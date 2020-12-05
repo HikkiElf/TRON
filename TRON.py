@@ -86,31 +86,6 @@ blueBikeDownImage = pygame.transform.rotate(blueBikeLeftImage, 90)
 blueBikeRightImage = pygame.transform.rotate(blueBikeLeftImage, 180)
 
 
-#Boost mechanism
-# def boost(color: pygame.Color):
-#     global redCarLine, blueCarLine, boostSpeed
-#     for event in pygame.event.get():
-#             if event.type == pygame.QUIT:
-#                 pygame.quit()
-#                 sys.exit()
-#             if event.type == pygame.KEYDOWN:
-#                 if color == red:
-#                     if direction == "RIGHT":
-#                         redCarPos[0] += boostSpeed
-#                         redCarLine.insert(0, list(redCarPos[0] + 10))
-#                     if direction == "UP":
-#                         redCarPos[1] += boostSpeed
-#                         redCarLine.insert(0, list(redCarPos[1] + 10))
-#                     if direction == "DOWN":
-#                         redCarPos[1] -= boostSpeed
-#                         redCarLine.insert(0, list(redCarPos[1] - 10))
-#                     if direction == "LEFT":
-#                         redCarPos[0] -= boostSpeed
-#                         redCarLine.insert(0, list(redCarPos[0] - 10))
-    # if color == blue:
-    #     if direction1 == "RIGHT"
-
-
 # Player win
 def playerWin(color: pygame.Color):
     global blue, red, blueBikeScore, redBikeScore, running, direction, direction1
@@ -170,17 +145,6 @@ def newGame():
 music.play()
 
 while running:
-    # while menu:
-    #     for event in pygame.event.get():
-    #         if event.type == pygame.QUIT:
-    #             pygame.quit()
-    #             quit()
-            
-    #         elif event.type == pygame.KEYDOWN:
-    #             if event.key == pygame.K_SPACE:
-    #                 menu = False
-
-
     playSurface.blit(background, (0, 0))
     if state == "BEGIN":
         # handle keydown event
@@ -288,21 +252,6 @@ while running:
             pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], speed, speed))
         for pos1 in blueCarLine:
             pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], speed, speed))
-
-        # key = pygame.key.get_pressed()
-        
-        # if direction == "RIGHT" and key[pygame.K_LSHIFT]:
-        #     redCarPos[0] += boostSpeed
-        #     redCarLine.insert(0, (redCarPos[0] + 10, redCarPos[1]))
-        # if direction == "UP" and key[pygame.K_LSHIFT]:
-        #     redCarPos[1] += boostSpeed
-        #     redCarLine.insert(0, list(redCarPos[1] + 10))
-        # if direction == "DOWN" and key[pygame.K_LSHIFT]:
-        #     redCarPos[1] -= boostSpeed
-        #     redCarLine.insert(0, list(redCarPos[1] - 10))
-        # if direction == "LEFT" and key[pygame.K_LSHIFT]:
-        #     redCarPos[0] -= boostSpeed
-        #     redCarLine.insert(0, list(redCarPos[0] - 10))
         
         # Red car correct blit
         if direction == "RIGHT":
@@ -326,10 +275,6 @@ while running:
 
         # Bounds
         if redCarPos[0] >= width or redCarPos[0] < 0:
-            # boom(red)
-            # boomSound.play()
-            # playerWin(blue)
-            # menu = True
             boomSound.play()
             state = 'END'
             winner = blue
@@ -356,11 +301,6 @@ while running:
         
         # Draw
         if redCarPos[0] == blueCarPos[0] and redCarPos[1] == blueCarPos[1]:
-            # boom(blue)
-            # boom(red)
-            # boomSound.play()
-            # tie()
-            # menu = True
             boomSound.play()
             winner = red
             loser = red
@@ -423,13 +363,11 @@ while running:
         if loser == winner:
             boom(blue)
             boom(red)
-            # boomSound.play()
             tie()
         elif winner == blue:
             boom(loser)
             playSurface.blit(blueOutlineSurf, blueOutlineRect)
             playSurface.blit(blueSurf, blueRect)
-            # boomSound.play()
         else:
             boom(loser)
             playSurface.blit(redOutlineSurf, redOutlineRect)
