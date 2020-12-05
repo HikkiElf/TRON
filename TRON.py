@@ -80,7 +80,7 @@ redBikeDownImage = pygame.transform.rotate(redBikeLeftImage, 90)
 redBikeRightImage = pygame.transform.rotate(redBikeLeftImage, 180)
 
 # Blue bike image
-blueBikeLeftImage = pygame.image.load("bikeBlue1.png")
+blueBikeLeftImage = pygame.image.load("bikeBlue.png")
 blueBikeUpImage = pygame.transform.rotate(blueBikeLeftImage, -90)
 blueBikeDownImage = pygame.transform.rotate(blueBikeLeftImage, 90)
 blueBikeRightImage = pygame.transform.rotate(blueBikeLeftImage, 180)
