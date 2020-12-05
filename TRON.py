@@ -11,7 +11,7 @@ pygame.init()
 pygame.mixer.init()
 
 # Sound
-music = pygame.mixer.Sound("Music.mp3")
+music = pygame.mixer.Sound("music.mp3")
 boomSound = pygame.mixer.Sound("boom_sound.wav")
 
 # Play Surface
