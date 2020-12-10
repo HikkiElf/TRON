@@ -6,7 +6,7 @@ import pygame
 import sys
 import time
 import random
-
+import menu
 pygame.init()
 pygame.mixer.init()
 
