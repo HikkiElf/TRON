@@ -7,7 +7,7 @@ pygame.display.set_caption("TRON")
 screen = pygame.display.set_mode([400, 600])
 background = pygame.Surface(screen.get_size())
 top=[60,210,360,510]; left=100; width=200; height=80
-menu_text=["Play", "Help","records","Exit"]
+menu_text=["Play", "Help", "Options", "Exit"]
 color = THECOLORS["blue"]
 font = pygame.font.Font(None, 40)
 line_width = 0

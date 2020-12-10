@@ -30,7 +30,7 @@ blue = pygame.Color(0, 255, 255)
 
 # Font
 globalFont = pygame.font.SysFont('monaco', 300)
-globalOutlineFont = pygame.font.SysFont('monaco', 305)
+globalOutlineFont = pygame.font.SysFont('monaco', 301)
 
 # Text red wins
 blueOutlineSurf = globalOutlineFont.render(" Blue Wins", True, black)
@@ -47,6 +47,14 @@ redOutlineRect = redOutlineSurf.get_rect()
 redRect = redSurf.get_rect()
 redOutlineRect.midtop = (640, 260)
 redRect.midtop = (640, 260)
+
+# Text draw
+drawOutlineSurf = globalOutlineFont.render(" Draw", True, black)
+drawSurf = globalFont.render("Draw", True, white)
+drawOutlineRect = drawOutlineSurf.get_rect()
+drawRect = drawSurf.get_rect()
+drawOutlineRect.midtop = (635, 260)
+drawRect.midtop = (640, 260)
 
 # FPS controller
 fpsController = pygame.time.Clock()
@@ -363,7 +371,8 @@ while running:
         if loser == winner:
             boom(blue)
             boom(red)
-            tie()
+            playSurface.blit(drawOutlineSurf, drawOutlineRect)
+            playSurface.blit(drawSurf, drawRect)
         elif winner == blue:
             boom(loser)
             playSurface.blit(blueOutlineSurf, blueOutlineRect)
