@@ -31,8 +31,7 @@ while running:
             if i==3:
                 running = False #выход            
             if i==0:
-                import game
-                game.mygame() #игра
+                import TRON #игра
             if i==2:
                 import records
                 records.show_rec()
