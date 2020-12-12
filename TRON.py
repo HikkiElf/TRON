@@ -408,3 +408,5 @@ while running:
     showScore()
     pygame.display.flip()
     fpsController.tick(60)
+
+# проверка
