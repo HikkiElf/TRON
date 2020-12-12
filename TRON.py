@@ -13,6 +13,8 @@ pygame.mixer.init()
 # Sound
 music = pygame.mixer.Sound("music.mp3")
 boomSound = pygame.mixer.Sound("boom_sound.wav")
+pygame.mixer.music.set_volume(0.1)
+music.play()
 
 # Play Surface
 size = width, height = 1280, 720
@@ -30,10 +32,18 @@ blue = pygame.Color(0, 255, 255)
 
 # Font
 globalFont = pygame.font.SysFont('monaco', 300)
-globalOutlineFont = pygame.font.SysFont('monaco', 301)
+globalOutlineFont = pygame.font.SysFont('monaco', 303)
+
+# Text Press space
+PressSpaceOutlineSurf = globalOutlineFont.render("Press space", True, black)
+PressSpaceSurf = globalFont.render("Press space", True, white)
+PressSpaceOutlineRect = PressSpaceOutlineSurf.get_rect()
+PressSpaceRect = PressSpaceSurf.get_rect()
+PressSpaceOutlineRect.midtop = (640, 260)
+PressSpaceRect.midtop = (640, 260)
 
 # Text red wins
-blueOutlineSurf = globalOutlineFont.render(" Blue Wins", True, black)
+blueOutlineSurf = globalOutlineFont.render("Blue Wins", True, black)
 blueSurf = globalFont.render("Blue Wins", True, blue)
 blueOutlineRect = blueOutlineSurf.get_rect()
 blueRect = blueSurf.get_rect()
@@ -41,7 +51,7 @@ blueOutlineRect.midtop = (640, 260)
 blueRect.midtop = (640, 260)
 
 # Text blue wins
-redOutlineSurf = globalOutlineFont.render(" Red Wins", True, black)
+redOutlineSurf = globalOutlineFont.render("Red Wins", True, black)
 redSurf = globalFont.render("Red Wins", True, red)
 redOutlineRect = redOutlineSurf.get_rect()
 redRect = redSurf.get_rect()
@@ -49,11 +59,11 @@ redOutlineRect.midtop = (640, 260)
 redRect.midtop = (640, 260)
 
 # Text draw
-drawOutlineSurf = globalOutlineFont.render(" Draw", True, black)
+drawOutlineSurf = globalOutlineFont.render("Draw", True, black)
 drawSurf = globalFont.render("Draw", True, white)
 drawOutlineRect = drawOutlineSurf.get_rect()
 drawRect = drawSurf.get_rect()
-drawOutlineRect.midtop = (635, 260)
+drawOutlineRect.midtop = (640, 260)
 drawRect.midtop = (640, 260)
 
 # FPS controller
@@ -149,8 +159,6 @@ def newGame():
     blueCarPos = [1000, 430]
     del redCarLine[:]
     del blueCarLine[:]
-
-music.play()
 
 while running:
     playSurface.blit(background, (0, 0))
@@ -343,6 +351,10 @@ while running:
                 playerWin(winner)
 
     elif state == 'END':
+
+        # playSurface.blit(PressSpaceOutlineSurf, PressSpaceOutlineRect)
+        # playSurface.blit(PressSpaceSurf, PressSpaceRect)
+
         for pos in redCarLine:
             pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], speed, speed))
         for pos1 in blueCarLine:
