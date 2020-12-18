@@ -9,8 +9,8 @@ screen = pygame.display.set_mode([1000, 600])
 background = pygame.Surface(screen.get_size())
 
 # Buttons setings
-top=[60, 210, 360, 510]; left = 400; width = 200; height = 80
-menu_text=["Play", "Help", "Options", "Exit"]
+top = 480; left = [60, 290, 520, 740]; width = 200; height = 80
+menu_text=["Play", "Help", "About", "Quit"]
 buttonColor = pygame.Color(0, 31, 63)
 buttonColorActive = pygame.Color(0, 50, 102)
 textColor = pygame.Color(57, 204, 204)
@@ -19,12 +19,26 @@ line_width = 0
 running=True
 
 while running:
-    background.fill([255,200,0])
+    background.fill([0, 0, 0])
 
-    for i in range(0, 4):#рисуем пункты меню
-        pygame.draw.rect(background, buttonColor, [left, top[i], width, height], line_width)
-        text = font.render(menu_text[i], 1, textColor)
-        background.blit(text, [left+50, top[i]+30])
+    for i in range(0, 4):
+        pygame.draw.rect(background, buttonColor, [left[i], top, width, height], line_width)
+
+        #Play button text blit
+        text = font.render(menu_text[0], 1, textColor)
+        background.blit(text, [left[0] + 42, top + 15])
+
+        #Help button text blit
+        text = font.render(menu_text[1], 1, textColor)
+        background.blit(text, [left[1] + 45, top + 15])
+
+        #About button text blit
+        text = font.render(menu_text[2], 1, textColor)
+        background.blit(text, [left[2] + 25, top + 15])
+
+        #Exit button text blit
+        text = font.render(menu_text[3], 1, textColor)
+        background.blit(text, [left[3] + 50, top + 15])
 
     text = font.render("Menu", 1, buttonColor)
     background.blit(text, [150, 10])
@@ -35,12 +49,14 @@ while running:
         if event.type == pygame.MOUSEBUTTONDOWN:
             (xMousePos, yMousePos) = pygame.mouse.get_pos()#координаты курсора мыши
             for i in range (0, 4):
-                if xMousePos > left and xMousePos < left + width and yMousePos > top[i] and yMousePos < top[i] + height:
+                if xMousePos > left[i] and xMousePos < left[i] + width and yMousePos > top and yMousePos < top + height:
                     break
             if i == 3:
                 running = False #выход
+                pygame.quit() 
             if i == 0:
                 import TRON #игра
+                running = False
             if i == 2:
                 import records
                 records.show_rec()
