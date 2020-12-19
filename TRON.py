@@ -20,7 +20,7 @@ music.play()
 size = width, height = 1280, 720
 playSurface = pygame.display.set_mode(size)
 pygame.display.set_caption("TRON")
-background = pygame.image.load("images/TRON.png")
+background = pygame.image.load("images/TRON2.png")
 
 # Colors
 red = pygame.Color(255, 0, 0)
@@ -72,12 +72,12 @@ fpsController = pygame.time.Clock()
 # Game settings
 speed = 10
 boostSpeed = 20
-redCarPos = [100, 430]
-blueCarPos = [1000, 430]
-redCarPosNG = [100, 430]
-blueCarPosNG = [1000, 430]
-redCarLine = [[100, 430]]
-blueCarLine = [[1000, 430]]
+redCarPos = [100, 360]
+blueCarPos = [1180, 360]
+# redCarPosNG = [100, 360]
+# blueCarPosNG = [1180, 360]
+redCarLine = [[100, 360]]
+blueCarLine = [[1180, 360]]
 direction = 'RIGHT'
 direction1 = 'LEFT'
 changeto = ''
@@ -85,7 +85,8 @@ changeto1 = ''
 redBikeScore = 0
 blueBikeScore = 0
 animCount = 0
-state = "BEGIN" # RUNNING END
+winCount = 0
+state = "BEGIN" # RUNNING, END
 winner: pygame.Color
 loser: pygame.Color
 menu = True
@@ -155,14 +156,17 @@ def tie():
 
 def newGame():
     global redCarPos, blueCarPos
-    redCarPos = [100, 430]
-    blueCarPos = [1000, 430]
+    redCarPos = [100, 360]
+    blueCarPos = [1180, 360]
     del redCarLine[:]
     del blueCarLine[:]
 
 while running:
     playSurface.blit(background, (0, 0))
+    pygame.draw.circle(playSurface, white, [320, 20], 10, 1)
     if state == "BEGIN":
+        if redBikeScore >= 1:
+            pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
         # handle keydown event
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -198,6 +202,8 @@ while running:
             state = 'RUNNING'
     
     elif state == 'RUNNING':
+        if redBikeScore >= 1:
+            pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -296,7 +302,7 @@ while running:
             winner = blue
             loser = red
             playerWin(winner)
-        if redCarPos[1] >= height or redCarPos[1] < 0:
+        if redCarPos[1] >= height or redCarPos[1] <= 40:
             boomSound.play()
             state = 'END'
             winner = blue
@@ -387,10 +393,14 @@ while running:
             playSurface.blit(drawSurf, drawRect)
         elif winner == blue:
             boom(loser)
+            if redBikeScore >= 1:
+                pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
             playSurface.blit(blueOutlineSurf, blueOutlineRect)
             playSurface.blit(blueSurf, blueRect)
         else:
             boom(loser)
+            if redBikeScore >= 1:
+                pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
             playSurface.blit(redOutlineSurf, redOutlineRect)
             playSurface.blit(redSurf, redRect)
         
