@@ -296,16 +296,16 @@ def boom(color: pygame.Color):
         animCount += 1
 
 # Show Score Red and Blue Bike
-def showScore():
-    SFont = pygame.font.SysFont('monaco', 32)
-    SBsurf = SFont.render("BLUE PLAYER SCORE  :  {0}".format(blueBikeScore), True, white)
-    SRsurf = SFont.render("RED PLAYER SCORE  :  {0}".format(redBikeScore), True, white)
-    SBrect = SBsurf.get_rect()
-    SRrect = SRsurf.get_rect()
-    SBrect.midtop = (1120, 10)
-    SRrect.midtop = (145, 10)
-    playSurface.blit(SBsurf, SBrect)
-    playSurface.blit(SRsurf, SRrect)
+# def showScore():
+#     SFont = pygame.font.SysFont('monaco', 32)
+#     SBsurf = SFont.render("BLUE PLAYER SCORE  :  {0}".format(blueBikeScore), True, white)
+#     SRsurf = SFont.render("RED PLAYER SCORE  :  {0}".format(redBikeScore), True, white)
+#     SBrect = SBsurf.get_rect()
+#     SRrect = SRsurf.get_rect()
+#     SBrect.midtop = (1120, 10)
+#     SRrect.midtop = (145, 10)
+#     playSurface.blit(SBsurf, SBrect)
+#     playSurface.blit(SRsurf, SRrect)
 
 def tie():
     myFont = pygame.font.SysFont('monaco', 300)
@@ -324,9 +324,7 @@ def newGame():
 
 while running:
     playSurface.blit(background, (0, 0))
-    pygame.draw.circle(playSurface, white, [320, 20], 10, 1)
-    pygame.draw.circle(playSurface, white, [342, 20], 10, 1)
-    pygame.draw.circle(playSurface, white, [364, 20], 10, 1)
+    pygame.draw.rect(playSurface, black, pygame.Rect(0, 0, 1280, 52))
 
     if state == "BEGIN":
 
@@ -601,6 +599,6 @@ while running:
                     changeto1 = ''
                     newGame()
 
-    showScore()
+    # showScore()
     pygame.display.flip()
     fpsController.tick(60)
