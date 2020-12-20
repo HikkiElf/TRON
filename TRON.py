@@ -286,14 +286,29 @@ def boom(color: pygame.Color):
     global animCount
     bang = [pygame.image.load("images/Explosion_1.png"), pygame.image.load("images/Explosion_2.png"), 
     pygame.image.load("images/Explosion_3.png"), pygame.image.load("images/Explosion_4.png")]
+    bangReverse = pygame.image.load("images/Explosion_2.png") 
     if animCount + 1 >= 20:
         animCount = 0
     if color == red:
-        playSurface.blit(bang[animCount // 5], (redCarPos[0]-100, redCarPos[1]-100))
         animCount += 1
+        if animCount // 5 == 0:
+            playSurface.blit(bang[0], (redCarPos[0] - 8, redCarPos[1] - 20))
+        if animCount // 5 == 1:
+            playSurface.blit(bang[1], (redCarPos[0] - 52, redCarPos[1] - 50))
+        if animCount // 5 == 2:
+            playSurface.blit(bang[2], (redCarPos[0] - 87, redCarPos[1] - 84))
+        if animCount // 5 == 3:
+            playSurface.blit(bangReverse, (redCarPos[0] - 52, redCarPos[1] - 50))
     else:
-        playSurface.blit(bang[animCount // 5], (blueCarPos[0]-100, blueCarPos[1]-100))
         animCount += 1
+        if animCount // 5 == 0:
+            playSurface.blit(bang[0], (blueCarPos[0] - 8, blueCarPos[1] - 20))
+        if animCount // 5 == 1:
+            playSurface.blit(bang[1], (blueCarPos[0] - 52, blueCarPos[1] - 50))
+        if animCount // 5 == 2:
+            playSurface.blit(bang[2], (blueCarPos[0] - 87, blueCarPos[1] - 84))
+        if animCount // 5 == 3:
+            playSurface.blit(bangReverse, (blueCarPos[0] - 52, blueCarPos[1] - 50))
 
 # Show Score Red and Blue Bike
 # def showScore():
