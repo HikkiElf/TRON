@@ -106,6 +106,15 @@ blueBikeRightImage = pygame.transform.rotate(blueBikeLeftImage, 180)
 
 def roundCount(color: pygame.Color):
     global redBikeScore, blueBikeScore
+
+    pygame.draw.circle(playSurface, white, [320, 20], 10, 1)
+    pygame.draw.circle(playSurface, white, [342, 20], 10, 1)
+    pygame.draw.circle(playSurface, white, [364, 20], 10, 1)
+
+    pygame.draw.circle(playSurface, white, [920, 20], 10, 1)
+    pygame.draw.circle(playSurface, white, [942, 20], 10, 1)
+    pygame.draw.circle(playSurface, white, [964, 20], 10, 1)
+
     if color == red:
         if redBikeScore >= 1:
             pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
@@ -116,16 +125,17 @@ def roundCount(color: pygame.Color):
             pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
             pygame.draw.circle(playSurface, red, [342, 20], 9, 0)
             pygame.draw.circle(playSurface, red, [364, 20], 9, 0)
+
     if color == blue:
         if blueBikeScore >= 1:
-            pygame.draw.circle(playSurface, blue, [920, 20], 9, 0)
+            pygame.draw.circle(playSurface, blue, [964, 20], 9, 0)
         if blueBikeScore >= 2:
-            pygame.draw.circle(playSurface, blue, [920, 20], 9, 0)
+            pygame.draw.circle(playSurface, blue, [964, 20], 9, 0)
             pygame.draw.circle(playSurface, blue, [942, 20], 9, 0)
         if blueBikeScore >= 3:
-            pygame.draw.circle(playSurface, blue, [920, 20], 9, 0)
-            pygame.draw.circle(playSurface, blue, [942, 20], 9, 0)
             pygame.draw.circle(playSurface, blue, [964, 20], 9, 0)
+            pygame.draw.circle(playSurface, blue, [942, 20], 9, 0)
+            pygame.draw.circle(playSurface, blue, [920, 20], 9, 0)
 
 
 # Player win
@@ -192,16 +202,6 @@ while running:
 
     if state == "BEGIN":
 
-        # if redBikeScore >= 1:
-        #     pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
-        # if redBikeScore >= 2:
-        #     pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
-        #     pygame.draw.circle(playSurface, red, [342, 20], 9, 0)
-        # if redBikeScore >= 3:
-        #     pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
-        #     pygame.draw.circle(playSurface, red, [342, 20], 9, 0)
-        #     pygame.draw.circle(playSurface, red, [364, 20], 9, 0)
-
         roundCount(red)
         roundCount(blue)
         
@@ -240,16 +240,6 @@ while running:
             state = 'RUNNING'
     
     elif state == 'RUNNING':
-
-        # if redBikeScore >= 1:
-        #     pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
-        # if redBikeScore >= 2:
-        #     pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
-        #     pygame.draw.circle(playSurface, red, [342, 20], 9, 0)
-        # if redBikeScore >= 3:
-        #     pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
-        #     pygame.draw.circle(playSurface, red, [342, 20], 9, 0)
-        #     pygame.draw.circle(playSurface, red, [364, 20], 9, 0)
 
         roundCount(red)
         roundCount(blue)
@@ -450,16 +440,6 @@ while running:
             boom(blue)
             boom(red)
 
-            # if redBikeScore >= 1:
-            #     pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
-            # if redBikeScore >= 2:
-            #     pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
-            #     pygame.draw.circle(playSurface, red, [342, 20], 9, 0)
-            # if redBikeScore >= 3:
-            #     pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
-            #     pygame.draw.circle(playSurface, red, [342, 20], 9, 0)
-            #     pygame.draw.circle(playSurface, red, [364, 20], 9, 0)
-
             roundCount(red)
             roundCount(blue)
 
@@ -468,18 +448,6 @@ while running:
         elif winner == blue:
             boom(loser)
 
-            # if redBikeScore >= 1:
-            #     pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
-
-            # if redBikeScore >= 2:
-            #     pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
-            #     pygame.draw.circle(playSurface, red, [342, 20], 9, 0)
-
-            # if redBikeScore >= 3:
-            #     pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
-            #     pygame.draw.circle(playSurface, red, [342, 20], 9, 0)
-            #     pygame.draw.circle(playSurface, red, [364, 20], 9, 0)
-
             roundCount(red)
             roundCount(blue)
 
@@ -487,17 +455,6 @@ while running:
             playSurface.blit(blueSurf, blueRect)
         else:
             boom(loser)
-            # if redBikeScore >= 1:
-            #     pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
-
-            # if redBikeScore >= 2:
-            #     pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
-            #     pygame.draw.circle(playSurface, red, [342, 20], 9, 0)
-
-            # if redBikeScore >= 3:
-            #     pygame.draw.circle(playSurface, red, [320, 20], 9, 0)
-            #     pygame.draw.circle(playSurface, red, [342, 20], 9, 0)
-            #     pygame.draw.circle(playSurface, red, [364, 20], 9, 0)
 
             roundCount(red)
             roundCount(blue)
