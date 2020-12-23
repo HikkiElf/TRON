@@ -475,7 +475,24 @@ while running:
         if direction1 == "LEFT":
             playSurface.blit(blueBikeLeftImage, (blueCarPos[0]-55, blueCarPos[1]-35))
 
+        # Draw
+        if (redCarPos[0] == blueCarPos[0] and redCarPos[1] == blueCarPos[1]):
+            boomSound.play()
+            winner = red
+            loser = red
+            state = 'END'
+
         # Bounds
+        if (redCarPos[0] >= width or redCarPos[0] < 0) and (blueCarPos[0] >= width or blueCarPos[0] < 0):
+            boomSound.play()
+            winner = red
+            loser = red
+            state = 'END'
+        if (redCarPos[1] >= height or redCarPos[1] <= 40) and (blueCarPos[1] >= height or blueCarPos[1] <= 40):
+            boomSound.play()
+            winner = red
+            loser = red
+            state = 'END'
         if redCarPos[0] >= width or redCarPos[0] < 0 and state != "END":
             boomSound.play()
             state = 'END'
@@ -521,7 +538,7 @@ while running:
                 loser = blue
                 playerWin(winner)
         for block1 in blueCarLine[1:]:
-            if blueCarPos == block and redCarPos == block1:
+            if blueCarPos == block1 and redCarPos == block1:
                 boomSound.play()
                 winner = red
                 loser = red
@@ -538,13 +555,6 @@ while running:
                 winner = blue
                 loser = red
                 playerWin(winner)
-
-        # Draw
-        if (redCarPos[0] == blueCarPos[0] and redCarPos[1] == blueCarPos[1]) or ((redCarPos[1] >= height or redCarPos[1] <= 40) and (blueCarPos[1] >= height or blueCarPos[1] <= 40)) or  ((redCarPos[0] >= width or redCarPos[0] < 0) and (blueCarPos[0] >= width or blueCarPos[0] < 0)) or ((redCarPos == block) and (blueCarPos == block)) or ((blueCarPos == block1) and (redCarPos == block1)):
-            boomSound.play()
-            winner = red
-            loser = red
-            state = 'END'
 
     elif state == 'END':
 
