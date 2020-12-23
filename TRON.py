@@ -104,6 +104,7 @@ blueBikeUpImage = pygame.transform.rotate(blueBikeLeftImage, -90)
 blueBikeDownImage = pygame.transform.rotate(blueBikeLeftImage, 90)
 blueBikeRightImage = pygame.transform.rotate(blueBikeLeftImage, 180)
 
+# Draw round count dots
 def roundCount(color: pygame.Color):
     global redBikeScore, blueBikeScore
 
@@ -308,26 +309,6 @@ def boom(color: pygame.Color):
             playSurface.blit(bang[2], (blueCarPos[0] - 87, blueCarPos[1] - 84))
         if animCount // 5 == 3:
             playSurface.blit(bangReverse, (blueCarPos[0] - 52, blueCarPos[1] - 50))
-
-# Show Score Red and Blue Bike
-# def showScore():
-#     SFont = pygame.font.SysFont('monaco', 32)
-#     SBsurf = SFont.render("BLUE PLAYER SCORE  :  {0}".format(blueBikeScore), True, white)
-#     SRsurf = SFont.render("RED PLAYER SCORE  :  {0}".format(redBikeScore), True, white)
-#     SBrect = SBsurf.get_rect()
-#     SRrect = SRsurf.get_rect()
-#     SBrect.midtop = (1120, 10)
-#     SRrect.midtop = (145, 10)
-#     playSurface.blit(SBsurf, SBrect)
-#     playSurface.blit(SRsurf, SRrect)
-
-def tie():
-    myFont = pygame.font.SysFont('monaco', 300)
-    Tsurf = myFont.render("DRAW", True, white)
-    Trect = Tsurf.get_rect()
-    Trect.midtop = (640, 260)
-    playSurface.blit(Tsurf, Trect)
-    pygame.display.flip() 
 
 def newGame():
     global redCarPos, blueCarPos

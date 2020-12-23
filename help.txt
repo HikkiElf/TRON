@@ -1,0 +1,14 @@
+Rules                                                                                                                                               #
+                                                                                                                                                    #
+players can move strictly up, down, left and right.                                                                                                 #
+The main task is to survive.                                                                                                                        #                     
+The winner is the one whose opponent explodes for 10 rounds,                                                                                        #
+if the bikes crashed directly into each other                                                                                                       #
+then this is considered a draw and the points are not counted                                                                                       #
+                                                                                                                                                    #
+Controls                                                                                                                                            #
+                                                                                                                                                    #
+To move red bike, use the W, A, S, D keys.                                                                                                          #
+To move red bike, use up, left, down, right arrows.                                                                                                 #
+To restart round use SPACE key.                                                                                                                     #
+Exit from game use ECSAPE key.                                                                                                                      #

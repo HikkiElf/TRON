@@ -8,7 +8,7 @@ intro.intro()
 def menu():
     # Screen setings
     pygame.display.set_caption("TRON")
-    screen = pygame.display.set_mode([1000, 600])
+    screen = pygame.display.set_mode([1280, 720])
     background = pygame.Surface(screen.get_size())
     tronLogo = pygame.image.load("images/TRON logo (1).png")
     TRONmenu = pygame.image.load("images/TRONmenu1.jpg")
@@ -121,10 +121,11 @@ def menu():
                     # run = False
                     # pygame.quit()
                 if xMousePos > xButtonPos[1] and xMousePos < xButtonPos[1] + width[1] and yMousePos > yButtonPos[1] and yMousePos < yButtonPos[1] + height[1]:
-                    import my_help #помощь
+                    import help #помощь
+                    help.help1()
                 if xMousePos > xButtonPos[2] and xMousePos < xButtonPos[2] + width[2] and yMousePos > yButtonPos[2] and yMousePos < yButtonPos[2] + height[2]:
-                    import records
-                    records.show_rec()
+                    import about
+                    about.about()
                 if xMousePos > xButtonPos[3] and xMousePos < xButtonPos[3] + width[3] and yMousePos > yButtonPos[3] and yMousePos < yButtonPos[3] + height[3]:
                     run = False #выход
                     pygame.quit()
