@@ -22,7 +22,7 @@ def menu():
     textColor = pygame.Color(57, 204, 204)
     font = pygame.font.SysFont("14722", 40)
     line_width = 0
-    running=True
+    run=True
     count = 4
 
     white = pygame.Color(255, 255, 255)
@@ -80,7 +80,7 @@ def menu():
             height[3] = 80
 
             
-    while running:
+    while run:
         background.fill([0, 0, 0])
 
         background.blit(TRONmenu, (-438, 0))
@@ -118,15 +118,15 @@ def menu():
                 (xMousePos, yMousePos) = pygame.mouse.get_pos()#координаты курсора мыши
                 if xMousePos > xButtonPos[0] and xMousePos < xButtonPos[0] + width[0] and yMousePos > yButtonPos[0] and yMousePos < yButtonPos[0] + height[0]:
                     import TRON #игра
-                    running = False
-                    pygame.quit()
+                    # run = False
+                    # pygame.quit()
                 if xMousePos > xButtonPos[1] and xMousePos < xButtonPos[1] + width[1] and yMousePos > yButtonPos[1] and yMousePos < yButtonPos[1] + height[1]:
                     import my_help #помощь
                 if xMousePos > xButtonPos[2] and xMousePos < xButtonPos[2] + width[2] and yMousePos > yButtonPos[2] and yMousePos < yButtonPos[2] + height[2]:
                     import records
                     records.show_rec()
                 if xMousePos > xButtonPos[3] and xMousePos < xButtonPos[3] + width[3] and yMousePos > yButtonPos[3] and yMousePos < yButtonPos[3] + height[3]:
-                    running = False #выход
+                    run = False #выход
                     pygame.quit()
 
             if event.type == pygame.MOUSEMOTION:
