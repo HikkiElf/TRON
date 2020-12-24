@@ -7,8 +7,10 @@ def help1():
      screen = pygame.display.set_mode([1280, 720])
      background = pygame.image.load("images/TRONmenu1.jpg")
      color = [57, 204, 204]
+     color1 = [0, 31, 63]
      top=100; left=90
-     font = pygame.font.SysFont('14722', 22,False,False)
+     font = pygame.font.SysFont('14722', 22, False, False)
+     font1 = pygame.font.SysFont('14722', 22, False, True)
      my_file = open('help.txt', 'r')#Открываем файл для чтения
      lines = my_file.readlines()# Записываем строки из файла в список lines
      my_file.close()
@@ -18,9 +20,13 @@ def help1():
           dl=len(ln) 
           ln=ln[0:dl]
           text = font.render(ln,1, color)
-          background.blit(text, [left, top] )
+          text1 = font1.render(ln,1, color1)
+          background.blit(text1, [left, top])
+          background.blit(text, [left, top])
           top=top+20
      text = font.render("Press Escape to exit",True, color)
+     text1 = font1.render("Press Escape to exit",True, color1)
+     background.blit(text1, [370, 520])
      background.blit(text, [370, 520])
      screen.blit(background, (0, 0))
      pygame.display.flip()

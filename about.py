@@ -7,8 +7,10 @@ def about():
      screen = pygame.display.set_mode([1280, 720])
      background = pygame.image.load("images/TRONmenu1.jpg")
      color = [57, 204, 204]
+     color1 = [0, 31, 63]
      top=40; left=180
      font = pygame.font.SysFont('14722', 25,False,False)
+     font1 = pygame.font.SysFont('14722', 25,False,True)
      my_file = open("about.txt", "r") #Открываем файл для чтения
      lines = my_file.readlines() # Записываем строки из файла в список lines
      my_file.close()
@@ -18,9 +20,13 @@ def about():
           dl=len(ln)+1 
           ln=ln[0:dl]
           text = font.render(ln, 1, color)
+          text1 = font1.render(ln, 1, color1)
+          background.blit(text1, [left, top] )
           background.blit(text, [left, top] )
           top=top+20
      text = font.render("Press Escape to exit",True, color)
+     text1 = font1.render("Press Escape to exit",True, color1)
+     background.blit(text1, [370, 520])
      background.blit(text, [370, 520])
      screen.blit(background, (0, 0))
      pygame.display.flip()
