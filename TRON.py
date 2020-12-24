@@ -31,18 +31,20 @@ brown = pygame.Color(165, 42, 42)
 blue = pygame.Color(0, 255, 255)
 
 # Font
+globalFontMini = pygame.font.SysFont('monaco', 150)
 globalFont = pygame.font.SysFont('monaco', 300)
+globalOutlineFontMini = pygame.font.SysFont('monaco', 153)
 globalOutlineFont = pygame.font.SysFont('monaco', 303)
 
 # Text Press space
-PressSpaceOutlineSurf = globalOutlineFont.render("Press space", True, black)
-PressSpaceSurf = globalFont.render("Press space", True, white)
+PressSpaceOutlineSurf = globalOutlineFontMini.render("Press space", True, black)
+PressSpaceSurf = globalFontMini.render("Press space", True, white)
 PressSpaceOutlineRect = PressSpaceOutlineSurf.get_rect()
 PressSpaceRect = PressSpaceSurf.get_rect()
-PressSpaceOutlineRect.midtop = (640, 260)
-PressSpaceRect.midtop = (640, 260)
+PressSpaceOutlineRect.midtop = (640, 460)
+PressSpaceRect.midtop = (640, 460)
 
-# Text red wins
+# Text blue wins
 blueOutlineSurf = globalOutlineFont.render("Blue Wins", True, black)
 blueSurf = globalFont.render("Blue Wins", True, blue)
 blueOutlineRect = blueOutlineSurf.get_rect()
@@ -50,7 +52,7 @@ blueRect = blueSurf.get_rect()
 blueOutlineRect.midtop = (640, 260)
 blueRect.midtop = (640, 260)
 
-# Text blue wins
+# Text red wins
 redOutlineSurf = globalOutlineFont.render("Red Wins", True, black)
 redSurf = globalFont.render("Red Wins", True, red)
 redOutlineRect = redOutlineSurf.get_rect()
@@ -265,8 +267,6 @@ def roundCount(color: pygame.Color):
             pygame.draw.circle(playSurface, blue, [788, 20], 11, 0)
             pygame.draw.circle(playSurface, blue, [766, 20], 11, 0)
 
-
-
 # Player win
 def playerWin(color: pygame.Color):
     global blue, red, blueBikeScore, redBikeScore, running, direction, direction1
@@ -281,7 +281,7 @@ def playerWin(color: pygame.Color):
     direction1 = "LEFT"
     pygame.display.flip() 
     menu = True
-    
+  
 # Boom animation
 def boom(color: pygame.Color):
     global animCount
@@ -310,18 +310,52 @@ def boom(color: pygame.Color):
         if animCount // 5 == 3:
             playSurface.blit(bangReverse, (blueCarPos[0] - 52, blueCarPos[1] - 50))
 
-def newGame():
+def newRound():
     global redCarPos, blueCarPos
     redCarPos = [100, 360]
     blueCarPos = [1180, 360]
     del redCarLine[:]
     del blueCarLine[:]
 
+def roundWin(color: pygame.Color):
+    globalFontWin = pygame.font.SysFont('monaco', 200)
+    globalOutlineFontWin = pygame.font.SysFont('monaco', 203)
+    if color == red:
+        # Text red win round
+        redOutlineSurfWin = globalOutlineFontWin.render("Red Win Round : {0}".format(redBikeScore), True, black)
+        redSurfWin = globalFontWin.render("Red Win Round : {0}".format(redBikeScore), True, red)
+        redOutlineRectWin = redOutlineSurfWin.get_rect()
+        redRectWin = redSurfWin.get_rect()
+        redOutlineRectWin.midtop = (640, 260)
+        redRectWin.midtop = (640, 260)
+        playSurface.blit(redOutlineSurfWin, redOutlineRectWin)
+        playSurface.blit(redSurfWin, redRectWin)
+    else:
+        # Text blue win round
+        blueOutlineSurfWin = globalOutlineFontWin.render("Blue Win Round : {0}".format(blueBikeScore), True, black)
+        blueSurfWin = globalFontWin.render("Blue Win Round : {0}".format(blueBikeScore), True, blue)
+        blueOutlineRectWin = blueOutlineSurfWin.get_rect()
+        blueRectWin = blueSurfWin.get_rect()
+        blueOutlineRectWin.midtop = (640, 260)
+        blueRectWin.midtop = (640, 260)
+        playSurface.blit(blueOutlineSurfWin, blueOutlineRectWin)
+        playSurface.blit(blueSurfWin, blueRectWin)
+
+
+
+
 while running:
     playSurface.blit(background, (0, 0))
     pygame.draw.rect(playSurface, black, pygame.Rect(0, 0, 1280, 52))
 
     if state == "BEGIN":
+
+        if redBikeScore == 10:
+            redBikeScore = 0
+            blueBikeScore = 0
+        if blueBikeScore == 10:
+            redBikeScore = 0
+            blueBikeScore = 0
 
         roundCount(red)
         roundCount(blue)
@@ -576,22 +610,37 @@ while running:
 
             playSurface.blit(drawOutlineSurf, drawOutlineRect)
             playSurface.blit(drawSurf, drawRect)
+
+            playSurface.blit(PressSpaceOutlineSurf, PressSpaceOutlineRect)
+            playSurface.blit(PressSpaceSurf, PressSpaceRect)
         elif winner == blue:
             boom(loser)
 
             roundCount(red)
             roundCount(blue)
 
-            playSurface.blit(blueOutlineSurf, blueOutlineRect)
-            playSurface.blit(blueSurf, blueRect)
+            if blueBikeScore == 10:
+                playSurface.blit(blueOutlineSurf, blueOutlineRect)
+                playSurface.blit(blueSurf, blueRect)
+            if blueBikeScore < 10:
+                roundWin(blue)
+            
+            playSurface.blit(PressSpaceOutlineSurf, PressSpaceOutlineRect)
+            playSurface.blit(PressSpaceSurf, PressSpaceRect)
         else:
             boom(loser)
 
             roundCount(red)
             roundCount(blue)
 
-            playSurface.blit(redOutlineSurf, redOutlineRect)
-            playSurface.blit(redSurf, redRect)
+            if redBikeScore == 10:
+                playSurface.blit(redOutlineSurf, redOutlineRect)
+                playSurface.blit(redSurf, redRect)
+            if redBikeScore < 10:
+                roundWin(red)
+
+            playSurface.blit(PressSpaceOutlineSurf, PressSpaceOutlineRect)
+            playSurface.blit(PressSpaceSurf, PressSpaceRect)
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -602,7 +651,7 @@ while running:
                     state = 'BEGIN'
                     changeto = ''
                     changeto1 = ''
-                    newGame()
+                    newRound()
 
     # showScore()
     pygame.display.flip()
