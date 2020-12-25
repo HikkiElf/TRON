@@ -348,25 +348,25 @@ def roundWin(color: pygame.Color):
 
 def setDirectionText(changeto, changeto1):
     globalFontMini = pygame.font.SysFont('monaco', 50)
-    globalOutlineFontMini = pygame.font.SysFont('monaco', 51)
+    # globalOutlineFontMini = pygame.font.SysFont('monaco', 51)
     if changeto == '':
-        setRedDirectionOutlineSurf = globalOutlineFontMini.render("Set red bike direction", True, black)
+        # setRedDirectionOutlineSurf = globalOutlineFontMini.render("Set red bike direction", True, black)
         setRedDirectionSurf = globalFontMini.render("Set red bike direction", True, red)
-        setRedDirectionOutlineRect = setRedDirectionOutlineSurf.get_rect()
+        # setRedDirectionOutlineRect = setRedDirectionOutlineSurf.get_rect()
         setRedDirectionRect = setRedDirectionSurf.get_rect()
-        setRedDirectionOutlineRect.midtop = (240, 260)
+        # setRedDirectionOutlineRect.midtop = (240, 260)
         setRedDirectionRect.midtop = (240, 260)
-        playSurface.blit(setRedDirectionOutlineSurf, setRedDirectionOutlineRect)
+        # playSurface.blit(setRedDirectionOutlineSurf, setRedDirectionOutlineRect)
         playSurface.blit(setRedDirectionSurf, setRedDirectionRect)
 
     if changeto1 == '':
-        setBlueDirectionOutlineSurf = globalOutlineFontMini.render("Set blue bike direction", True, black)
+        # setBlueDirectionOutlineSurf = globalOutlineFontMini.render("Set blue bike direction", True, black)
         setBlueDirectionSurf = globalFontMini.render("Set blue bike direction", True, blue)
-        setBlueDirectionOutlineRect = setBlueDirectionOutlineSurf.get_rect()
+        # setBlueDirectionOutlineRect = setBlueDirectionOutlineSurf.get_rect()
         setBlueDirectionRect = setBlueDirectionSurf.get_rect()
-        setBlueDirectionOutlineRect.midtop = (1040, 260)
+        # setBlueDirectionOutlineRect.midtop = (1040, 260)
         setBlueDirectionRect.midtop = (1040, 260)
-        playSurface.blit(setBlueDirectionOutlineSurf, setBlueDirectionOutlineRect)
+        # playSurface.blit(setBlueDirectionOutlineSurf, setBlueDirectionOutlineRect)
         playSurface.blit(setBlueDirectionSurf, setBlueDirectionRect)
 
 
@@ -377,11 +377,6 @@ while running:
     playSurface.blit(background, (0, 0))
     pygame.draw.rect(playSurface, black, pygame.Rect(0, 0, 1280, 52))
 
-    # while pause:
-    #     playSurface.blit(TRONmenu, (-343, 0))
-    #     playSurface.blit(tronLogo, (140, 130))
-
-        
     if state == "BEGIN":
 
         if redBikeScore == 10:
