@@ -9,7 +9,6 @@ then this is considered a draw and the points are not counted                   
 Controls                                                                                                                                            #
                                                                                                                                                     #
 To move red bike, use the W, A, S, D keys.                                                                                                          #
-To move red bike, use up, left, down, right arrows.                                                                                                 #
-to pause press P key.                                                                                                                               #
+To move red bike, use up, left, down, right arrows.                                                                                                 #                                                                                                                              #
 To restart round use SPACE key.                                                                                                                     #
 Exit from game use ECSAPE key.                                                                                                                      #

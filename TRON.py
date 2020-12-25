@@ -14,7 +14,7 @@ pygame.mixer.init()
 music = pygame.mixer.Sound("music.mp3")
 boomSound = pygame.mixer.Sound("boom_sound.wav")
 pygame.mixer.music.set_volume(0.1)
-music.play()
+# music.play()
 
 # Play Surface
 size = width, height = 1280, 720
@@ -23,7 +23,6 @@ pygame.display.set_caption("TRON")
 background = pygame.image.load("images/TRON2.png")
 tronLogo = pygame.image.load("images/TRON logo.png")
 TRONmenu = pygame.image.load("images/TRONmenu1.jpg")
-
 
 # Colors
 red = pygame.Color(255, 0, 0)
@@ -95,7 +94,6 @@ winner: pygame.Color
 loser: pygame.Color
 pause = False
 running = True
-b = 0
 
 # Red bike images
 redBikeLeftImage = pygame.image.load("images/bikeRed.png")
@@ -423,45 +421,13 @@ while running:
         for pos1 in blueCarLine:
             pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], speed, speed))
 
-        if changeto == '' and b == 0:
-            playSurface.blit(redBikeRightImage, (redCarPos[0]-40, redCarPos[1]-55))
-        if changeto1 == '' and b == 0:
-            playSurface.blit(blueBikeLeftImage, (blueCarPos[0]-55, blueCarPos[1]-35))
-
-         # Red car correct blit
-        if direction == "RIGHT":
-            b = 1
-            playSurface.blit(redBikeRightImage, (redCarPos[0]-40, redCarPos[1]-55))
-        if direction == "UP":
-            b =1
-            playSurface.blit(redBikeUpImage, (redCarPos[0]-55, redCarPos[1]-35))
-        if direction == "DOWN":
-            b = 1
-            playSurface.blit(redBikeDownImage, (redCarPos[0]-35, redCarPos[1]-55))
-        if direction == "LEFT":
-            b = 1
-            playSurface.blit(redBikeLeftImage, (redCarPos[0]-55, redCarPos[1]-35))
-        
-        # Blue car correct blit
-        if direction1 == "RIGHT":
-            b = 1
-            playSurface.blit(blueBikeRightImage, (blueCarPos[0]-40, blueCarPos[1]-55))
-        if direction1 == "UP":
-            b = 1
-            playSurface.blit(blueBikeUpImage, (blueCarPos[0]-55, blueCarPos[1]-35))
-        if direction1 == "DOWN":
-            b = 1
-            playSurface.blit(blueBikeDownImage, (blueCarPos[0]-35, blueCarPos[1]-55))
-        if direction1 == "LEFT":
-            b = 1
-            playSurface.blit(blueBikeLeftImage, (blueCarPos[0]-55, blueCarPos[1]-35))
+        playSurface.blit(redBikeRightImage, (redCarPos[0]-40, redCarPos[1]-55))
+        playSurface.blit(blueBikeLeftImage, (blueCarPos[0]-55, blueCarPos[1]-35))
 
         if changeto != '' and changeto1 != '':
             state = 'RUNNING'
     
     elif state == 'RUNNING':
-
-        b = 1
 
         roundCount(red)
         roundCount(blue)
@@ -715,7 +681,6 @@ while running:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    b = 0
                     state = 'BEGIN'
                     changeto = ''
                     changeto1 = ''
