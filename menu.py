@@ -114,6 +114,12 @@ def menu():
         pygame.display.flip()
 
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    pygame.event.post(pygame.event.Event(pygame.QUIT))
             if event.type == pygame.MOUSEBUTTONDOWN:
                 (xMousePos, yMousePos) = pygame.mouse.get_pos()#координаты курсора мыши
                 if xMousePos > xButtonPos[0] and xMousePos < xButtonPos[0] + width[0] and yMousePos > yButtonPos[0] and yMousePos < yButtonPos[0] + height[0]:

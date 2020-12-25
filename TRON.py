@@ -14,13 +14,16 @@ pygame.mixer.init()
 music = pygame.mixer.Sound("music.mp3")
 boomSound = pygame.mixer.Sound("boom_sound.wav")
 pygame.mixer.music.set_volume(0.1)
-# music.play()
+music.play()
 
 # Play Surface
 size = width, height = 1280, 720
 playSurface = pygame.display.set_mode(size)
 pygame.display.set_caption("TRON")
 background = pygame.image.load("images/TRON2.png")
+tronLogo = pygame.image.load("images/TRON logo.png")
+TRONmenu = pygame.image.load("images/TRONmenu1.jpg")
+
 
 # Colors
 red = pygame.Color(255, 0, 0)
@@ -73,7 +76,6 @@ fpsController = pygame.time.Clock()
 
 # Game settings
 speed = 10
-boostSpeed = 20
 redCarPos = [100, 360]
 blueCarPos = [1180, 360]
 # redCarPosNG = [100, 360]
@@ -91,8 +93,9 @@ winCount = 0
 state = "BEGIN" # RUNNING, END
 winner: pygame.Color
 loser: pygame.Color
-menu = True
+pause = False
 running = True
+b = 0
 
 # Red bike images
 redBikeLeftImage = pygame.image.load("images/bikeRed.png")
@@ -110,162 +113,162 @@ blueBikeRightImage = pygame.transform.rotate(blueBikeLeftImage, 180)
 def roundCount(color: pygame.Color):
     global redBikeScore, blueBikeScore
 
-    pygame.draw.circle(playSurface, white, [320, 20], 12, 1)
-    pygame.draw.circle(playSurface, white, [342, 20], 12, 1)
-    pygame.draw.circle(playSurface, white, [364, 20], 12, 1)
-    pygame.draw.circle(playSurface, white, [386, 20], 12, 1)
-    pygame.draw.circle(playSurface, white, [408, 20], 12, 1)
-    pygame.draw.circle(playSurface, white, [430, 20], 12, 1)
-    pygame.draw.circle(playSurface, white, [452, 20], 12, 1)
-    pygame.draw.circle(playSurface, white, [474, 20], 12, 1)
-    pygame.draw.circle(playSurface, white, [496, 20], 12, 1)
-    pygame.draw.circle(playSurface, white, [518, 20], 12, 1)
+    pygame.draw.circle(playSurface, white, [320, 30], 12, 1)
+    pygame.draw.circle(playSurface, white, [344, 30], 12, 1)
+    pygame.draw.circle(playSurface, white, [368, 30], 12, 1)
+    pygame.draw.circle(playSurface, white, [392, 30], 12, 1)
+    pygame.draw.circle(playSurface, white, [416, 30], 12, 1)
+    pygame.draw.circle(playSurface, white, [440, 30], 12, 1)
+    pygame.draw.circle(playSurface, white, [464, 30], 12, 1)
+    pygame.draw.circle(playSurface, white, [488, 30], 12, 1)
+    pygame.draw.circle(playSurface, white, [512, 30], 12, 1)
+    pygame.draw.circle(playSurface, white, [536, 30], 12, 1)
 
-    pygame.draw.circle(playSurface, white, [964, 20], 12, 1)
-    pygame.draw.circle(playSurface, white, [942, 20], 12, 1)
-    pygame.draw.circle(playSurface, white, [920, 20], 12, 1)
-    pygame.draw.circle(playSurface, white, [898, 20], 12, 1)
-    pygame.draw.circle(playSurface, white, [876, 20], 12, 1)
-    pygame.draw.circle(playSurface, white, [854, 20], 12, 1)
-    pygame.draw.circle(playSurface, white, [832, 20], 12, 1)
-    pygame.draw.circle(playSurface, white, [810, 20], 12, 1)
-    pygame.draw.circle(playSurface, white, [788, 20], 12, 1)
-    pygame.draw.circle(playSurface, white, [766, 20], 12, 1)
+    pygame.draw.circle(playSurface, white, [972, 30], 12, 1)
+    pygame.draw.circle(playSurface, white, [948, 30], 12, 1)
+    pygame.draw.circle(playSurface, white, [924, 30], 12, 1)
+    pygame.draw.circle(playSurface, white, [900, 30], 12, 1)
+    pygame.draw.circle(playSurface, white, [876, 30], 12, 1)
+    pygame.draw.circle(playSurface, white, [852, 30], 12, 1)
+    pygame.draw.circle(playSurface, white, [828, 30], 12, 1)
+    pygame.draw.circle(playSurface, white, [804, 30], 12, 1)
+    pygame.draw.circle(playSurface, white, [780, 30], 12, 1)
+    pygame.draw.circle(playSurface, white, [756, 30], 12, 1)
 
     if color == red:
         if redBikeScore >= 1:
-            pygame.draw.circle(playSurface, red, [320, 20], 11, 0)
+            pygame.draw.circle(playSurface, red, [320, 30], 11, 0)
         if redBikeScore >= 2:
-            pygame.draw.circle(playSurface, red, [320, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [342, 20], 11, 0)
+            pygame.draw.circle(playSurface, red, [320, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [344, 30], 11, 0)
         if redBikeScore >= 3:
-            pygame.draw.circle(playSurface, red, [320, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [342, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [364, 20], 11, 0)
+            pygame.draw.circle(playSurface, red, [320, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [344, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [368, 30], 11, 0)
         if redBikeScore >= 4:
-            pygame.draw.circle(playSurface, red, [320, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [342, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [364, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [386, 20], 11, 0)
+            pygame.draw.circle(playSurface, red, [320, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [344, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [368, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [392, 30], 11, 0)
         if redBikeScore >= 5:
-            pygame.draw.circle(playSurface, red, [320, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [342, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [364, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [386, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [408, 20], 11, 0)
+            pygame.draw.circle(playSurface, red, [320, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [344, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [368, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [392, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [416, 30], 11, 0)
         if redBikeScore >= 6:
-            pygame.draw.circle(playSurface, red, [320, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [342, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [364, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [386, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [408, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [430, 20], 11, 0)
+            pygame.draw.circle(playSurface, red, [320, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [344, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [368, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [392, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [416, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [440, 30], 11, 0)
         if redBikeScore >= 7:
-            pygame.draw.circle(playSurface, red, [320, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [342, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [364, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [386, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [408, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [430, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [452, 20], 11, 0)
+            pygame.draw.circle(playSurface, red, [320, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [344, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [368, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [392, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [416, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [440, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [464, 30], 11, 0)
         if redBikeScore >= 8:
-            pygame.draw.circle(playSurface, red, [320, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [342, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [364, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [386, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [408, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [430, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [452, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [474, 20], 11, 0)
+            pygame.draw.circle(playSurface, red, [320, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [344, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [368, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [392, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [416, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [440, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [464, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [488, 30], 11, 0)
         if redBikeScore >= 9:
-            pygame.draw.circle(playSurface, red, [320, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [342, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [364, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [386, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [408, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [430, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [452, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [474, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [496, 20], 11, 0)
+            pygame.draw.circle(playSurface, red, [320, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [344, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [368, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [392, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [416, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [440, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [464, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [488, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [512, 30], 11, 0)
         if redBikeScore >= 10:
-            pygame.draw.circle(playSurface, red, [320, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [342, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [364, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [386, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [408, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [430, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [452, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [474, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [496, 20], 11, 0)
-            pygame.draw.circle(playSurface, red, [518, 20], 11, 0)
+            pygame.draw.circle(playSurface, red, [320, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [344, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [368, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [392, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [416, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [440, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [464, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [488, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [512, 30], 11, 0)
+            pygame.draw.circle(playSurface, red, [536, 30], 11, 0)
 
 
     if color == blue:
         if blueBikeScore >= 1:
-            pygame.draw.circle(playSurface, blue, [964, 20], 11, 0)
+            pygame.draw.circle(playSurface, blue, [972, 30], 11, 0)
         if blueBikeScore >= 2:
-            pygame.draw.circle(playSurface, blue, [964, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [942, 20], 11, 0)
+            pygame.draw.circle(playSurface, blue, [972, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [948, 30], 11, 0)
         if blueBikeScore >= 3:
-            pygame.draw.circle(playSurface, blue, [964, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [942, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [920, 20], 11, 0)
+            pygame.draw.circle(playSurface, blue, [972, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [948, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [924, 30], 11, 0)
         if blueBikeScore >= 4:
-            pygame.draw.circle(playSurface, blue, [964, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [942, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [920, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [898, 20], 11, 0)
+            pygame.draw.circle(playSurface, blue, [972, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [948, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [924, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [900, 30], 11, 0)
         if blueBikeScore >= 5:
-            pygame.draw.circle(playSurface, blue, [964, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [942, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [920, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [898, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [876, 20], 11, 0)
+            pygame.draw.circle(playSurface, blue, [972, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [948, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [924, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [900, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [876, 30], 11, 0)
         if blueBikeScore >= 6:
-            pygame.draw.circle(playSurface, blue, [964, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [942, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [920, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [898, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [876, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [854, 20], 11, 0)
+            pygame.draw.circle(playSurface, blue, [972, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [948, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [924, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [900, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [876, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [852, 30], 11, 0)
         if blueBikeScore >= 7:
-            pygame.draw.circle(playSurface, blue, [964, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [942, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [920, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [898, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [876, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [854, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [832, 20], 11, 0)
+            pygame.draw.circle(playSurface, blue, [972, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [948, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [924, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [900, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [876, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [852, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [828, 30], 11, 0)
         if blueBikeScore >= 8:
-            pygame.draw.circle(playSurface, blue, [964, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [942, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [920, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [898, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [876, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [854, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [832, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [810, 20], 11, 0)
+            pygame.draw.circle(playSurface, blue, [972, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [948, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [924, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [900, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [876, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [852, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [828, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [804, 30], 11, 0)
         if blueBikeScore >= 9:
-            pygame.draw.circle(playSurface, blue, [964, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [942, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [920, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [898, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [876, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [854, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [832, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [810, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [788, 20], 11, 0)
+            pygame.draw.circle(playSurface, blue, [972, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [948, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [924, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [900, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [876, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [852, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [828, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [804, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [780, 30], 11, 0)
         if blueBikeScore >= 10:
-            pygame.draw.circle(playSurface, blue, [964, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [942, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [920, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [898, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [876, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [854, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [832, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [810, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [788, 20], 11, 0)
-            pygame.draw.circle(playSurface, blue, [766, 20], 11, 0)
+            pygame.draw.circle(playSurface, blue, [972, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [948, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [924, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [900, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [876, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [852, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [828, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [804, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [780, 30], 11, 0)
+            pygame.draw.circle(playSurface, blue, [756, 30], 11, 0)
 
 # Player win
 def playerWin(color: pygame.Color):
@@ -310,6 +313,7 @@ def boom(color: pygame.Color):
         if animCount // 5 == 3:
             playSurface.blit(bangReverse, (blueCarPos[0] - 52, blueCarPos[1] - 50))
 
+# Set start bike position 
 def newRound():
     global redCarPos, blueCarPos
     redCarPos = [100, 360]
@@ -317,6 +321,7 @@ def newRound():
     del redCarLine[:]
     del blueCarLine[:]
 
+# Text who win round
 def roundWin(color: pygame.Color):
     globalFontWin = pygame.font.SysFont('monaco', 200)
     globalOutlineFontWin = pygame.font.SysFont('monaco', 203)
@@ -341,13 +346,42 @@ def roundWin(color: pygame.Color):
         playSurface.blit(blueOutlineSurfWin, blueOutlineRectWin)
         playSurface.blit(blueSurfWin, blueRectWin)
 
+def setDirectionText(changeto, changeto1):
+    globalFontMini = pygame.font.SysFont('monaco', 50)
+    globalOutlineFontMini = pygame.font.SysFont('monaco', 51)
+    if changeto == '':
+        setRedDirectionOutlineSurf = globalOutlineFontMini.render("Set red bike direction", True, black)
+        setRedDirectionSurf = globalFontMini.render("Set red bike direction", True, red)
+        setRedDirectionOutlineRect = setRedDirectionOutlineSurf.get_rect()
+        setRedDirectionRect = setRedDirectionSurf.get_rect()
+        setRedDirectionOutlineRect.midtop = (240, 260)
+        setRedDirectionRect.midtop = (240, 260)
+        playSurface.blit(setRedDirectionOutlineSurf, setRedDirectionOutlineRect)
+        playSurface.blit(setRedDirectionSurf, setRedDirectionRect)
+
+    if changeto1 == '':
+        setBlueDirectionOutlineSurf = globalOutlineFontMini.render("Set blue bike direction", True, black)
+        setBlueDirectionSurf = globalFontMini.render("Set blue bike direction", True, blue)
+        setBlueDirectionOutlineRect = setBlueDirectionOutlineSurf.get_rect()
+        setBlueDirectionRect = setBlueDirectionSurf.get_rect()
+        setBlueDirectionOutlineRect.midtop = (1040, 260)
+        setBlueDirectionRect.midtop = (1040, 260)
+        playSurface.blit(setBlueDirectionOutlineSurf, setBlueDirectionOutlineRect)
+        playSurface.blit(setBlueDirectionSurf, setBlueDirectionRect)
+
 
 
 
 while running:
+
     playSurface.blit(background, (0, 0))
     pygame.draw.rect(playSurface, black, pygame.Rect(0, 0, 1280, 52))
 
+    # while pause:
+    #     playSurface.blit(TRONmenu, (-343, 0))
+    #     playSurface.blit(tronLogo, (140, 130))
+
+        
     if state == "BEGIN":
 
         if redBikeScore == 10:
@@ -356,6 +390,8 @@ while running:
         if blueBikeScore == 10:
             redBikeScore = 0
             blueBikeScore = 0
+        
+        setDirectionText(changeto, changeto1)
 
         roundCount(red)
         roundCount(blue)
@@ -367,7 +403,7 @@ while running:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    menu = True
+                    pause = True
                 if event.key == pygame.K_d:
                     changeto = 'RIGHT'
                 if event.key == pygame.K_a:
@@ -386,15 +422,51 @@ while running:
                     changeto1 = 'DOWN'
                 if event.key == pygame.K_ESCAPE:
                     pygame.event.post(pygame.event.Event(pygame.QUIT))
+        
+        for pos in redCarLine:
+            pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], speed, speed))
+        for pos1 in blueCarLine:
+            pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], speed, speed))
 
-        # draw player bikes
-        playSurface.blit(redBikeRightImage, (redCarPos[0]-40, redCarPos[1]-55))
-        playSurface.blit(blueBikeLeftImage, (blueCarPos[0]-55, blueCarPos[1]-35))
+        if changeto == '' and b == 0:
+            playSurface.blit(redBikeRightImage, (redCarPos[0]-40, redCarPos[1]-55))
+        if changeto1 == '' and b == 0:
+            playSurface.blit(blueBikeLeftImage, (blueCarPos[0]-55, blueCarPos[1]-35))
+
+         # Red car correct blit
+        if direction == "RIGHT":
+            b = 1
+            playSurface.blit(redBikeRightImage, (redCarPos[0]-40, redCarPos[1]-55))
+        if direction == "UP":
+            b =1
+            playSurface.blit(redBikeUpImage, (redCarPos[0]-55, redCarPos[1]-35))
+        if direction == "DOWN":
+            b = 1
+            playSurface.blit(redBikeDownImage, (redCarPos[0]-35, redCarPos[1]-55))
+        if direction == "LEFT":
+            b = 1
+            playSurface.blit(redBikeLeftImage, (redCarPos[0]-55, redCarPos[1]-35))
+        
+        # Blue car correct blit
+        if direction1 == "RIGHT":
+            b = 1
+            playSurface.blit(blueBikeRightImage, (blueCarPos[0]-40, blueCarPos[1]-55))
+        if direction1 == "UP":
+            b = 1
+            playSurface.blit(blueBikeUpImage, (blueCarPos[0]-55, blueCarPos[1]-35))
+        if direction1 == "DOWN":
+            b = 1
+            playSurface.blit(blueBikeDownImage, (blueCarPos[0]-35, blueCarPos[1]-55))
+        if direction1 == "LEFT":
+            b = 1
+            playSurface.blit(blueBikeLeftImage, (blueCarPos[0]-55, blueCarPos[1]-35))
 
         if changeto != '' and changeto1 != '':
             state = 'RUNNING'
     
     elif state == 'RUNNING':
+
+        b = 1
 
         roundCount(red)
         roundCount(blue)
@@ -404,8 +476,11 @@ while running:
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    menu = True
+                if event.key == pygame.K_p:
+                    pause = True
+                    state = 'BEGIN'
+                    changeto = ''
+                    changeto1 = ''
                 if event.key == pygame.K_d:
                     changeto = 'RIGHT'
                 if event.key == pygame.K_a:
@@ -573,9 +648,6 @@ while running:
 
     elif state == 'END':
 
-        # playSurface.blit(PressSpaceOutlineSurf, PressSpaceOutlineRect)
-        # playSurface.blit(PressSpaceSurf, PressSpaceRect)
-
         for pos in redCarLine:
             pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], speed, speed))
         for pos1 in blueCarLine:
@@ -648,6 +720,7 @@ while running:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
+                    b = 0
                     state = 'BEGIN'
                     changeto = ''
                     changeto1 = ''

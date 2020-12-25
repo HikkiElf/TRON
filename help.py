@@ -5,10 +5,10 @@ pygame.init()
 def help1():
      pygame.display.set_caption("TRON")
      screen = pygame.display.set_mode([1280, 720])
-     background = pygame.image.load("images/TRONmenu1.jpg")
+     background = pygame.image.load("images/TRONmenu2.jpg")
      color = [57, 204, 204]
      color1 = [0, 31, 63]
-     top=100; left=90
+     top=120; left=90
      font = pygame.font.SysFont('14722', 22, False, False)
      font1 = pygame.font.SysFont('14722', 22, False, True)
      my_file = open('help.txt', 'r')#Открываем файл для чтения
@@ -26,8 +26,8 @@ def help1():
           top=top+20
      text = font.render("Press Escape to exit",True, color)
      text1 = font1.render("Press Escape to exit",True, color1)
-     background.blit(text1, [370, 520])
-     background.blit(text, [370, 520])
+     background.blit(text1, [450, 620])
+     background.blit(text, [450, 620])
      screen.blit(background, (0, 0))
      pygame.display.flip()
      running=True
