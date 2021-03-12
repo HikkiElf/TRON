@@ -367,19 +367,44 @@ def setDirectionText(changeto, changeto1):
 def particleDraw(direction, direction1):
     global particlesRed, particlesBlue
 
-    mxr, myr = redCarPos
-    mxb, myb = blueCarPos
-    particlesRed.append([[mxr, myr+5], [random.randint(0, 20) / 10 - 1, -0.1], random.randint(4, 6)])
-    particlesBlue.append([[mxb, myb+5], [random.randint(0, 20) / 10 - 1, -0.1], random.randint(4, 6)])
+    xr, yr = redCarPos
+    xb, yb = blueCarPos
+    if state != 'END':
+        if direction == 'RIGHT' or direction == 'LEFT':
+                particlesRed.append([[xr, yr+5], [-0.1, random.randint(0, 20) / 10 - 1], random.randint(4, 6)])
+        if direction == 'UP' or direction =='DOWN':
+                particlesRed.append([[xr, yr+5], [random.randint(0, 20) / 10 - 1, -0.1], random.randint(4, 6)])
+        if direction1 == 'RIGHT' or direction1 == 'LEFT':
+            particlesBlue.append([[xb, yb+5], [-0.1, random.randint(0, 20) / 10 - 1], random.randint(4, 6)])
+        if direction1 == 'UP' or direction1 == 'DOWN':
+            particlesBlue.append([[xb, yb+5], [random.randint(0, 20) / 10 - 1, -0.1], random.randint(4, 6)])
 
+    for particleBlue in particlesRed:
+        particleBlue[0][0] += particleBlue[1][0]
+        particleBlue[0][1] += particleBlue[1][1]
+        particleBlue[2] -= 0.05
+        # particleBlue[1][1] += 0.1
+        pygame.draw.circle(playSurface, (0, 0, 0), [int(particleBlue[0][0]), int(particleBlue[0][1])], int(particleBlue[2]))
+        if particleBlue[2] <= 0:
+            particlesRed.remove(particleBlue)
     for particleRed in particlesRed:
         particleRed[0][0] += particleRed[1][0]
         particleRed[0][1] += particleRed[1][1]
         particleRed[2] -= 0.05
         # particleRed[1][1] += 0.1
-        pygame.draw.circle(playSurface, (205, 0, 0), [int(particleRed[0][0]), int(particleRed[0][1])], int(particleRed[2]))
+        pygame.draw.circle(playSurface, (245, 0, 0), [int(particleRed[0][0]), int(particleRed[0][1])], int(particleRed[2]))
         if particleRed[2] <= 0:
             particlesRed.remove(particleRed)
+
+    for particleRed in particlesBlue:
+        particleRed[0][0] += particleRed[1][0]
+        particleRed[0][1] += particleRed[1][1]
+        particleRed[2] -= 0.05
+        # particleRed[1][1] += 0.1
+        pygame.draw.circle(playSurface, (255, 255, 255), [int(particleRed[0][0]), int(particleRed[0][1])], int(particleRed[2]))
+        if particleRed[2] <= 0:
+            particlesBlue.remove(particleRed)
+
 
     for particleBlue in particlesBlue:
         particleBlue[0][0] += particleBlue[1][0]
@@ -635,7 +660,7 @@ while running:
 
 
     elif state == 'END':
-        
+
         particleDraw(direction, direction1)
 
         for pos in redCarLine:
