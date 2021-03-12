@@ -668,25 +668,27 @@ while running:
         for pos1 in blueCarLine:
             pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], speed, speed))
 
-        # Red car correct blit
-        if direction == "RIGHT":
-            playSurface.blit(redBikeRightImage, (redCarPos[0]-40, redCarPos[1]-55))
-        if direction == "UP":
-            playSurface.blit(redBikeUpImage, (redCarPos[0]-55, redCarPos[1]-35))
-        if direction == "DOWN":
-            playSurface.blit(redBikeDownImage, (redCarPos[0]-35, redCarPos[1]-55))
-        if direction == "LEFT":
-            playSurface.blit(redBikeLeftImage, (redCarPos[0]-55, redCarPos[1]-35))
+        if winner != blue:
+            # Red car correct blit
+            if direction == "RIGHT":
+                playSurface.blit(redBikeRightImage, (redCarPos[0]-40, redCarPos[1]-55))
+            if direction == "UP":
+                playSurface.blit(redBikeUpImage, (redCarPos[0]-55, redCarPos[1]-35))
+            if direction == "DOWN":
+                playSurface.blit(redBikeDownImage, (redCarPos[0]-35, redCarPos[1]-55))
+            if direction == "LEFT":
+                playSurface.blit(redBikeLeftImage, (redCarPos[0]-55, redCarPos[1]-35))
         
-        # Blue car correct blit
-        if direction1 == "RIGHT":
-            playSurface.blit(blueBikeRightImage, (blueCarPos[0]-40, blueCarPos[1]-55))
-        if direction1 == "UP":
-            playSurface.blit(blueBikeUpImage, (blueCarPos[0]-55, blueCarPos[1]-35))
-        if direction1 == "DOWN":
-            playSurface.blit(blueBikeDownImage, (blueCarPos[0]-35, blueCarPos[1]-55))
-        if direction1 == "LEFT":
-            playSurface.blit(blueBikeLeftImage, (blueCarPos[0]-55, blueCarPos[1]-35))
+        if winner != red:
+            # Blue car correct blit
+            if direction1 == "RIGHT":
+                playSurface.blit(blueBikeRightImage, (blueCarPos[0]-40, blueCarPos[1]-55))
+            if direction1 == "UP":
+                playSurface.blit(blueBikeUpImage, (blueCarPos[0]-55, blueCarPos[1]-35))
+            if direction1 == "DOWN":
+                playSurface.blit(blueBikeDownImage, (blueCarPos[0]-35, blueCarPos[1]-55))
+            if direction1 == "LEFT":
+                playSurface.blit(blueBikeLeftImage, (blueCarPos[0]-55, blueCarPos[1]-35))
         
         if loser == winner:
             boom(blue)

@@ -51,7 +51,7 @@ class Spark():
         # a bunch of options to mess around with relating to angles...
         # self.point_towards(math.pi / 2, 0.02)
         # self.velocity_adjust(0.975, 0.2, 8, dt)
-        # self.angle += 0.1
+        self.angle += 0.1
 
         self.speed -= 0.1
 
@@ -82,7 +82,7 @@ while True:
 
 
     mx, my = pygame.mouse.get_pos()
-    sparks.append(Spark([mx, my], math.radians(random.randint(0, 360)), random.randint(3, 6), (255, 255, 255), 2))
+    sparks.append(Spark([mx, my], math.radians(random.randint(0, 360)), random.randint(3, 6), (251, 134, 3), 2))
 
     # Buttons ------------------------------------------------ #
     for event in pygame.event.get():
