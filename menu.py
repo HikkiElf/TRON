@@ -26,10 +26,13 @@ def menu():
     line_width = 0
     run=True
     count = 4
+    musicCount = 0
 
     white = pygame.Color(255, 255, 255)
 
-    def buttonFocusedAnimation(count):
+    def buttonFocusedAnimation(count, musicCount):
+        if musicCount == 1:
+            selectSound.play()
         if count == 0:
             buttonColor[0] = buttonColorActive
             xButtonPos[0] = 58
@@ -142,13 +145,19 @@ def menu():
                 (xMousePos, yMousePos) = pygame.mouse.get_pos()
                 if xMousePos > xButtonPos[0] and xMousePos < xButtonPos[0] + width[0] and yMousePos > yButtonPos[0] and yMousePos < yButtonPos[0] + height[0]:
                     count = 0
-                if xMousePos > xButtonPos[1] and xMousePos < xButtonPos[1] + width[1] and yMousePos > yButtonPos[1] and yMousePos < yButtonPos[1] + height[1]:
+                    musicCount += 1
+                elif xMousePos > xButtonPos[1] and xMousePos < xButtonPos[1] + width[1] and yMousePos > yButtonPos[1] and yMousePos < yButtonPos[1] + height[1]:
                     count = 1
-                if xMousePos > xButtonPos[2] and xMousePos < xButtonPos[2] + width[2] and yMousePos > yButtonPos[2] and yMousePos < yButtonPos[2] + height[2]:
+                    musicCount += 1
+                elif xMousePos > xButtonPos[2] and xMousePos < xButtonPos[2] + width[2] and yMousePos > yButtonPos[2] and yMousePos < yButtonPos[2] + height[2]:
                     count = 2
-                if xMousePos > xButtonPos[3] and xMousePos < xButtonPos[3] + width[3] and yMousePos > yButtonPos[3] and yMousePos < yButtonPos[3] + height[3]:
+                    musicCount += 1
+                elif xMousePos > xButtonPos[3] and xMousePos < xButtonPos[3] + width[3] and yMousePos > yButtonPos[3] and yMousePos < yButtonPos[3] + height[3]:
                     count = 3
-                buttonFocusedAnimation(count)
+                    musicCount += 1
+                else:
+                    musicCount = 0
+                buttonFocusedAnimation(count, musicCount)
                 buttonUnfocusedAnimation(count)
 
 

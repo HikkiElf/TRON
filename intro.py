@@ -3,6 +3,8 @@ import sys
 pygame.init()
 pygame.display.set_caption("TRON")
 def intro():
+    music = pygame.mixer.Sound("Start.wav")
+    music.play()
     screen = pygame.display.set_mode([1280, 720])
     intro_pic = pygame.image.load('images/splash screen copy.png')
     screen.blit(intro_pic, (0, 0))

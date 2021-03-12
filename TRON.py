@@ -11,6 +11,8 @@ import menu
 from pygame.locals import *
 pygame.init()
 pygame.mixer.init()
+pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
+
 
 # Sound
 music = pygame.mixer.Sound("music.mp3")
@@ -387,6 +389,7 @@ def particleDraw(direction, direction1):
         pygame.draw.circle(playSurface, (0, 0, 0), [int(particleBlue[0][0]), int(particleBlue[0][1])], int(particleBlue[2]))
         if particleBlue[2] <= 0:
             particlesRed.remove(particleBlue)
+
     for particleRed in particlesRed:
         particleRed[0][0] += particleRed[1][0]
         particleRed[0][1] += particleRed[1][1]
