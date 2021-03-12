@@ -4,9 +4,11 @@
 
 import pygame
 import sys
+import math
 import time
 import random
 import menu
+from pygame.locals import *
 pygame.init()
 pygame.mixer.init()
 
@@ -94,6 +96,11 @@ winner: pygame.Color
 loser: pygame.Color
 pause = False
 running = True
+particlesRed = []
+particlesBlue = []
+
+
+
 
 # Red bike images
 redBikeLeftImage = pygame.image.load("images/bikeRed.png")
@@ -357,6 +364,31 @@ def setDirectionText(changeto, changeto1):
         setBlueDirectionRect.midtop = (1040, 260)
         playSurface.blit(setBlueDirectionSurf, setBlueDirectionRect)
 
+def particleDraw(direction, direction1):
+    global particlesRed, particlesBlue
+
+    mxr, myr = redCarPos
+    mxb, myb = blueCarPos
+    particlesRed.append([[mxr, myr+5], [random.randint(0, 20) / 10 - 1, -0.1], random.randint(4, 6)])
+    particlesBlue.append([[mxb, myb+5], [random.randint(0, 20) / 10 - 1, -0.1], random.randint(4, 6)])
+
+    for particleRed in particlesRed:
+        particleRed[0][0] += particleRed[1][0]
+        particleRed[0][1] += particleRed[1][1]
+        particleRed[2] -= 0.05
+        # particleRed[1][1] += 0.1
+        pygame.draw.circle(playSurface, (205, 0, 0), [int(particleRed[0][0]), int(particleRed[0][1])], int(particleRed[2]))
+        if particleRed[2] <= 0:
+            particlesRed.remove(particleRed)
+
+    for particleBlue in particlesBlue:
+        particleBlue[0][0] += particleBlue[1][0]
+        particleBlue[0][1] += particleBlue[1][1]
+        particleBlue[2] -= 0.05
+        # particleBlue[1][1] += 0.1
+        pygame.draw.circle(playSurface, (0, 245, 245), [int(particleBlue[0][0]), int(particleBlue[0][1])], int(particleBlue[2]))
+        if particleBlue[2] <= 0:
+            particlesBlue.remove(particleBlue)
 
 
 
@@ -366,6 +398,8 @@ while running:
     pygame.draw.rect(playSurface, black, pygame.Rect(0, 0, 1280, 52))
 
     if state == "BEGIN":
+
+        particleDraw(direction, direction1)
 
         if redBikeScore == 10:
             redBikeScore = 0
@@ -421,7 +455,7 @@ while running:
 
         roundCount(red)
         roundCount(blue)
-            
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -495,6 +529,8 @@ while running:
             pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], speed, speed))
         for pos1 in blueCarLine:
             pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], speed, speed))
+        
+        particleDraw(direction, direction1)
         
         # Red car correct blit
         if direction == "RIGHT":
@@ -597,7 +633,10 @@ while running:
                 loser = red
                 playerWin(winner)
 
+
     elif state == 'END':
+        
+        particleDraw(direction, direction1)
 
         for pos in redCarLine:
             pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], speed, speed))
