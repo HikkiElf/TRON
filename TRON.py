@@ -80,6 +80,7 @@ fpsController = pygame.time.Clock()
 
 # Game settings
 speed = 10
+lineSize = 150
 redCarPos = [100, 360]
 blueCarPos = [1180, 360]
 # redCarPosNG = [100, 360]
@@ -477,9 +478,9 @@ while running:
                     pygame.event.post(pygame.event.Event(pygame.QUIT))
         
         for pos in redCarLine:
-            pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], speed, speed))
+            pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], lineSize, lineSize))
         for pos1 in blueCarLine:
-            pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], speed, speed))
+            pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], lineSize, lineSize))
 
         playSurface.blit(redBikeRightImage, (redCarPos[0]-40, redCarPos[1]-55))
         playSurface.blit(blueBikeLeftImage, (blueCarPos[0]-55, blueCarPos[1]-35))
@@ -562,9 +563,9 @@ while running:
         blueCarLine.insert(0, list(blueCarPos))
 
         for pos in redCarLine:
-            pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], speed, speed))
+            pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], lineSize, lineSize))
         for pos1 in blueCarLine:
-            pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], speed, speed))
+            pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], lineSize, lineSize))
         
         particleDraw(direction, direction1)
         
@@ -675,9 +676,9 @@ while running:
         particleDraw(direction, direction1)
 
         for pos in redCarLine:
-            pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], speed, speed))
+            pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], lineSize, lineSize))
         for pos1 in blueCarLine:
-            pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], speed, speed))
+            pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], lineSize, lineSize))
 
         if winner != blue:
             # Red car correct blit
