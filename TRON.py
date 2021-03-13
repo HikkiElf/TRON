@@ -15,10 +15,11 @@ pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
 
 
 # Sound
-music = pygame.mixer.Sound("music.mp3")
+music = pygame.mixer.Sound("TRONmusic.mp3")
 boomSound = pygame.mixer.Sound("boom_sound.wav")
+moveSound = pygame.mixer.Sound("move.wav")
 pygame.mixer.music.set_volume(0.1)
-# music.play()
+music.play(-1)
 
 # Play Surface
 size = width, height = 1280, 720
@@ -408,7 +409,6 @@ def particleDraw(direction, direction1):
         if particleRed[2] <= 0:
             particlesBlue.remove(particleRed)
 
-
     for particleBlue in particlesBlue:
         particleBlue[0][0] += particleBlue[1][0]
         particleBlue[0][1] += particleBlue[1][1]
@@ -450,20 +450,28 @@ while running:
                 if event.key == pygame.K_SPACE:
                     pause = True
                 if event.key == pygame.K_d:
+                    moveSound.play()
                     changeto = 'RIGHT'
                 if event.key == pygame.K_a:
+                    moveSound.play()
                     changeto = 'LEFT'
                 if event.key == pygame.K_w:
+                    moveSound.play()
                     changeto = 'UP'
                 if event.key == pygame.K_s:
+                    moveSound.play()
                     changeto = 'DOWN'
                 if event.key == pygame.K_RIGHT:
+                    moveSound.play()
                     changeto1 = 'RIGHT'
                 if event.key == pygame.K_LEFT:
+                    moveSound.play()
                     changeto1 = 'LEFT'
                 if event.key == pygame.K_UP:
+                    moveSound.play()
                     changeto1 = 'UP'
                 if event.key == pygame.K_DOWN:
+                    moveSound.play()
                     changeto1 = 'DOWN'
                 if event.key == pygame.K_ESCAPE:
                     pygame.event.post(pygame.event.Event(pygame.QUIT))
