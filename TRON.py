@@ -19,7 +19,7 @@ music = pygame.mixer.Sound("TRONmusic.mp3")
 boomSound = pygame.mixer.Sound("boom_sound.wav")
 moveSound = pygame.mixer.Sound("move.wav")
 pygame.mixer.music.set_volume(0.1)
-music.play(-1)
+# music.play(-1)
 
 # Play Surface
 size = width, height = 1280, 720
@@ -80,12 +80,14 @@ fpsController = pygame.time.Clock()
 
 # Game settings
 speed = 10
-lineSize = 150
+boostSpeed = 20
+lineSize = 10
 redCarPos = [100, 360]
 blueCarPos = [1180, 360]
 # redCarPosNG = [100, 360]
 # blueCarPosNG = [1180, 360]
 redCarLine = [[100, 360]]
+redCarLineBoost = redCarLine
 blueCarLine = [[1180, 360]]
 direction = 'RIGHT'
 direction1 = 'LEFT'
@@ -102,6 +104,8 @@ pause = False
 running = True
 particlesRed = []
 particlesBlue = []
+boostRed = False
+boostBlue = False
 
 
 
@@ -423,6 +427,8 @@ def particleDraw(direction, direction1):
 
 while running:
 
+    keys = pygame.key.get_pressed()
+
     playSurface.blit(background, (0, 0))
     pygame.draw.rect(playSurface, black, pygame.Rect(0, 0, 1280, 52))
 
@@ -451,28 +457,28 @@ while running:
                 if event.key == pygame.K_SPACE:
                     pause = True
                 if event.key == pygame.K_d:
-                    moveSound.play()
+                    moveSound.play(1)
                     changeto = 'RIGHT'
                 if event.key == pygame.K_a:
-                    moveSound.play()
+                    moveSound.play(1)
                     changeto = 'LEFT'
                 if event.key == pygame.K_w:
-                    moveSound.play()
+                    moveSound.play(1)
                     changeto = 'UP'
                 if event.key == pygame.K_s:
-                    moveSound.play()
+                    moveSound.play(1)
                     changeto = 'DOWN'
                 if event.key == pygame.K_RIGHT:
-                    moveSound.play()
+                    moveSound.play(1)
                     changeto1 = 'RIGHT'
                 if event.key == pygame.K_LEFT:
-                    moveSound.play()
+                    moveSound.play(1)
                     changeto1 = 'LEFT'
                 if event.key == pygame.K_UP:
-                    moveSound.play()
+                    moveSound.play(1)
                     changeto1 = 'UP'
                 if event.key == pygame.K_DOWN:
-                    moveSound.play()
+                    moveSound.play(1)
                     changeto1 = 'DOWN'
                 if event.key == pygame.K_ESCAPE:
                     pygame.event.post(pygame.event.Event(pygame.QUIT))
@@ -492,6 +498,15 @@ while running:
 
         roundCount(red)
         roundCount(blue)
+
+
+        boostRed = False
+        boostBlue = False
+
+        if keys[pygame.K_LSHIFT]:
+            boostRed = True
+        if keys[pygame.K_RALT]:
+            boostBlue = True
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -559,11 +574,42 @@ while running:
             blueCarPos[1] -= speed
 
         # Line mechanism
-        redCarLine.insert(0, list(redCarPos))
-        blueCarLine.insert(0, list(blueCarPos))
+        if boostRed == True:
+            redCarLine.insert(0, list(redCarPos))
+            if direction == 'RIGHT':
+                redCarPos[0] += speed
+                redCarLine.insert(0, list(redCarPos))
+            if direction == 'LEFT':
+                redCarPos[0] -= speed
+                redCarLine.insert(0, list(redCarPos))
+            if direction == 'DOWN':
+                redCarPos[1] += speed
+                redCarLine.insert(0, list(redCarPos))
+            if direction == 'UP':
+                redCarPos[1] -= speed
+                redCarLine.insert(0, list(redCarPos))
+        if boostBlue == True:
+            blueCarLine.insert(0, list(blueCarPos))
+            if direction1 == 'RIGHT':
+                blueCarPos[0] += speed
+                blueCarLine.insert(0, list(blueCarPos))
+            if direction1 == 'LEFT':
+                blueCarPos[0] -= speed
+                blueCarLine.insert(0, list(blueCarPos))
+            if direction1 == 'DOWN':
+                blueCarPos[1] += speed
+                blueCarLine.insert(0, list(blueCarPos))
+            if direction1 == 'UP':
+                blueCarPos[1] -= speed
+                blueCarLine.insert(0, list(blueCarPos))
+        if boostRed == False:
+            redCarLine.insert(0, list(redCarPos))
+        if boostBlue == False:
+            blueCarLine.insert(0, list(blueCarPos))
 
         for pos in redCarLine:
-            pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], lineSize, lineSize))
+                pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], lineSize, lineSize))
+
         for pos1 in blueCarLine:
             pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], lineSize, lineSize))
         

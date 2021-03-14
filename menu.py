@@ -22,7 +22,6 @@ def menu():
     textColor = pygame.Color(57, 204, 204)
     font = pygame.font.SysFont("14722", 50)
     selectSound = pygame.mixer.Sound("select.wav")
-    buttonSound = pygame.mixer.Sound("button.wav")
     line_width = 0
     run=True
     count = 4
