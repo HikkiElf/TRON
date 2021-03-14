@@ -104,8 +104,7 @@ pause = False
 running = True
 particlesRed = []
 particlesBlue = []
-boostRed = False
-boostBlue = False
+
 
 
 
@@ -697,6 +696,7 @@ while running:
                 winner = red
                 loser = blue
                 playerWin(winner)
+
         for block1 in blueCarLine[1:]:
             if blueCarPos == block1 and redCarPos == block1:
                 boomSound.play()
@@ -715,9 +715,21 @@ while running:
                 winner = blue
                 loser = red
                 playerWin(winner)
+            elif boostRed == True:
+                if direction == "UP":
+                    if redCarPos[0] == block1[0] and redCarPos[1] + 10 == block1[1]:
+                        print(1)
+                        boomSound.play()
+                        state = "END"
+                        winner = blue
+                        loser = red
+                        playerWin(winner)
+
+
 
 
     elif state == 'END':
+        # print(boostRed)
 
         particleDraw(direction, direction1)
 
