@@ -24,14 +24,16 @@ while True:
     # Background --------------------------------------------- #
     screen.fill((0,0,0))
     mx, my = pygame.mouse.get_pos()
-    particles.append([[mx, my], [random.randint(0, 20) / 10 - 1, -0.1], random.randint(4, 6)])
+    particles.append([[mx, my], [0.1, -0.1], random.randint(4, 6)])
+    particles.append([[mx, my-5], [0.1, -0.1], random.randint(4, 6)])
+    particles.append([[mx, my-10], [0.1, -0.1], random.randint(4, 6)])
 
     for particle in particles:
         particle[0][0] += particle[1][0]
         particle[0][1] += particle[1][1]
-        particle[2] -= 0.4
-        particle[1][1] += 0.1
-        pygame.draw.circle(screen, (255, 255, 255), [int(particle[0][0]), int(particle[0][1])], int(particle[2]))
+        particle[2] -= 0.1
+        # particle[1][1] += 0.1
+        pygame.draw.circle(screen, (255, 0, 0), [int(particle[0][0]), int(particle[0][1])], int(particle[2]))
         if particle[2] <= 0:
             particles.remove(particle)
     

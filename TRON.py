@@ -358,8 +358,6 @@ def boostLimit():
         pygame.draw.rect(playSurface, blue, pygame.Rect(width - 50 - 200, 16, limitCountBlue, 26))
 
 
-
-
 # Set start bike position 
 def newRound():
     global redCarPos, blueCarPos
@@ -407,56 +405,47 @@ def setDirectionText(changeto, changeto1):
         setBlueDirectionRect.midtop = (1040, 260)
         playSurface.blit(setBlueDirectionSurf, setBlueDirectionRect)
 
-def particleDraw(direction, direction1):
+def particleDraw():
     global particlesRed, particlesBlue
+    
+    xr = 50 + limitCountRed
+    yr = 16
+    xb = width - 50 - 200 + limitCountBlue
+    yb = 16
 
-    xr, yr = redCarPos
-    xb, yb = blueCarPos
-    if state != 'END':
-        if direction == 'RIGHT' or direction == 'LEFT':
-                particlesRed.append([[xr, yr+5], [-0.1, random.randint(0, 20) / 10 - 1], random.randint(4, 6)])
-        if direction == 'UP' or direction =='DOWN':
-                particlesRed.append([[xr, yr+5], [random.randint(0, 20) / 10 - 1, -0.1], random.randint(4, 6)])
-        if direction1 == 'RIGHT' or direction1 == 'LEFT':
-            particlesBlue.append([[xb, yb+5], [-0.1, random.randint(0, 20) / 10 - 1], random.randint(4, 6)])
-        if direction1 == 'UP' or direction1 == 'DOWN':
-            particlesBlue.append([[xb, yb+5], [random.randint(0, 20) / 10 - 1, -0.1], random.randint(4, 6)])
+    if boostRed == True or limitCountRed < 200:
+        # particlesRed.append([[xr, yr], [0.1, -0.1], random.randint(4, 6)])
+        particlesRed.append([[xr, yr+3], [0.1, -0.1], random.randint(4, 6)])
+        particlesRed.append([[xr, yr+10], [0.1, -0.1], random.randint(4, 6)])
+        particlesRed.append([[xr, yr+15], [0.1, -0.1], random.randint(4, 6)])
+        particlesRed.append([[xr, yr+20], [0.1, -0.1], random.randint(4, 6)])
+        particlesRed.append([[xr, yr+25], [0.1, -0.1], random.randint(4, 6)])
+        # particlesRed.append([[xr, yr+30], [0.1, -0.1], random.randint(4, 6)])
+    if boostBlue == True or limitCountBlue < 200:
+        particlesBlue.append([[xb, yb+3], [0.1, -0.1], random.randint(4, 6)])
+        particlesBlue.append([[xb, yb+10], [0.1, -0.1], random.randint(4, 6)])
+        particlesBlue.append([[xb, yb+15], [0.1, -0.1], random.randint(4, 6)])
+        particlesBlue.append([[xb, yb+20], [0.1, -0.1], random.randint(4, 6)])
+        particlesBlue.append([[xb, yb+25], [0.1, -0.1], random.randint(4, 6)])
 
-    for particleBlue in particlesRed:
-        particleBlue[0][0] += particleBlue[1][0]
-        particleBlue[0][1] += particleBlue[1][1]
-        particleBlue[2] -= 0.05
-        # particleBlue[1][1] += 0.1
-        pygame.draw.circle(playSurface, (0, 0, 0), [int(particleBlue[0][0]), int(particleBlue[0][1])], int(particleBlue[2]))
-        if particleBlue[2] <= 0:
-            particlesRed.remove(particleBlue)
+    for particle in particlesRed:
+        particle[0][0] += particle[1][0]
+        particle[0][1] += particle[1][1]
+        particle[2] -= 0.1
+        # particle[1][1] += 0.1
+        pygame.draw.circle(playSurface, (251, 134, 3), [int(particle[0][0]), int(particle[0][1])], int(particle[2]))
+        if particle[2] <= 0:
+            particlesRed.remove(particle)
+        
+    for particle1 in particlesBlue:
+        particle1[0][0] += particle1[1][0]
+        particle1[0][1] += particle1[1][1]
+        particle1[2] -= 0.1
+        # particle[1][1] += 0.1
+        pygame.draw.circle(playSurface, (65, 105, 225), [int(particle1[0][0]), int(particle1[0][1])], int(particle1[2]))
+        if particle1[2] <= 0:
+            particlesBlue.remove(particle1)
 
-    for particleRed in particlesRed:
-        particleRed[0][0] += particleRed[1][0]
-        particleRed[0][1] += particleRed[1][1]
-        particleRed[2] -= 0.05
-        # particleRed[1][1] += 0.1
-        pygame.draw.circle(playSurface, (245, 0, 0), [int(particleRed[0][0]), int(particleRed[0][1])], int(particleRed[2]))
-        if particleRed[2] <= 0:
-            particlesRed.remove(particleRed)
-
-    for particleRed in particlesBlue:
-        particleRed[0][0] += particleRed[1][0]
-        particleRed[0][1] += particleRed[1][1]
-        particleRed[2] -= 0.05
-        # particleRed[1][1] += 0.1
-        pygame.draw.circle(playSurface, (255, 255, 255), [int(particleRed[0][0]), int(particleRed[0][1])], int(particleRed[2]))
-        if particleRed[2] <= 0:
-            particlesBlue.remove(particleRed)
-
-    for particleBlue in particlesBlue:
-        particleBlue[0][0] += particleBlue[1][0]
-        particleBlue[0][1] += particleBlue[1][1]
-        particleBlue[2] -= 0.05
-        # particleBlue[1][1] += 0.1
-        pygame.draw.circle(playSurface, (0, 245, 245), [int(particleBlue[0][0]), int(particleBlue[0][1])], int(particleBlue[2]))
-        if particleBlue[2] <= 0:
-            particlesBlue.remove(particleBlue)
 
 
 
@@ -469,7 +458,7 @@ while running:
 
     if state == "BEGIN":
 
-        particleDraw(direction, direction1)
+        particleDraw()
 
         if redBikeScore == 10:
             redBikeScore = 0
@@ -653,7 +642,7 @@ while running:
         for pos1 in blueCarLine:
             pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], lineSize, lineSize))
         
-        particleDraw(direction, direction1)
+        particleDraw()
         
         # Red car correct blit
         if direction == "RIGHT":
@@ -901,7 +890,7 @@ while running:
         limitCountRed = 200
         limitCountBlue = 200
 
-        particleDraw(direction, direction1)
+        particleDraw()
 
         for pos in redCarLine:
             pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], lineSize, lineSize))
