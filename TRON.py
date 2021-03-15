@@ -104,6 +104,12 @@ pause = False
 running = True
 particlesRed = []
 particlesBlue = []
+boostRed = False
+boostBlue = False
+limitCountRed = 200
+limitCountBlue = 200
+timeCountRed = 50
+timeCountBlue = 50
 
 
 
@@ -324,6 +330,28 @@ def boom(color: pygame.Color):
         if animCount // 5 == 3:
             playSurface.blit(bangReverse, (blueCarPos[0] - 52, blueCarPos[1] - 50))
 
+def boostLimit():
+    global boostRed, boostBlue, limitCountRed, limitCountBlue, timeCountRed, timeCountBlue
+
+    if boostRed == False:
+        if timeCountRed < 50:
+            timeCountRed += 0.5
+        if limitCountRed < 200 and timeCountRed == 50:
+            limitCountRed += 10
+        pygame.draw.rect(playSurface, red, pygame.Rect(50, 16, limitCountRed, 26))
+
+    if boostBlue == False:
+        pygame.draw.rect(playSurface, blue, pygame.Rect(width - 50 - 200, 16, limitCountBlue, 26))
+
+    if boostRed == True:
+        limitCountRed -= 10
+        timeCountRed -= 50
+        pygame.draw.rect(playSurface, red, pygame.Rect(50, 16, limitCountRed, 26))
+
+
+
+
+
 # Set start bike position 
 def newRound():
     global redCarPos, blueCarPos
@@ -502,10 +530,14 @@ while running:
         boostRed = False
         boostBlue = False
 
-        if keys[pygame.K_LSHIFT]:
+        if keys[pygame.K_LSHIFT] and limitCountRed != 0:
             boostRed = True
+            timeCountRed = 0
         if keys[pygame.K_RALT]:
             boostBlue = True
+
+        boostLimit()
+
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -678,13 +710,14 @@ while running:
             playerWin(winner)
         
         # Self hit and enemy line hit
-        for block in redCarLine[1:]:
+        for block in redCarLine[2:]:
             if blueCarPos == block and redCarPos == block:
                 boomSound.play()
                 winner = red
                 loser = red
                 state = 'END'
             elif redCarPos == block and state != "END":
+                print("BLYA")
                 boomSound.play()
                 state = 'END'
                 winner = blue
@@ -696,10 +729,45 @@ while running:
                 winner = red
                 loser = blue
                 playerWin(winner)
-            elif boostBlue == True:
+
+            elif boostBlue == True or boostRed == True:
+
+                if direction == "UP":
+                    if redCarPos[0] == block[0] and redCarPos[1] + 10 == block[1]:
+                        print(1)
+                        boomSound.play()
+                        state = "END"
+                        winner = blue
+                        loser = red
+                        playerWin(winner)
+                if direction == "DOWN":
+                    if redCarPos[0] == block[0] and redCarPos[1] - 10 == block[1]:
+                        print("NORM")
+                        boomSound.play()
+                        state = "END"
+                        winner = blue
+                        loser = red
+                        playerWin(winner)
+                if direction == "RIGHT" :
+                    if redCarPos[0] - 10 == block[0] and redCarPos[1] == block[1] and winner != blue:
+                        print(2)
+                        boomSound.play()
+                        state = "END"
+                        winner = blue
+                        loser = red
+                        playerWin(winner)
+                if direction == "LEFT":
+                    if redCarPos[0] + 10 == block[0] and redCarPos[1] == block[1]:
+                        print(3)
+                        boomSound.play()
+                        state = "END"
+                        winner = blue
+                        loser = red
+                        playerWin(winner)
+
                 if direction1 == "UP":
                     if blueCarPos[0] == block[0] and blueCarPos[1] + 10 == block[1]:
-                        print(1)
+                        print(4)
                         boomSound.play()
                         state = "END"
                         winner = red
@@ -707,7 +775,7 @@ while running:
                         playerWin(winner)
                 if direction1 == "DOWN":
                     if blueCarPos[0] == block[0] and blueCarPos[1] - 10 == block[1]:
-                        print(2)
+                        print(5)
                         boomSound.play()
                         state = "END"
                         winner = red
@@ -715,7 +783,7 @@ while running:
                         playerWin(winner)
                 if direction1 == "RIGHT":
                     if blueCarPos[0] - 10 == block[0] and blueCarPos[1] == block[1]:
-                        print(3)
+                        print(6)
                         boomSound.play()
                         state = "END"
                         winner = red
@@ -723,14 +791,14 @@ while running:
                         playerWin(winner)
                 if direction1 == "LEFT":
                     if blueCarPos[0] + 10 == block[0] and blueCarPos[1] == block[1]:
-                        print(4)
+                        print(7)
                         boomSound.play()
                         state = "END"
                         winner = red
                         loser = blue
                         playerWin(winner)
 
-        for block1 in blueCarLine[1:]:
+        for block1 in blueCarLine[2:]:
             if blueCarPos == block1 and redCarPos == block1:
                 boomSound.play()
                 winner = red
@@ -748,10 +816,45 @@ while running:
                 winner = blue
                 loser = red
                 playerWin(winner)
-            elif boostRed == True:
+
+            elif boostRed == True or boostBlue == True:
+
+                if direction1 == "UP":
+                    if blueCarPos[0] == block1[0] and blueCarPos[1] + 10 == block1[1]:
+                        print(8)
+                        boomSound.play()
+                        state = "END"
+                        winner = red
+                        loser = blue
+                        playerWin(winner)
+                if direction1 == "DOWN":
+                    if blueCarPos[0] == block1[0] and blueCarPos[1] - 10 == block1[1]:
+                        print(9)
+                        boomSound.play()
+                        state = "END"
+                        winner = red
+                        loser = blue
+                        playerWin(winner)
+                if direction1 == "RIGHT":
+                    if blueCarPos[0] - 10 == block1[0] and blueCarPos[1] == block1[1]:
+                        print(10)
+                        boomSound.play()
+                        state = "END"
+                        winner = red
+                        loser = blue
+                        playerWin(winner)
+                if direction1 == "LEFT":
+                    if blueCarPos[0] + 10 == block1[0] and blueCarPos[1] == block1[1] and winner != red:
+                        print(11)
+                        boomSound.play()
+                        state = "END"
+                        winner = red
+                        loser = blue
+                        playerWin(winner)
+
                 if direction == "UP":
                     if redCarPos[0] == block1[0] and redCarPos[1] + 10 == block1[1]:
-                        print(1)
+                        print(12)
                         boomSound.play()
                         state = "END"
                         winner = blue
@@ -759,7 +862,7 @@ while running:
                         playerWin(winner)
                 if direction == "DOWN":
                     if redCarPos[0] == block1[0] and redCarPos[1] - 10 == block1[1]:
-                        print(2)
+                        print(13)
                         boomSound.play()
                         state = "END"
                         winner = blue
@@ -767,7 +870,7 @@ while running:
                         playerWin(winner)
                 if direction == "RIGHT":
                     if redCarPos[0] - 10 == block1[0] and redCarPos[1] == block1[1]:
-                        print(3)
+                        print(14)
                         boomSound.play()
                         state = "END"
                         winner = blue
@@ -775,7 +878,7 @@ while running:
                         playerWin(winner)
                 if direction == "LEFT":
                     if redCarPos[0] + 10 == block1[0] and redCarPos[1] == block1[1]:
-                        print(4)
+                        print(15)
                         boomSound.play()
                         state = "END"
                         winner = blue
@@ -786,6 +889,8 @@ while running:
 
 
     elif state == 'END':
+
+        limitCountRed = 200
 
         particleDraw(direction, direction1)
 
@@ -863,6 +968,8 @@ while running:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
+                    winner = white
+                    loser = white
                     state = 'BEGIN'
                     changeto = ''
                     changeto1 = ''
