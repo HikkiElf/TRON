@@ -690,12 +690,45 @@ while running:
                 winner = blue
                 loser = red
                 playerWin(winner)
-            elif blueCarPos == block and state != "END" and boostRed != True:
+            elif blueCarPos == block and state != "END":
                 boomSound.play()
                 state = 'END'
                 winner = red
                 loser = blue
                 playerWin(winner)
+            elif boostBlue == True:
+                if direction1 == "UP":
+                    if blueCarPos[0] == block[0] and blueCarPos[1] + 10 == block[1]:
+                        print(1)
+                        boomSound.play()
+                        state = "END"
+                        winner = red
+                        loser = blue
+                        playerWin(winner)
+                if direction1 == "DOWN":
+                    if blueCarPos[0] == block[0] and blueCarPos[1] - 10 == block[1]:
+                        print(2)
+                        boomSound.play()
+                        state = "END"
+                        winner = red
+                        loser = blue
+                        playerWin(winner)
+                if direction1 == "RIGHT":
+                    if blueCarPos[0] - 10 == block[0] and blueCarPos[1] == block[1]:
+                        print(3)
+                        boomSound.play()
+                        state = "END"
+                        winner = red
+                        loser = blue
+                        playerWin(winner)
+                if direction1 == "LEFT":
+                    if blueCarPos[0] + 10 == block[0] and blueCarPos[1] == block[1]:
+                        print(4)
+                        boomSound.play()
+                        state = "END"
+                        winner = red
+                        loser = blue
+                        playerWin(winner)
 
         for block1 in blueCarLine[1:]:
             if blueCarPos == block1 and redCarPos == block1:
@@ -709,7 +742,7 @@ while running:
                 winner = red
                 loser = blue
                 playerWin(winner)
-            elif redCarPos == block1 and state != "END" and boostRed != True:
+            elif redCarPos == block1 and state != "END":
                 boomSound.play()
                 state = 'END'
                 winner = blue
@@ -740,19 +773,19 @@ while running:
                         winner = blue
                         loser = red
                         playerWin(winner)
-                    if direction1 == "LEFT":
-                        if (redCarPos[0] - 10 == blueCarPos[0]) and (redCarPos[1] == blueCarPos[1]):
-                            print("draw")
-                            boomSound.play()
-                            state = "END"
-                            winner = red
-                            loser = red
+                if direction == "LEFT":
+                    if redCarPos[0] + 10 == block1[0] and redCarPos[1] == block1[1]:
+                        print(4)
+                        boomSound.play()
+                        state = "END"
+                        winner = blue
+                        loser = red
+                        playerWin(winner)
 
 
 
 
     elif state == 'END':
-        # print(boostRed)
 
         particleDraw(direction, direction1)
 
