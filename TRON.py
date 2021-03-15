@@ -341,13 +341,21 @@ def boostLimit():
         pygame.draw.rect(playSurface, red, pygame.Rect(50, 16, limitCountRed, 26))
 
     if boostBlue == False:
+        if timeCountBlue < 50:
+            timeCountBlue += 0.5
+        if limitCountBlue < 200 and timeCountBlue == 50:
+            limitCountBlue += 10
         pygame.draw.rect(playSurface, blue, pygame.Rect(width - 50 - 200, 16, limitCountBlue, 26))
 
     if boostRed == True:
         limitCountRed -= 10
         timeCountRed -= 50
         pygame.draw.rect(playSurface, red, pygame.Rect(50, 16, limitCountRed, 26))
-
+    
+    if boostBlue == True:
+        limitCountBlue -= 10
+        timeCountBlue -= 50
+        pygame.draw.rect(playSurface, blue, pygame.Rect(width - 50 - 200, 16, limitCountBlue, 26))
 
 
 
@@ -533,8 +541,9 @@ while running:
         if keys[pygame.K_LSHIFT] and limitCountRed != 0:
             boostRed = True
             timeCountRed = 0
-        if keys[pygame.K_RALT]:
+        if keys[pygame.K_RALT] and limitCountBlue != 0:
             boostBlue = True
+            timeCountBlue = 0
 
         boostLimit()
 
@@ -717,7 +726,6 @@ while running:
                 loser = red
                 state = 'END'
             elif redCarPos == block and state != "END":
-                print("BLYA")
                 boomSound.play()
                 state = 'END'
                 winner = blue
@@ -891,6 +899,7 @@ while running:
     elif state == 'END':
 
         limitCountRed = 200
+        limitCountBlue = 200
 
         particleDraw(direction, direction1)
 
