@@ -347,14 +347,17 @@ def boostLimit():
             limitCountBlue += 10
         pygame.draw.rect(playSurface, blue, pygame.Rect(width - 50 - 200, 16, limitCountBlue, 26))
 
+
     if boostRed == True:
-        limitCountRed -= 10
-        timeCountRed -= 50
+        if state != "END":
+            limitCountRed -= 10
+            timeCountRed -= 50
         pygame.draw.rect(playSurface, red, pygame.Rect(50, 16, limitCountRed, 26))
     
     if boostBlue == True:
-        limitCountBlue -= 10
-        timeCountBlue -= 50
+        if state != "END":
+            limitCountBlue -= 10
+            timeCountBlue -= 50
         pygame.draw.rect(playSurface, blue, pygame.Rect(width - 50 - 200, 16, limitCountBlue, 26))
 
 
@@ -432,7 +435,7 @@ def particleDraw():
         particle[0][0] += particle[1][0]
         particle[0][1] += particle[1][1]
         particle[2] -= 0.1
-        # particle[1][1] += 0.1
+        particle[1][1] -= 0.1
         pygame.draw.circle(playSurface, (251, 134, 3), [int(particle[0][0]), int(particle[0][1])], int(particle[2]))
         if particle[2] <= 0:
             particlesRed.remove(particle)
@@ -441,7 +444,7 @@ def particleDraw():
         particle1[0][0] += particle1[1][0]
         particle1[0][1] += particle1[1][1]
         particle1[2] -= 0.1
-        # particle[1][1] += 0.1
+        particle1[1][1] -= 0.1
         pygame.draw.circle(playSurface, (65, 105, 225), [int(particle1[0][0]), int(particle1[0][1])], int(particle1[2]))
         if particle1[2] <= 0:
             particlesBlue.remove(particle1)
@@ -457,6 +460,11 @@ while running:
     pygame.draw.rect(playSurface, black, pygame.Rect(0, 0, 1280, 52))
 
     if state == "BEGIN":
+
+        limitCountRed = 200
+        limitCountBlue = 200
+
+        boostLimit()
 
         particleDraw()
 
@@ -887,8 +895,7 @@ while running:
 
     elif state == 'END':
 
-        limitCountRed = 200
-        limitCountBlue = 200
+        boostLimit()
 
         particleDraw()
 
