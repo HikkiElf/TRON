@@ -12,7 +12,9 @@ pygame.mixer.init()
 music = pygame.mixer.Sound("TRONmusic.mp3")
 boomSound = pygame.mixer.Sound("boom_sound.wav")
 moveSound = pygame.mixer.Sound("move.wav")
-pygame.mixer.music.set_volume(0.1)
+music.set_volume(0.1)
+boomSound.set_volume(0.2)
+moveSound.set_volume(0.5)
 music.play(-1)
 
 # Play surface
@@ -337,6 +339,9 @@ def carBlueCorrectBlit():
         playSurface.blit(blueBikeLeftImage, (blueCarPos[0]-55, blueCarPos[1]-35))
 
 def TRON1():
+    pygame.mixer.unpause()
+    menu.music1.stop()
+
     
     global speed
     global lineSize 
@@ -443,6 +448,7 @@ def TRON1():
                             moveSound.play()
                         changeto1 = 'DOWN'
                     if event.key == pygame.K_ESCAPE:
+                        pygame.mixer.pause()
                         running = False
             
             for pos in redCarLine:

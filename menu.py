@@ -3,9 +3,13 @@ import pickle
 import intro
 
 pygame.init()
+pygame.mixer.init()
 intro.intro()
+music1 = pygame.mixer.Sound("menuMusic.mp3")
+music1.set_volume(0.2)
 
 def menu():
+
     # Screen setings
     pygame.display.set_caption("TRON")
     screen = pygame.display.set_mode([1280, 720])
@@ -30,6 +34,8 @@ def menu():
     # pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
 
     white = pygame.Color(255, 255, 255)
+
+    selectSound.set_volume(0.2)
 
     def buttonFocusedAnimation(count, musicCount):
         if musicCount == 1:
@@ -85,8 +91,16 @@ def menu():
             width[3] = 240
             height[3] = 120
 
+    n = 0
             
     while running:
+
+        n += 1
+
+        print(n)
+
+        if n == 30:
+            music1.play(-1)
 
         background.fill((0, 0, 0))
 
@@ -134,6 +148,8 @@ def menu():
                 if xMousePos > xButtonPos[0] and xMousePos < xButtonPos[0] + width[0] and yMousePos > yButtonPos[0] and yMousePos < yButtonPos[0] + height[0]:
                     import TRON #игра
                     TRON.TRON1()
+                    music1.stop()
+                    n = 0
                     # running = False
                     # pygame.quit()
                 if xMousePos > xButtonPos[1] and xMousePos < xButtonPos[1] + width[1] and yMousePos > yButtonPos[1] and yMousePos < yButtonPos[1] + height[1]:
