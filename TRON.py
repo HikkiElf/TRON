@@ -2,17 +2,11 @@
 #   Truhanov Vsevolod
 #   Python 3.9.0 Pygame
 
-import pygame
-import sys
-import math
-import time
-import random
-import menu
+import pygame, sys, math, time, random, menu
 from pygame.locals import *
 pygame.init()
 pygame.mixer.init()
 pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
-
 
 # Sound
 music = pygame.mixer.Sound("TRONmusic.mp3")
@@ -36,44 +30,6 @@ black = pygame.Color(0, 0, 0)
 white = pygame.Color(255, 255, 255)
 brown = pygame.Color(165, 42, 42)
 blue = pygame.Color(0, 255, 255)
-
-# Font
-globalFontMini = pygame.font.SysFont('monaco', 150)
-globalFont = pygame.font.SysFont('monaco', 300)
-globalOutlineFontMini = pygame.font.SysFont('monaco', 153)
-globalOutlineFont = pygame.font.SysFont('monaco', 303)
-
-# Text Press space
-PressSpaceOutlineSurf = globalOutlineFontMini.render("Press space", True, black)
-PressSpaceSurf = globalFontMini.render("Press space", True, white)
-PressSpaceOutlineRect = PressSpaceOutlineSurf.get_rect()
-PressSpaceRect = PressSpaceSurf.get_rect()
-PressSpaceOutlineRect.midtop = (640, 460)
-PressSpaceRect.midtop = (640, 460)
-
-# Text blue wins
-blueOutlineSurf = globalOutlineFont.render("Blue Wins", True, black)
-blueSurf = globalFont.render("Blue Wins", True, blue)
-blueOutlineRect = blueOutlineSurf.get_rect()
-blueRect = blueSurf.get_rect()
-blueOutlineRect.midtop = (640, 260)
-blueRect.midtop = (640, 260)
-
-# Text red wins
-redOutlineSurf = globalOutlineFont.render("Red Wins", True, black)
-redSurf = globalFont.render("Red Wins", True, red)
-redOutlineRect = redOutlineSurf.get_rect()
-redRect = redSurf.get_rect()
-redOutlineRect.midtop = (640, 260)
-redRect.midtop = (640, 260)
-
-# Text draw
-drawOutlineSurf = globalOutlineFont.render("Draw", True, black)
-drawSurf = globalFont.render("Draw", True, white)
-drawOutlineRect = drawOutlineSurf.get_rect()
-drawRect = drawSurf.get_rect()
-drawOutlineRect.midtop = (640, 260)
-drawRect.midtop = (640, 260)
 
 # FPS controller
 fpsController = pygame.time.Clock()
@@ -111,10 +67,6 @@ redWin = False
 blueWin = False
 print(rectBlueX)
 print(rectBlueX - 200)
-
-
-
-
 
 # Red bike images
 redBikeLeftImage = pygame.image.load("images/bikeRed.png")
@@ -159,12 +111,12 @@ def roundCount(color: pygame.Color):
 # Player win
 def playerWin(color: pygame.Color):
     global blue, red, blueBikeScore, redBikeScore, running, direction, direction1
-    message = str
+    # message = str
     if color == blue:
-        message = "Blue Wins"
+        # message = "Blue Wins"
         blueBikeScore += 1
     else:
-        message = "Red Wins"
+        # message = "Red Wins"
         redBikeScore += 1
     direction = "RIGHT"
     direction1 = "LEFT"
@@ -198,6 +150,7 @@ def boom(color: pygame.Color):
         if animCount // 5 == 3:
             playSurface.blit(bangReverse, (blueCarPos[0] - 52, blueCarPos[1] - 50))
 
+#draw limit lines for cars boost
 def boostLimit():
     global boostRed, boostBlue, limitCountRed, limitCountBlue, timeCountRed, timeCountBlue, rectBlueX
 
@@ -238,31 +191,93 @@ def newRound():
     del redCarLine[:]
     del blueCarLine[:]
 
-# Text who win round
-def roundWin(color: pygame.Color):
+# All text in game
+def setText(color: pygame.Color, changeto, changeto1):
+    global winner, loser
+
+    globalFontMini = pygame.font.SysFont('monaco', 50)
+    globalFontSmall = pygame.font.SysFont('monaco', 150)
+    globalFont = pygame.font.SysFont('monaco', 300)
+    globalOutlineFontSmall = pygame.font.SysFont('monaco', 153)
+    globalOutlineFont = pygame.font.SysFont('monaco', 303)
     globalFontWin = pygame.font.SysFont('monaco', 200)
     globalOutlineFontWin = pygame.font.SysFont('monaco', 203)
-    if color == red:
-        # Text red win round
-        redOutlineSurfWin = globalOutlineFontWin.render("Red Win Round : {0}".format(redBikeScore), True, black)
-        redSurfWin = globalFontWin.render("Red Win Round : {0}".format(redBikeScore), True, red)
-        redOutlineRectWin = redOutlineSurfWin.get_rect()
-        redRectWin = redSurfWin.get_rect()
-        redOutlineRectWin.midtop = (640, 260)
-        redRectWin.midtop = (640, 260)
-        playSurface.blit(redOutlineSurfWin, redOutlineRectWin)
-        playSurface.blit(redSurfWin, redRectWin)
-    else:
-        # Text blue win round
-        blueOutlineSurfWin = globalOutlineFontWin.render("Blue Win Round : {0}".format(blueBikeScore), True, black)
-        blueSurfWin = globalFontWin.render("Blue Win Round : {0}".format(blueBikeScore), True, blue)
-        blueOutlineRectWin = blueOutlineSurfWin.get_rect()
-        blueRectWin = blueSurfWin.get_rect()
-        blueOutlineRectWin.midtop = (640, 260)
-        blueRectWin.midtop = (640, 260)
-        playSurface.blit(blueOutlineSurfWin, blueOutlineRectWin)
-        playSurface.blit(blueSurfWin, blueRectWin)
 
+    if changeto == '' and state == 'BEGIN':
+        setRedDirectionSurf = globalFontMini.render("Set red bike direction", True, red)
+        setRedDirectionRect = setRedDirectionSurf.get_rect()
+        setRedDirectionRect.midtop = (240, 260)
+        playSurface.blit(setRedDirectionSurf, setRedDirectionRect)
+
+    if changeto1 == '' and state == 'BEGIN':
+        setBlueDirectionSurf = globalFontMini.render("Set blue bike direction", True, blue)
+        setBlueDirectionRect = setBlueDirectionSurf.get_rect()
+        setBlueDirectionRect.midtop = (1040, 260)
+        playSurface.blit(setBlueDirectionSurf, setBlueDirectionRect)
+
+    if state == 'END':
+        PressSpaceOutlineSurf = globalOutlineFontSmall.render("Press space", True, black)
+        PressSpaceSurf = globalFontSmall.render("Press space", True, white)
+        PressSpaceOutlineRect = PressSpaceOutlineSurf.get_rect()
+        PressSpaceRect = PressSpaceSurf.get_rect()
+        PressSpaceOutlineRect.midtop = (640, 460)
+        PressSpaceRect.midtop = (640, 460)
+        playSurface.blit(PressSpaceOutlineSurf, PressSpaceOutlineRect)
+        playSurface.blit(PressSpaceSurf, PressSpaceRect)
+
+    if state == 'END' and winner == loser:
+        drawOutlineSurf = globalOutlineFont.render("Draw", True, black)
+        drawSurf = globalFont.render("Draw", True, white)
+        drawOutlineRect = drawOutlineSurf.get_rect()
+        drawRect = drawSurf.get_rect()
+        drawOutlineRect.midtop = (640, 260)
+        drawRect.midtop = (640, 260)
+        playSurface.blit(drawOutlineSurf, drawOutlineRect)
+        playSurface.blit(drawSurf, drawRect)
+
+    elif color == red and state == 'END':
+        if redBikeScore == 10:
+            redOutlineSurf = globalOutlineFont.render("Red Wins", True, black)
+            redSurf = globalFont.render("Red Wins", True, red)
+            redOutlineRect = redOutlineSurf.get_rect()
+            redRect = redSurf.get_rect()
+            redOutlineRect.midtop = (640, 260)
+            redRect.midtop = (640, 260)
+            playSurface.blit(redOutlineSurf, redOutlineRect)
+            playSurface.blit(redSurf, redRect)
+
+        else:
+            redOutlineSurfWin = globalOutlineFontWin.render("Red Win Round : {0}".format(redBikeScore), True, black)
+            redSurfWin = globalFontWin.render("Red Win Round : {0}".format(redBikeScore), True, red)
+            redOutlineRectWin = redOutlineSurfWin.get_rect()
+            redRectWin = redSurfWin.get_rect()
+            redOutlineRectWin.midtop = (640, 260)
+            redRectWin.midtop = (640, 260)
+            playSurface.blit(redOutlineSurfWin, redOutlineRectWin)
+            playSurface.blit(redSurfWin, redRectWin)
+
+    elif color == blue and state == 'END':
+        if blueBikeScore == 10:
+            blueOutlineSurf = globalOutlineFont.render("Blue Wins", True, black)
+            blueSurf = globalFont.render("Blue Wins", True, blue)
+            blueOutlineRect = blueOutlineSurf.get_rect()
+            blueRect = blueSurf.get_rect()
+            blueOutlineRect.midtop = (640, 260)
+            blueRect.midtop = (640, 260)
+            playSurface.blit(blueOutlineSurf, blueOutlineRect)
+            playSurface.blit(blueSurf, blueRect)
+
+        else:
+            blueOutlineSurfWin = globalOutlineFontWin.render("Blue Win Round : {0}".format(blueBikeScore), True, black)
+            blueSurfWin = globalFontWin.render("Blue Win Round : {0}".format(blueBikeScore), True, blue)
+            blueOutlineRectWin = blueOutlineSurfWin.get_rect()
+            blueRectWin = blueSurfWin.get_rect()
+            blueOutlineRectWin.midtop = (640, 260)
+            blueRectWin.midtop = (640, 260)
+            playSurface.blit(blueOutlineSurfWin, blueOutlineRectWin)
+            playSurface.blit(blueSurfWin, blueRectWin)
+
+#draw text for set direction
 def setDirectionText(changeto, changeto1):
     globalFontMini = pygame.font.SysFont('monaco', 50)
     if changeto == '':
@@ -277,6 +292,7 @@ def setDirectionText(changeto, changeto1):
         setBlueDirectionRect.midtop = (1040, 260)
         playSurface.blit(setBlueDirectionSurf, setBlueDirectionRect)
 
+#draw particles
 def particleDraw():
     global particlesRed, particlesBlue
     
@@ -319,9 +335,6 @@ def particleDraw():
         if particle1[2] <= 0:
             particlesBlue.remove(particle1)
 
-
-
-
 while running:
 
     keys = pygame.key.get_pressed()
@@ -347,7 +360,7 @@ while running:
             redBikeScore = 0
             blueBikeScore = 0
         
-        setDirectionText(changeto, changeto1)
+        setText(white, changeto, changeto1)
 
         roundCount(red)
         roundCount(blue)
@@ -361,28 +374,36 @@ while running:
                 if event.key == pygame.K_SPACE:
                     pause = True
                 if event.key == pygame.K_d:
-                    moveSound.play(1)
+                    if changeto == '':
+                        moveSound.play()
                     changeto = 'RIGHT'
                 if event.key == pygame.K_a:
-                    moveSound.play(1)
+                    if changeto == '':
+                        moveSound.play()
                     changeto = 'LEFT'
                 if event.key == pygame.K_w:
-                    moveSound.play(1)
+                    if changeto == '':
+                        moveSound.play()
                     changeto = 'UP'
                 if event.key == pygame.K_s:
-                    moveSound.play(1)
+                    if changeto == '':
+                        moveSound.play()
                     changeto = 'DOWN'
                 if event.key == pygame.K_RIGHT:
-                    moveSound.play(1)
+                    if changeto1 == '':
+                        moveSound.play()
                     changeto1 = 'RIGHT'
                 if event.key == pygame.K_LEFT:
-                    moveSound.play(1)
+                    if changeto1 == '':
+                        moveSound.play()
                     changeto1 = 'LEFT'
                 if event.key == pygame.K_UP:
-                    moveSound.play(1)
+                    if changeto1 == '':
+                        moveSound.play()
                     changeto1 = 'UP'
                 if event.key == pygame.K_DOWN:
-                    moveSound.play(1)
+                    if changeto1 == '':
+                        moveSound.play()
                     changeto1 = 'DOWN'
                 if event.key == pygame.K_ESCAPE:
                     pygame.event.post(pygame.event.Event(pygame.QUIT))
@@ -403,7 +424,6 @@ while running:
         roundCount(red)
         roundCount(blue)
 
-
         boostRed = False
         boostBlue = False
 
@@ -415,7 +435,6 @@ while running:
             timeCountBlue = 0
 
         boostLimit()
-
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -497,6 +516,7 @@ while running:
             if direction == 'UP':
                 redCarPos[1] -= speed
                 redCarLine.insert(0, list(redCarPos))
+
         if boostBlue == True:
             blueCarLine.insert(0, list(blueCarPos))
             if direction1 == 'RIGHT':
@@ -511,6 +531,7 @@ while running:
             if direction1 == 'UP':
                 blueCarPos[1] -= speed
                 blueCarLine.insert(0, list(blueCarPos))
+
         if boostRed == False:
             redCarLine.insert(0, list(redCarPos))
         if boostBlue == False:
@@ -762,9 +783,6 @@ while running:
                         loser = red
                         playerWin(winner)
 
-
-
-
     elif state == 'END':
 
         boostLimit()
@@ -805,40 +823,24 @@ while running:
             roundCount(red)
             roundCount(blue)
 
-            playSurface.blit(drawOutlineSurf, drawOutlineRect)
-            playSurface.blit(drawSurf, drawRect)
+            setText(white, changeto, changeto1)
 
-            playSurface.blit(PressSpaceOutlineSurf, PressSpaceOutlineRect)
-            playSurface.blit(PressSpaceSurf, PressSpaceRect)
         elif winner == blue:
             boom(loser)
 
             roundCount(red)
             roundCount(blue)
 
-            if blueBikeScore == 10:
-                playSurface.blit(blueOutlineSurf, blueOutlineRect)
-                playSurface.blit(blueSurf, blueRect)
-            if blueBikeScore < 10:
-                roundWin(blue)
+            setText(blue, changeto, changeto1)
             
-            playSurface.blit(PressSpaceOutlineSurf, PressSpaceOutlineRect)
-            playSurface.blit(PressSpaceSurf, PressSpaceRect)
         else:
             boom(loser)
 
             roundCount(red)
             roundCount(blue)
 
-            if redBikeScore == 10:
-                playSurface.blit(redOutlineSurf, redOutlineRect)
-                playSurface.blit(redSurf, redRect)
-            if redBikeScore < 10:
-                roundWin(red)
+            setText(red, changeto, changeto1)
 
-            playSurface.blit(PressSpaceOutlineSurf, PressSpaceOutlineRect)
-            playSurface.blit(PressSpaceSurf, PressSpaceRect)
-        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()

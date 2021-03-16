@@ -2,6 +2,7 @@ import pygame, sys
 from pygame.color import THECOLORS
 from pygame import font
 pygame.init()
+
 def help1():
      pygame.display.set_caption("TRON")
      screen = pygame.display.set_mode([1280, 720])
