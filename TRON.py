@@ -130,27 +130,16 @@ blueBikeRightImage = pygame.transform.rotate(blueBikeLeftImage, 180)
 def roundCount(color: pygame.Color):
     global redBikeScore, blueBikeScore
 
-    pygame.draw.circle(playSurface, white, [320, 30], 12, 1)
-    pygame.draw.circle(playSurface, white, [344, 30], 12, 1)
-    pygame.draw.circle(playSurface, white, [368, 30], 12, 1)
-    pygame.draw.circle(playSurface, white, [392, 30], 12, 1)
-    pygame.draw.circle(playSurface, white, [416, 30], 12, 1)
-    pygame.draw.circle(playSurface, white, [440, 30], 12, 1)
-    pygame.draw.circle(playSurface, white, [464, 30], 12, 1)
-    pygame.draw.circle(playSurface, white, [488, 30], 12, 1)
-    pygame.draw.circle(playSurface, white, [512, 30], 12, 1)
-    pygame.draw.circle(playSurface, white, [536, 30], 12, 1)
+    posCircleRed = 320
+    posCircleBlue = 756
 
-    pygame.draw.circle(playSurface, white, [972, 30], 12, 1)
-    pygame.draw.circle(playSurface, white, [948, 30], 12, 1)
-    pygame.draw.circle(playSurface, white, [924, 30], 12, 1)
-    pygame.draw.circle(playSurface, white, [900, 30], 12, 1)
-    pygame.draw.circle(playSurface, white, [876, 30], 12, 1)
-    pygame.draw.circle(playSurface, white, [852, 30], 12, 1)
-    pygame.draw.circle(playSurface, white, [828, 30], 12, 1)
-    pygame.draw.circle(playSurface, white, [804, 30], 12, 1)
-    pygame.draw.circle(playSurface, white, [780, 30], 12, 1)
-    pygame.draw.circle(playSurface, white, [756, 30], 12, 1)
+    for i in range(10):
+        pygame.draw.circle(playSurface, white, [posCircleRed, 30], 12, 1)
+        posCircleRed += 24
+
+    for i in range(10):
+        pygame.draw.circle(playSurface, white, [posCircleBlue, 30], 12, 1)
+        posCircleBlue += 24
 
     if color == red:
         if redBikeScore >= 1:
@@ -360,7 +349,6 @@ def boostLimit():
             limitCountBlue -= 10
             timeCountBlue -= 50
         pygame.draw.rect(playSurface, blue, pygame.Rect(rectBlueX, 16, limitCountBlue, 26))
-
 
 # Set start bike position 
 def newRound():
