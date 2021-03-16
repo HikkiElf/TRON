@@ -1,27 +1,16 @@
 import pygame, sys, random
  
-# Setup pygame/window ---------------------------------------- #
 mainClock = pygame.time.Clock()
 from pygame.locals import *
 pygame.init()
 pygame.display.set_caption('game base')
 screen = pygame.display.set_mode((500, 500),0,100)
 pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
-
  
-# a particle is...
-# a thing that exists at a location
-# typically moves around
-# typically changes over time
-# and typically disappears after a certain amount of time
- 
-# [loc, velocity, timer]
 particles = []
  
-# Loop ------------------------------------------------------- #
 while True:
     
-    # Background --------------------------------------------- #
     screen.fill((0,0,0))
     mx, my = pygame.mouse.get_pos()
     particles.append([[mx, my], [random.randint(0, 20) / 10 - 1, -0.1], random.randint(4, 6)])
@@ -35,7 +24,6 @@ while True:
         if particle[2] <= 0:
             particles.remove(particle)
     
-    # Buttons ------------------------------------------------ #
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
@@ -45,6 +33,5 @@ while True:
                 pygame.quit()
                 sys.exit()
                 
-    # Update ------------------------------------------------- #
     pygame.display.update()
     mainClock.tick(60)

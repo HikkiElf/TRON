@@ -12,6 +12,7 @@ pygame.mixer.init()
 music = pygame.mixer.Sound("data/audio/TRONmusic.mp3")
 boomSound = pygame.mixer.Sound("data/audio/boom_sound.wav")
 moveSound = pygame.mixer.Sound("data/audio/move.wav")
+winSound = pygame.mixer.Sound("data/audio/winSound1.wav")
 music.set_volume(0.1)
 boomSound.set_volume(0.2)
 moveSound.set_volume(0.5)
@@ -63,6 +64,7 @@ timeCountBlue = 50
 rectBlueX = width - 50 - 200
 redWin = False
 blueWin = False
+flagWin = False
 
 # Red bike images
 redBikeLeftImage = pygame.image.load("data/images/bikeRed.png")
@@ -372,6 +374,7 @@ def TRON1():
     global rectBlueX
     global redWin
     global blueWin
+    global flagWin
 
     # FPS controller
     fpsController = pygame.time.Clock()
@@ -385,6 +388,8 @@ def TRON1():
         pygame.draw.rect(playSurface, black, pygame.Rect(0, 0, 1280, 52))
 
         if state == "BEGIN":
+
+            flagWin = False
 
             rectBlueX = width - 50 - 200
 
@@ -810,6 +815,10 @@ def TRON1():
                             playerWin(winner)
 
         elif state == 'END':
+
+            if redBikeScore == 10 or blueBikeScore == 10 and flagWin != True:
+                winSound.play(1)
+                flagWin = True
 
             boostLimit()
 
