@@ -23,11 +23,11 @@ def menu():
     font = pygame.font.SysFont("14722", 50)
     selectSound = pygame.mixer.Sound("select.wav")
     line_width = 0
-    run=True
+    running=True
     count = 4
     musicCount = 0
     particles = []
-    pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
+    # pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
 
     white = pygame.Color(255, 255, 255)
 
@@ -86,7 +86,7 @@ def menu():
             height[3] = 120
 
             
-    while run:
+    while running:
 
         background.fill([0, 0, 0])
 
@@ -120,18 +120,6 @@ def menu():
         screen.blit(background, (0, 0))
         pygame.display.flip()
 
-        mx, my = pygame.mouse.get_pos()
-
-        particles.append([[mx, my], [0.1, -0.1], random.randint(4, 6)])
-
-        for particle in particles:
-            particle[0][0] += particle[1][0]
-            particle[0][1] += particle[1][1]
-            particle[2] -= 0.1
-            # particle[1][1] -= 0.1
-            pygame.draw.circle(screen, (255, 255, 255), [int(particle[0][0]), int(particle[0][1])], int(particle[2]))
-            if particle[2] <= 0:
-                particles.remove(particle)
 
 
         for event in pygame.event.get():
@@ -145,7 +133,8 @@ def menu():
                 (xMousePos, yMousePos) = pygame.mouse.get_pos()#координаты курсора мыши
                 if xMousePos > xButtonPos[0] and xMousePos < xButtonPos[0] + width[0] and yMousePos > yButtonPos[0] and yMousePos < yButtonPos[0] + height[0]:
                     import TRON #игра
-                    # run = False
+                    TRON.TRON1()
+                    # running = False
                     # pygame.quit()
                 if xMousePos > xButtonPos[1] and xMousePos < xButtonPos[1] + width[1] and yMousePos > yButtonPos[1] and yMousePos < yButtonPos[1] + height[1]:
                     import help #помощь
@@ -154,7 +143,7 @@ def menu():
                     import about
                     about.about()
                 if xMousePos > xButtonPos[3] and xMousePos < xButtonPos[3] + width[3] and yMousePos > yButtonPos[3] and yMousePos < yButtonPos[3] + height[3]:
-                    run = False #выход
+                    running = False #выход
                     pygame.quit()
 
             if event.type == pygame.MOUSEMOTION:
@@ -176,5 +165,17 @@ def menu():
                 buttonFocusedAnimation(count, musicCount)
                 buttonUnfocusedAnimation(count)
 
+        mx, my = pygame.mouse.get_pos()
+
+        particles.append([[mx, my], [0.1, -0.1], random.randint(4, 6)])
+
+        for particle in particles:
+            particle[0][0] += particle[1][0]
+            particle[0][1] += particle[1][1]
+            particle[2] -= 0.1
+            # particle[1][1] -= 0.1
+            pygame.draw.circle(screen, (255, 255, 255), [int(particle[0][0]), int(particle[0][1])], int(particle[2]))
+            if particle[2] <= 0:
+                particles.remove(particle)
 
     pygame.quit()         

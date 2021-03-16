@@ -6,16 +6,30 @@ import pygame, sys, math, time, random, menu
 from pygame.locals import *
 pygame.init()
 pygame.mixer.init()
-pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
+# pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
 
-# Sound
+# global 
+# global 
+# global 
+# global 
+# global 
+# global 
+# global 
+# global 
+# global 
+# global 
+# global 
+# global 
+# global 
+# global 
+# global 
+
 music = pygame.mixer.Sound("TRONmusic.mp3")
 boomSound = pygame.mixer.Sound("boom_sound.wav")
 moveSound = pygame.mixer.Sound("move.wav")
 pygame.mixer.music.set_volume(0.1)
 # music.play(-1)
 
-# Play Surface
 size = width, height = 1280, 720
 playSurface = pygame.display.set_mode(size)
 pygame.display.set_caption("TRON")
@@ -23,7 +37,6 @@ background = pygame.image.load("images/TRON2.png")
 tronLogo = pygame.image.load("images/TRON logo.png")
 TRONmenu = pygame.image.load("images/TRONmenu1.jpg")
 
-# Colors
 red = pygame.Color(255, 0, 0)
 green = pygame.Color(0, 255, 0)
 black = pygame.Color(0, 0, 0)
@@ -31,10 +44,36 @@ white = pygame.Color(255, 255, 255)
 brown = pygame.Color(165, 42, 42)
 blue = pygame.Color(0, 255, 255)
 
-# FPS controller
-fpsController = pygame.time.Clock()
+global speed
+global lineSize 
+global redCarPos 
+global blueCarPos
+global redCarLine 
+global blueCarLine 
+global direction
+global direction1 
+global changeto
+global changeto1 
+global redBikeScore
+global blueBikeScore
+global animCount
+global state
+global winner
+global loser
+global pause
+global running
+global particlesRed
+global particlesBlue
+global boostRed
+global boostBlue
+global limitCountRed
+global limitCountBlue
+global timeCountRed
+global timeCountBlue
+global rectBlueX
+global redWin
+global blueWin
 
-# Game settings
 speed = 10
 lineSize = 10
 redCarPos = [100, 360]
@@ -48,7 +87,6 @@ changeto1 = ''
 redBikeScore = 0
 blueBikeScore = 0
 animCount = 0
-winCount = 0
 state = "BEGIN" # RUNNING, END
 winner: pygame.Color
 loser: pygame.Color
@@ -65,8 +103,8 @@ timeCountBlue = 50
 rectBlueX = width - 50 - 200
 redWin = False
 blueWin = False
-print(rectBlueX)
-print(rectBlueX - 200)
+
+
 
 # Red bike images
 redBikeLeftImage = pygame.image.load("images/bikeRed.png")
@@ -342,491 +380,594 @@ def carBlueCorrectBlit():
     if direction1 == "LEFT":
         playSurface.blit(blueBikeLeftImage, (blueCarPos[0]-55, blueCarPos[1]-35))
 
-while running:
+def TRON1():
+    global speed
+    global lineSize 
+    global redCarPos 
+    global blueCarPos
+    global redCarLine 
+    global blueCarLine 
+    global direction
+    global direction1 
+    global changeto
+    global changeto1 
+    global redBikeScore
+    global blueBikeScore
+    global animCount
+    global state
+    global winner
+    global loser
+    global pause
+    global running
+    global particlesRed
+    global particlesBlue
+    global boostRed
+    global boostBlue
+    global limitCountRed
+    global limitCountBlue
+    global timeCountRed
+    global timeCountBlue
+    global rectBlueX
+    global redWin
+    global blueWin
 
-    keys = pygame.key.get_pressed()
+    # Sound
+    # music = pygame.mixer.Sound("TRONmusic.mp3")
+    # boomSound = pygame.mixer.Sound("boom_sound.wav")
+    # moveSound = pygame.mixer.Sound("move.wav")
+    # pygame.mixer.music.set_volume(0.1)
+    # music.play(-1)
 
-    playSurface.blit(background, (0, 0))
-    pygame.draw.rect(playSurface, black, pygame.Rect(0, 0, 1280, 52))
+    # Play Surface
+    # size = width, height = 1280, 720
+    # playSurface = pygame.display.set_mode(size)
+    # pygame.display.set_caption("TRON")
+    # background = pygame.image.load("images/TRON2.png")
+    # tronLogo = pygame.image.load("images/TRON logo.png")
+    # TRONmenu = pygame.image.load("images/TRONmenu1.jpg")
 
-    if state == "BEGIN":
+    # Colors
+    # red = pygame.Color(255, 0, 0)
+    # green = pygame.Color(0, 255, 0)
+    # black = pygame.Color(0, 0, 0)
+    # white = pygame.Color(255, 255, 255)
+    # brown = pygame.Color(165, 42, 42)
+    # blue = pygame.Color(0, 255, 255)
 
-        rectBlueX = width - 50 - 200
+    # FPS controller
+    fpsController = pygame.time.Clock()
 
-        limitCountRed = 200
-        limitCountBlue = 200
+    # Game settings
+    # speed = 10
+    # lineSize = 10
+    # redCarPos = [100, 360]
+    # blueCarPos = [1180, 360]
+    # redCarLine = [[100, 360]]
+    # blueCarLine = [[1180, 360]]
+    # direction = 'RIGHT'
+    # direction1 = 'LEFT'
+    # changeto = ''
+    # changeto1 = ''
+    # redBikeScore = 0
+    # blueBikeScore = 0
+    # animCount = 0
+    # state = "BEGIN" # RUNNING, END
+    # winner: pygame.Color
+    # loser: pygame.Color
+    # pause = False
+    # running = True
+    # particlesRed = []
+    # particlesBlue = []
+    # boostRed = False
+    # boostBlue = False
+    # limitCountRed = 200
+    # limitCountBlue = 200
+    # timeCountRed = 50
+    # timeCountBlue = 50
+    # rectBlueX = width - 50 - 200
+    # redWin = False
+    # blueWin = False
+    # print(rectBlueX)
+    # print(rectBlueX - 200)
 
-        boostLimit()
+    # Red bike images
+    # redBikeLeftImage = pygame.image.load("images/bikeRed.png")
+    # redBikeUpImage = pygame.transform.rotate(redBikeLeftImage, -90)
+    # redBikeDownImage = pygame.transform.rotate(redBikeLeftImage, 90)
+    # redBikeRightImage = pygame.transform.rotate(redBikeLeftImage, 180)
 
-        particleDraw()
+    # Blue bike images
+    # blueBikeLeftImage = pygame.image.load("images/bikeBlue.png")
+    # blueBikeUpImage = pygame.transform.rotate(blueBikeLeftImage, -90)
+    # blueBikeDownImage = pygame.transform.rotate(blueBikeLeftImage, 90)
+    # blueBikeRightImage = pygame.transform.rotate(blueBikeLeftImage, 180)
 
-        if redBikeScore == 10:
-            redBikeScore = 0
-            blueBikeScore = 0
-        if blueBikeScore == 10:
-            redBikeScore = 0
-            blueBikeScore = 0
-        
-        setText(white, changeto, changeto1)
+    running = True
+    while running:
 
-        roundCount(red)
-        roundCount(blue)
-        
-        # handle keydown event
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    pause = True
-                if event.key == pygame.K_d:
-                    if changeto == '':
-                        moveSound.play()
-                    changeto = 'RIGHT'
-                if event.key == pygame.K_a:
-                    if changeto == '':
-                        moveSound.play()
-                    changeto = 'LEFT'
-                if event.key == pygame.K_w:
-                    if changeto == '':
-                        moveSound.play()
-                    changeto = 'UP'
-                if event.key == pygame.K_s:
-                    if changeto == '':
-                        moveSound.play()
-                    changeto = 'DOWN'
-                if event.key == pygame.K_RIGHT:
-                    if changeto1 == '':
-                        moveSound.play()
-                    changeto1 = 'RIGHT'
-                if event.key == pygame.K_LEFT:
-                    if changeto1 == '':
-                        moveSound.play()
-                    changeto1 = 'LEFT'
-                if event.key == pygame.K_UP:
-                    if changeto1 == '':
-                        moveSound.play()
-                    changeto1 = 'UP'
-                if event.key == pygame.K_DOWN:
-                    if changeto1 == '':
-                        moveSound.play()
-                    changeto1 = 'DOWN'
-                if event.key == pygame.K_ESCAPE:
-                    pygame.event.post(pygame.event.Event(pygame.QUIT))
-        
-        for pos in redCarLine:
-            pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], lineSize, lineSize))
-        for pos1 in blueCarLine:
-            pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], lineSize, lineSize))
+        keys = pygame.key.get_pressed()
 
-        playSurface.blit(redBikeRightImage, (redCarPos[0]-40, redCarPos[1]-55))
-        playSurface.blit(blueBikeLeftImage, (blueCarPos[0]-55, blueCarPos[1]-35))
+        playSurface.blit(background, (0, 0))
+        pygame.draw.rect(playSurface, black, pygame.Rect(0, 0, 1280, 52))
 
-        if changeto != '' and changeto1 != '':
-            state = 'RUNNING'
-    
-    elif state == 'RUNNING':
+        if state == "BEGIN":
 
-        roundCount(red)
-        roundCount(blue)
+            rectBlueX = width - 50 - 200
 
-        boostRed = False
-        boostBlue = False
+            limitCountRed = 200
+            limitCountBlue = 200
 
-        if keys[pygame.K_LSHIFT] and limitCountRed != 0:
-            boostRed = True
-            timeCountRed = 0
-        if keys[pygame.K_RALT] and limitCountBlue != 0:
-            boostBlue = True
-            timeCountBlue = 0
+            boostLimit()
 
-        boostLimit()
+            particleDraw()
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_p:
-                    pause = True
-                    state = 'BEGIN'
-                    changeto = ''
-                    changeto1 = ''
-                if event.key == pygame.K_d:
-                    changeto = 'RIGHT'
-                if event.key == pygame.K_a:
-                    changeto = 'LEFT'
-                if event.key == pygame.K_w:
-                    changeto = 'UP'
-                if event.key == pygame.K_s:
-                    changeto = 'DOWN'
-                if event.key == pygame.K_RIGHT:
-                    changeto1 = 'RIGHT'
-                if event.key == pygame.K_LEFT:
-                    changeto1 = 'LEFT'
-                if event.key == pygame.K_UP:
-                    changeto1 = 'UP'
-                if event.key == pygame.K_DOWN:
-                    changeto1 = 'DOWN'
-                if event.key == pygame.K_ESCAPE:
-                    pygame.event.post(pygame.event.Event(pygame.QUIT))
-
-        # Validate direction
-        if changeto == 'RIGHT' and direction != 'LEFT':
-            direction = changeto
-        if changeto == 'LEFT' and direction != 'RIGHT':
-            direction = changeto
-        if changeto == 'UP' and direction != 'DOWN':
-            direction = changeto
-        if changeto == 'DOWN' and direction != 'UP':
-            direction = changeto
-        if changeto1 == 'RIGHT' and direction1 != 'LEFT':
-            direction1 = changeto1
-        if changeto1 == 'LEFT' and direction1 != 'RIGHT':
-            direction1 = changeto1
-        if changeto1 == 'UP' and direction1 != 'DOWN':
-            direction1 = changeto1
-        if changeto1 == 'DOWN' and direction1 != 'UP':
-            direction1 = changeto1
-
-        # Update  position
-        if direction == 'RIGHT':
-            redCarPos[0] += speed
-        if direction == 'LEFT':
-            redCarPos[0] -= speed
-        if direction == 'DOWN':
-            redCarPos[1] += speed
-        if direction == 'UP':
-            redCarPos[1] -= speed
-        if direction1 == 'RIGHT':
-            blueCarPos[0] += speed
-        if direction1 == 'LEFT':
-            blueCarPos[0] -= speed
-        if direction1 == 'DOWN':
-            blueCarPos[1] += speed
-        if direction1 == 'UP':
-            blueCarPos[1] -= speed
-
-        # Line mechanism
-        if boostRed == True:
-            redCarLine.insert(0, list(redCarPos))
-            if direction == 'RIGHT':
-                redCarPos[0] += speed
-                redCarLine.insert(0, list(redCarPos))
-            if direction == 'LEFT':
-                redCarPos[0] -= speed
-                redCarLine.insert(0, list(redCarPos))
-            if direction == 'DOWN':
-                redCarPos[1] += speed
-                redCarLine.insert(0, list(redCarPos))
-            if direction == 'UP':
-                redCarPos[1] -= speed
-                redCarLine.insert(0, list(redCarPos))
-
-        if boostBlue == True:
-            blueCarLine.insert(0, list(blueCarPos))
-            if direction1 == 'RIGHT':
-                blueCarPos[0] += speed
-                blueCarLine.insert(0, list(blueCarPos))
-            if direction1 == 'LEFT':
-                blueCarPos[0] -= speed
-                blueCarLine.insert(0, list(blueCarPos))
-            if direction1 == 'DOWN':
-                blueCarPos[1] += speed
-                blueCarLine.insert(0, list(blueCarPos))
-            if direction1 == 'UP':
-                blueCarPos[1] -= speed
-                blueCarLine.insert(0, list(blueCarPos))
-
-        if boostRed == False:
-            redCarLine.insert(0, list(redCarPos))
-        if boostBlue == False:
-            blueCarLine.insert(0, list(blueCarPos))
-
-        for pos in redCarLine:
-                pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], lineSize, lineSize))
-
-        for pos1 in blueCarLine:
-            pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], lineSize, lineSize))
-        
-        particleDraw()
-        
-        carRedCorrectBlit()
-        carBlueCorrectBlit()
-
-        # Draw
-        if (redCarPos[0] == blueCarPos[0] and redCarPos[1] == blueCarPos[1]):
-            boomSound.play()
-            winner = red
-            loser = red
-            state = 'END'
-
-        # Bounds
-        if (redCarPos[0] >= width or redCarPos[0] < 0) and (blueCarPos[0] >= width or blueCarPos[0] < 0):
-            boomSound.play()
-            winner = red
-            loser = red
-            state = 'END'
-        if (redCarPos[1] >= height or redCarPos[1] <= 40) and (blueCarPos[1] >= height or blueCarPos[1] <= 40):
-            boomSound.play()
-            winner = red
-            loser = red
-            state = 'END'
-        if redCarPos[0] >= width or redCarPos[0] < 0 and state != "END":
-            boomSound.play()
-            state = 'END'
-            winner = blue
-            loser = red
-            playerWin(winner)
-        if redCarPos[1] >= height or redCarPos[1] <= 40 and state != "END":
-            boomSound.play()
-            state = 'END'
-            winner = blue
-            loser = red
-            playerWin(winner)
-        if blueCarPos[0] >= width or blueCarPos[0] < 0 and state != "END":
-            boomSound.play()
-            state = 'END'
-            winner = red
-            loser = blue
-            playerWin(winner)
-        if blueCarPos[1] >= height or blueCarPos[1] <= 40 and state != "END":
-            boomSound.play()
-            state = 'END'
-            winner = red
-            loser = blue
-            playerWin(winner)
-        
-        # Self hit and enemy line hit
-        for block in redCarLine[2:]:
-            if blueCarPos == block and redCarPos == block:
-                boomSound.play()
-                winner = red
-                loser = red
-                state = 'END'
-            elif redCarPos == block and state != "END":
-                boomSound.play()
-                state = 'END'
-                winner = blue
-                loser = red
-                playerWin(winner)
-            elif blueCarPos == block and state != "END":
-                boomSound.play()
-                state = 'END'
-                winner = red
-                loser = blue
-                playerWin(winner)
-
-            elif boostBlue == True or boostRed == True:
-
-                if direction == "UP":
-                    if redCarPos[0] == block[0] and redCarPos[1] + 10 == block[1]:
-                        print(1)
-                        boomSound.play()
-                        state = "END"
-                        winner = blue
-                        loser = red
-                        playerWin(winner)
-                if direction == "DOWN":
-                    if redCarPos[0] == block[0] and redCarPos[1] - 10 == block[1]:
-                        print("NORM")
-                        boomSound.play()
-                        state = "END"
-                        winner = blue
-                        loser = red
-                        playerWin(winner)
-                if direction == "RIGHT" :
-                    if redCarPos[0] - 10 == block[0] and redCarPos[1] == block[1] and winner != blue:
-                        print(2)
-                        boomSound.play()
-                        state = "END"
-                        winner = blue
-                        loser = red
-                        playerWin(winner)
-                if direction == "LEFT":
-                    if redCarPos[0] + 10 == block[0] and redCarPos[1] == block[1]:
-                        print(3)
-                        boomSound.play()
-                        state = "END"
-                        winner = blue
-                        loser = red
-                        playerWin(winner)
-
-                if direction1 == "UP":
-                    if blueCarPos[0] == block[0] and blueCarPos[1] + 10 == block[1]:
-                        print(4)
-                        boomSound.play()
-                        state = "END"
-                        winner = red
-                        loser = blue
-                        playerWin(winner)
-                if direction1 == "DOWN":
-                    if blueCarPos[0] == block[0] and blueCarPos[1] - 10 == block[1]:
-                        print(5)
-                        boomSound.play()
-                        state = "END"
-                        winner = red
-                        loser = blue
-                        playerWin(winner)
-                if direction1 == "RIGHT":
-                    if blueCarPos[0] - 10 == block[0] and blueCarPos[1] == block[1]:
-                        print(6)
-                        boomSound.play()
-                        state = "END"
-                        winner = red
-                        loser = blue
-                        playerWin(winner)
-                if direction1 == "LEFT":
-                    if blueCarPos[0] + 10 == block[0] and blueCarPos[1] == block[1]:
-                        print(7)
-                        boomSound.play()
-                        state = "END"
-                        winner = red
-                        loser = blue
-                        playerWin(winner)
-
-        for block1 in blueCarLine[2:]:
-            if blueCarPos == block1 and redCarPos == block1:
-                boomSound.play()
-                winner = red
-                loser = red
-                state = 'END'
-            elif blueCarPos == block1 and state != "END":
-                boomSound.play()
-                state = 'END'
-                winner = red
-                loser = blue
-                playerWin(winner)
-            elif redCarPos == block1 and state != "END":
-                boomSound.play()
-                state = 'END'
-                winner = blue
-                loser = red
-                playerWin(winner)
-
-            elif boostRed == True or boostBlue == True:
-
-                if direction1 == "UP":
-                    if blueCarPos[0] == block1[0] and blueCarPos[1] + 10 == block1[1]:
-                        print(8)
-                        boomSound.play()
-                        state = "END"
-                        winner = red
-                        loser = blue
-                        playerWin(winner)
-                if direction1 == "DOWN":
-                    if blueCarPos[0] == block1[0] and blueCarPos[1] - 10 == block1[1]:
-                        print(9)
-                        boomSound.play()
-                        state = "END"
-                        winner = red
-                        loser = blue
-                        playerWin(winner)
-                if direction1 == "RIGHT":
-                    if blueCarPos[0] - 10 == block1[0] and blueCarPos[1] == block1[1]:
-                        print(10)
-                        boomSound.play()
-                        state = "END"
-                        winner = red
-                        loser = blue
-                        playerWin(winner)
-                if direction1 == "LEFT":
-                    if blueCarPos[0] + 10 == block1[0] and blueCarPos[1] == block1[1] and winner != red:
-                        print(11)
-                        boomSound.play()
-                        state = "END"
-                        winner = red
-                        loser = blue
-                        playerWin(winner)
-
-                if direction == "UP":
-                    if redCarPos[0] == block1[0] and redCarPos[1] + 10 == block1[1]:
-                        print(12)
-                        boomSound.play()
-                        state = "END"
-                        winner = blue
-                        loser = red
-                        playerWin(winner)
-                if direction == "DOWN":
-                    if redCarPos[0] == block1[0] and redCarPos[1] - 10 == block1[1]:
-                        print(13)
-                        boomSound.play()
-                        state = "END"
-                        winner = blue
-                        loser = red
-                        playerWin(winner)
-                if direction == "RIGHT":
-                    if redCarPos[0] - 10 == block1[0] and redCarPos[1] == block1[1]:
-                        print(14)
-                        boomSound.play()
-                        state = "END"
-                        winner = blue
-                        loser = red
-                        playerWin(winner)
-                if direction == "LEFT":
-                    if redCarPos[0] + 10 == block1[0] and redCarPos[1] == block1[1]:
-                        print(15)
-                        boomSound.play()
-                        state = "END"
-                        winner = blue
-                        loser = red
-                        playerWin(winner)
-
-    elif state == 'END':
-
-        boostLimit()
-
-        particleDraw()
-
-        for pos in redCarLine:
-            pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], lineSize, lineSize))
-        for pos1 in blueCarLine:
-            pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], lineSize, lineSize))
-
-        if winner != blue:
-            carRedCorrectBlit()
-        else:
-            carBlueCorrectBlit()
-        
-        if loser == winner:
-            boom(blue)
-            boom(red)
-
-            roundCount(red)
-            roundCount(blue)
-
+            if redBikeScore == 10:
+                redBikeScore = 0
+                blueBikeScore = 0
+            if blueBikeScore == 10:
+                redBikeScore = 0
+                blueBikeScore = 0
+            
             setText(white, changeto, changeto1)
 
-        elif winner == blue:
-            boom(loser)
-
             roundCount(red)
             roundCount(blue)
-
-            setText(blue, changeto, changeto1)
             
-        else:
-            boom(loser)
+            # handle keydown event
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        pause = False
+                    if event.key == pygame.K_d:
+                        if changeto == '':
+                            moveSound.play()
+                        changeto = 'RIGHT'
+                    if event.key == pygame.K_a:
+                        if changeto == '':
+                            moveSound.play()
+                        changeto = 'LEFT'
+                    if event.key == pygame.K_w:
+                        if changeto == '':
+                            moveSound.play()
+                        changeto = 'UP'
+                    if event.key == pygame.K_s:
+                        if changeto == '':
+                            moveSound.play()
+                        changeto = 'DOWN'
+                    if event.key == pygame.K_RIGHT:
+                        if changeto1 == '':
+                            moveSound.play()
+                        changeto1 = 'RIGHT'
+                    if event.key == pygame.K_LEFT:
+                        if changeto1 == '':
+                            moveSound.play()
+                        changeto1 = 'LEFT'
+                    if event.key == pygame.K_UP:
+                        if changeto1 == '':
+                            moveSound.play()
+                        changeto1 = 'UP'
+                    if event.key == pygame.K_DOWN:
+                        if changeto1 == '':
+                            moveSound.play()
+                        changeto1 = 'DOWN'
+                    if event.key == pygame.K_ESCAPE:
+                        running = False
+            
+            for pos in redCarLine:
+                pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], lineSize, lineSize))
+            for pos1 in blueCarLine:
+                pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], lineSize, lineSize))
+
+            playSurface.blit(redBikeRightImage, (redCarPos[0]-40, redCarPos[1]-55))
+            playSurface.blit(blueBikeLeftImage, (blueCarPos[0]-55, blueCarPos[1]-35))
+
+            if changeto != '' and changeto1 != '':
+                state = 'RUNNING'
+        
+        elif state == 'RUNNING':
 
             roundCount(red)
             roundCount(blue)
 
-            setText(red, changeto, changeto1)
+            boostRed = False
+            boostBlue = False
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    winner = white
-                    loser = white
-                    state = 'BEGIN'
-                    changeto = ''
-                    changeto1 = ''
-                    newRound()
+            if keys[pygame.K_LSHIFT] and limitCountRed != 0:
+                boostRed = True
+                timeCountRed = 0
+            if keys[pygame.K_RALT] and limitCountBlue != 0:
+                boostBlue = True
+                timeCountBlue = 0
 
-    # showScore()
-    pygame.display.flip()
-    fpsController.tick(60)
+            boostLimit()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_p:
+                        pause = True
+                        state = 'BEGIN'
+                        changeto = ''
+                        changeto1 = ''
+                    if event.key == pygame.K_d:
+                        changeto = 'RIGHT'
+                    if event.key == pygame.K_a:
+                        changeto = 'LEFT'
+                    if event.key == pygame.K_w:
+                        changeto = 'UP'
+                    if event.key == pygame.K_s:
+                        changeto = 'DOWN'
+                    if event.key == pygame.K_RIGHT:
+                        changeto1 = 'RIGHT'
+                    if event.key == pygame.K_LEFT:
+                        changeto1 = 'LEFT'
+                    if event.key == pygame.K_UP:
+                        changeto1 = 'UP'
+                    if event.key == pygame.K_DOWN:
+                        changeto1 = 'DOWN'
+                    if event.key == pygame.K_ESCAPE:
+                        pygame.event.post(pygame.event.Event(pygame.QUIT))
+
+            # Validate direction
+            if changeto == 'RIGHT' and direction != 'LEFT':
+                direction = changeto
+            if changeto == 'LEFT' and direction != 'RIGHT':
+                direction = changeto
+            if changeto == 'UP' and direction != 'DOWN':
+                direction = changeto
+            if changeto == 'DOWN' and direction != 'UP':
+                direction = changeto
+            if changeto1 == 'RIGHT' and direction1 != 'LEFT':
+                direction1 = changeto1
+            if changeto1 == 'LEFT' and direction1 != 'RIGHT':
+                direction1 = changeto1
+            if changeto1 == 'UP' and direction1 != 'DOWN':
+                direction1 = changeto1
+            if changeto1 == 'DOWN' and direction1 != 'UP':
+                direction1 = changeto1
+
+            # Update  position
+            if direction == 'RIGHT':
+                redCarPos[0] += speed
+            if direction == 'LEFT':
+                redCarPos[0] -= speed
+            if direction == 'DOWN':
+                redCarPos[1] += speed
+            if direction == 'UP':
+                redCarPos[1] -= speed
+            if direction1 == 'RIGHT':
+                blueCarPos[0] += speed
+            if direction1 == 'LEFT':
+                blueCarPos[0] -= speed
+            if direction1 == 'DOWN':
+                blueCarPos[1] += speed
+            if direction1 == 'UP':
+                blueCarPos[1] -= speed
+
+            # Line mechanism
+            if boostRed == True:
+                redCarLine.insert(0, list(redCarPos))
+                if direction == 'RIGHT':
+                    redCarPos[0] += speed
+                    redCarLine.insert(0, list(redCarPos))
+                if direction == 'LEFT':
+                    redCarPos[0] -= speed
+                    redCarLine.insert(0, list(redCarPos))
+                if direction == 'DOWN':
+                    redCarPos[1] += speed
+                    redCarLine.insert(0, list(redCarPos))
+                if direction == 'UP':
+                    redCarPos[1] -= speed
+                    redCarLine.insert(0, list(redCarPos))
+
+            if boostBlue == True:
+                blueCarLine.insert(0, list(blueCarPos))
+                if direction1 == 'RIGHT':
+                    blueCarPos[0] += speed
+                    blueCarLine.insert(0, list(blueCarPos))
+                if direction1 == 'LEFT':
+                    blueCarPos[0] -= speed
+                    blueCarLine.insert(0, list(blueCarPos))
+                if direction1 == 'DOWN':
+                    blueCarPos[1] += speed
+                    blueCarLine.insert(0, list(blueCarPos))
+                if direction1 == 'UP':
+                    blueCarPos[1] -= speed
+                    blueCarLine.insert(0, list(blueCarPos))
+
+            if boostRed == False:
+                redCarLine.insert(0, list(redCarPos))
+            if boostBlue == False:
+                blueCarLine.insert(0, list(blueCarPos))
+
+            for pos in redCarLine:
+                    pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], lineSize, lineSize))
+
+            for pos1 in blueCarLine:
+                pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], lineSize, lineSize))
+            
+            particleDraw()
+            
+            carRedCorrectBlit()
+            carBlueCorrectBlit()
+
+            # Draw
+            if (redCarPos[0] == blueCarPos[0] and redCarPos[1] == blueCarPos[1]):
+                boomSound.play()
+                winner = red
+                loser = red
+                state = 'END'
+
+            # Bounds
+            if (redCarPos[0] >= width or redCarPos[0] < 0) and (blueCarPos[0] >= width or blueCarPos[0] < 0):
+                boomSound.play()
+                winner = red
+                loser = red
+                state = 'END'
+            if (redCarPos[1] >= height or redCarPos[1] <= 40) and (blueCarPos[1] >= height or blueCarPos[1] <= 40):
+                boomSound.play()
+                winner = red
+                loser = red
+                state = 'END'
+            if redCarPos[0] >= width or redCarPos[0] < 0 and state != "END":
+                boomSound.play()
+                state = 'END'
+                winner = blue
+                loser = red
+                playerWin(winner)
+            if redCarPos[1] >= height or redCarPos[1] <= 40 and state != "END":
+                boomSound.play()
+                state = 'END'
+                winner = blue
+                loser = red
+                playerWin(winner)
+            if blueCarPos[0] >= width or blueCarPos[0] < 0 and state != "END":
+                boomSound.play()
+                state = 'END'
+                winner = red
+                loser = blue
+                playerWin(winner)
+            if blueCarPos[1] >= height or blueCarPos[1] <= 40 and state != "END":
+                boomSound.play()
+                state = 'END'
+                winner = red
+                loser = blue
+                playerWin(winner)
+            
+            # Self hit and enemy line hit
+            for block in redCarLine[2:]:
+                if blueCarPos == block and redCarPos == block:
+                    boomSound.play()
+                    winner = red
+                    loser = red
+                    state = 'END'
+                elif redCarPos == block and state != "END":
+                    boomSound.play()
+                    state = 'END'
+                    winner = blue
+                    loser = red
+                    playerWin(winner)
+                elif blueCarPos == block and state != "END":
+                    boomSound.play()
+                    state = 'END'
+                    winner = red
+                    loser = blue
+                    playerWin(winner)
+
+                elif boostBlue == True or boostRed == True:
+
+                    if direction == "UP":
+                        if redCarPos[0] == block[0] and redCarPos[1] + 10 == block[1]:
+                            print(1)
+                            boomSound.play()
+                            state = "END"
+                            winner = blue
+                            loser = red
+                            playerWin(winner)
+                    if direction == "DOWN":
+                        if redCarPos[0] == block[0] and redCarPos[1] - 10 == block[1]:
+                            print("NORM")
+                            boomSound.play()
+                            state = "END"
+                            winner = blue
+                            loser = red
+                            playerWin(winner)
+                    if direction == "RIGHT" :
+                        if redCarPos[0] - 10 == block[0] and redCarPos[1] == block[1] and winner != blue:
+                            print(2)
+                            boomSound.play()
+                            state = "END"
+                            winner = blue
+                            loser = red
+                            playerWin(winner)
+                    if direction == "LEFT":
+                        if redCarPos[0] + 10 == block[0] and redCarPos[1] == block[1]:
+                            print(3)
+                            boomSound.play()
+                            state = "END"
+                            winner = blue
+                            loser = red
+                            playerWin(winner)
+
+                    if direction1 == "UP":
+                        if blueCarPos[0] == block[0] and blueCarPos[1] + 10 == block[1]:
+                            print(4)
+                            boomSound.play()
+                            state = "END"
+                            winner = red
+                            loser = blue
+                            playerWin(winner)
+                    if direction1 == "DOWN":
+                        if blueCarPos[0] == block[0] and blueCarPos[1] - 10 == block[1]:
+                            print(5)
+                            boomSound.play()
+                            state = "END"
+                            winner = red
+                            loser = blue
+                            playerWin(winner)
+                    if direction1 == "RIGHT":
+                        if blueCarPos[0] - 10 == block[0] and blueCarPos[1] == block[1]:
+                            print(6)
+                            boomSound.play()
+                            state = "END"
+                            winner = red
+                            loser = blue
+                            playerWin(winner)
+                    if direction1 == "LEFT":
+                        if blueCarPos[0] + 10 == block[0] and blueCarPos[1] == block[1]:
+                            print(7)
+                            boomSound.play()
+                            state = "END"
+                            winner = red
+                            loser = blue
+                            playerWin(winner)
+
+            for block1 in blueCarLine[2:]:
+                if blueCarPos == block1 and redCarPos == block1:
+                    boomSound.play()
+                    winner = red
+                    loser = red
+                    state = 'END'
+                elif blueCarPos == block1 and state != "END":
+                    boomSound.play()
+                    state = 'END'
+                    winner = red
+                    loser = blue
+                    playerWin(winner)
+                elif redCarPos == block1 and state != "END":
+                    boomSound.play()
+                    state = 'END'
+                    winner = blue
+                    loser = red
+                    playerWin(winner)
+
+                elif boostRed == True or boostBlue == True:
+
+                    if direction1 == "UP":
+                        if blueCarPos[0] == block1[0] and blueCarPos[1] + 10 == block1[1]:
+                            print(8)
+                            boomSound.play()
+                            state = "END"
+                            winner = red
+                            loser = blue
+                            playerWin(winner)
+                    if direction1 == "DOWN":
+                        if blueCarPos[0] == block1[0] and blueCarPos[1] - 10 == block1[1]:
+                            print(9)
+                            boomSound.play()
+                            state = "END"
+                            winner = red
+                            loser = blue
+                            playerWin(winner)
+                    if direction1 == "RIGHT":
+                        if blueCarPos[0] - 10 == block1[0] and blueCarPos[1] == block1[1]:
+                            print(10)
+                            boomSound.play()
+                            state = "END"
+                            winner = red
+                            loser = blue
+                            playerWin(winner)
+                    if direction1 == "LEFT":
+                        if blueCarPos[0] + 10 == block1[0] and blueCarPos[1] == block1[1] and winner != red:
+                            print(11)
+                            boomSound.play()
+                            state = "END"
+                            winner = red
+                            loser = blue
+                            playerWin(winner)
+
+                    if direction == "UP":
+                        if redCarPos[0] == block1[0] and redCarPos[1] + 10 == block1[1]:
+                            print(12)
+                            boomSound.play()
+                            state = "END"
+                            winner = blue
+                            loser = red
+                            playerWin(winner)
+                    if direction == "DOWN":
+                        if redCarPos[0] == block1[0] and redCarPos[1] - 10 == block1[1]:
+                            print(13)
+                            boomSound.play()
+                            state = "END"
+                            winner = blue
+                            loser = red
+                            playerWin(winner)
+                    if direction == "RIGHT":
+                        if redCarPos[0] - 10 == block1[0] and redCarPos[1] == block1[1]:
+                            print(14)
+                            boomSound.play()
+                            state = "END"
+                            winner = blue
+                            loser = red
+                            playerWin(winner)
+                    if direction == "LEFT":
+                        if redCarPos[0] + 10 == block1[0] and redCarPos[1] == block1[1]:
+                            print(15)
+                            boomSound.play()
+                            state = "END"
+                            winner = blue
+                            loser = red
+                            playerWin(winner)
+
+        elif state == 'END':
+
+            boostLimit()
+
+            particleDraw()
+
+            for pos in redCarLine:
+                pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], lineSize, lineSize))
+            for pos1 in blueCarLine:
+                pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], lineSize, lineSize))
+
+            if winner != blue:
+                carRedCorrectBlit()
+            else:
+                carBlueCorrectBlit()
+            
+            if loser == winner:
+                boom(blue)
+                boom(red)
+
+                roundCount(red)
+                roundCount(blue)
+
+                setText(white, changeto, changeto1)
+
+            elif winner == blue:
+                boom(loser)
+
+                roundCount(red)
+                roundCount(blue)
+
+                setText(blue, changeto, changeto1)
+                
+            else:
+                boom(loser)
+
+                roundCount(red)
+                roundCount(blue)
+
+                setText(red, changeto, changeto1)
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        winner = white
+                        loser = white
+                        state = 'BEGIN'
+                        changeto = ''
+                        changeto1 = ''
+                        newRound()
+
+        # showScore()
+        pygame.display.flip()
+        fpsController.tick(60)
