@@ -5,13 +5,13 @@ pygame.init()
 def about():
      pygame.display.set_caption("TRON")
      screen = pygame.display.set_mode([1280, 720])
-     background = pygame.image.load("images/TRONmenu2.jpg")
+     background = pygame.image.load("data/images/TRONmenu2.jpg")
      color = [57, 204, 204]
      color1 = [0, 31, 63]
      top=40; left=180
      font = pygame.font.SysFont('14722', 25,False,False)
      font1 = pygame.font.SysFont('14722', 25,False,True)
-     my_file = open("about.txt", "r") #Открываем файл для чтения
+     my_file = open("data/text/about.txt", "r") #Открываем файл для чтения
      lines = my_file.readlines() # Записываем строки из файла в список lines
      my_file.close()
      dlina=len(lines)#Это количество строк

@@ -6,7 +6,7 @@ pygame.init()
 def help1():
      pygame.display.set_caption("TRON")
      screen = pygame.display.set_mode([1280, 720])
-     background = pygame.image.load("images/TRONmenu2.jpg")
+     background = pygame.image.load("data/images/TRONmenu2.jpg")
 
      color = [57, 204, 204]
      color1 = [0, 31, 63]
@@ -15,7 +15,7 @@ def help1():
      font = pygame.font.SysFont('14722', 22, False, False)
      font1 = pygame.font.SysFont('14722', 22, False, True)
 
-     my_file = open('help.txt', 'r')#Открываем файл для чтения
+     my_file = open('data/text/help.txt', 'r')#Открываем файл для чтения
 
      lines = my_file.readlines()# Записываем строки из файла в список lines
 

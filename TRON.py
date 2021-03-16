@@ -9,9 +9,9 @@ pygame.mixer.init()
 # pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0)) 
 
 # Music
-music = pygame.mixer.Sound("TRONmusic.mp3")
-boomSound = pygame.mixer.Sound("boom_sound.wav")
-moveSound = pygame.mixer.Sound("move.wav")
+music = pygame.mixer.Sound("data/audio/TRONmusic.mp3")
+boomSound = pygame.mixer.Sound("data/audio/boom_sound.wav")
+moveSound = pygame.mixer.Sound("data/audio/move.wav")
 music.set_volume(0.1)
 boomSound.set_volume(0.2)
 moveSound.set_volume(0.5)
@@ -21,9 +21,9 @@ music.play(-1)
 size = width, height = 1280, 720
 playSurface = pygame.display.set_mode(size)
 pygame.display.set_caption("TRON")
-background = pygame.image.load("images/TRON2.png")
-tronLogo = pygame.image.load("images/TRON logo.png")
-TRONmenu = pygame.image.load("images/TRONmenu1.jpg")
+background = pygame.image.load("data/images/TRON2.png")
+tronLogo = pygame.image.load("data/images/TRON logo.png")
+TRONmenu = pygame.image.load("data/images/TRONmenu1.jpg")
 
 # Colors
 red = pygame.Color(255, 0, 0)
@@ -65,13 +65,13 @@ redWin = False
 blueWin = False
 
 # Red bike images
-redBikeLeftImage = pygame.image.load("images/bikeRed.png")
+redBikeLeftImage = pygame.image.load("data/images/bikeRed.png")
 redBikeUpImage = pygame.transform.rotate(redBikeLeftImage, -90)
 redBikeDownImage = pygame.transform.rotate(redBikeLeftImage, 90)
 redBikeRightImage = pygame.transform.rotate(redBikeLeftImage, 180)
 
 # Blue bike images
-blueBikeLeftImage = pygame.image.load("images/bikeBlue.png")
+blueBikeLeftImage = pygame.image.load("data/images/bikeBlue.png")
 blueBikeUpImage = pygame.transform.rotate(blueBikeLeftImage, -90)
 blueBikeDownImage = pygame.transform.rotate(blueBikeLeftImage, 90)
 blueBikeRightImage = pygame.transform.rotate(blueBikeLeftImage, 180)
@@ -121,9 +121,9 @@ def playerWin(color: pygame.Color):
 # Boom animation
 def boom(color: pygame.Color):
     global animCount
-    bang = [pygame.image.load("images/Explosion_1.png"), pygame.image.load("images/Explosion_2.png"), 
-    pygame.image.load("images/Explosion_3.png"), pygame.image.load("images/Explosion_4.png")]
-    bangReverse = pygame.image.load("images/Explosion_2.png") 
+    bang = [pygame.image.load("data/images/Explosion_1.png"), pygame.image.load("data/images/Explosion_2.png"), 
+    pygame.image.load("data/images/Explosion_3.png"), pygame.image.load("data/images/Explosion_4.png")]
+    bangReverse = pygame.image.load("data/images/Explosion_2.png") 
     animCount += 1
     if animCount + 1 >= 20:
         animCount = 0
@@ -291,7 +291,7 @@ def particleDraw():
         particlesRed.append([[xr, yr+25], [0.1, -0.1], random.randint(4, 6)])
         # particlesRed.append([[xr, yr+30], [0.1, -0.1], random.randint(4, 6)])
         
-    if boostBlue == True or rectBlueX < 1030:
+    if boostBlue == True or rectBlueX > 1030:
         particlesBlue.append([[xb, yb+3], [0.1, -0.1], random.randint(4, 6)])
         particlesBlue.append([[xb, yb+10], [0.1, -0.1], random.randint(4, 6)])
         particlesBlue.append([[xb, yb+15], [0.1, -0.1], random.randint(4, 6)])

@@ -5,7 +5,7 @@ import intro
 pygame.init()
 pygame.mixer.init()
 intro.intro()
-music1 = pygame.mixer.Sound("menuMusic.mp3")
+music1 = pygame.mixer.Sound("data/audio/menuMusic.mp3")
 music1.set_volume(0.2)
 
 def menu():
@@ -14,8 +14,8 @@ def menu():
     pygame.display.set_caption("TRON")
     screen = pygame.display.set_mode([1280, 720])
     background = pygame.Surface(screen.get_size())
-    tronLogo = pygame.image.load("images/TRON logo.png")
-    TRONmenu = pygame.image.load("images/TRONmenu1.jpg")
+    tronLogo = pygame.image.load("data/images/TRON logo.png")
+    TRONmenu = pygame.image.load("data/images/TRONmenu1.jpg")
 
     # Buttons setings
     xButtonPos = [60, 368, 680, 980]; width = [240, 240, 240, 240]; height = [120, 120, 120, 120]; yButtonPos = [580, 580, 580, 580]
@@ -25,7 +25,7 @@ def menu():
     buttonColorActive = pygame.Color(0, 50, 102)
     textColor = pygame.Color(57, 204, 204)
     font = pygame.font.SysFont("14722", 50)
-    selectSound = pygame.mixer.Sound("select.wav")
+    selectSound = pygame.mixer.Sound("data/audio/select.wav")
     line_width = 0
     running=True
     count = 4
