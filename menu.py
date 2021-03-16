@@ -88,7 +88,7 @@ def menu():
             
     while running:
 
-        background.fill([0, 0, 0])
+        background.fill((0, 0, 0))
 
         background.blit(TRONmenu, (-343, 0))
 

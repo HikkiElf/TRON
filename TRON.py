@@ -6,30 +6,16 @@ import pygame, sys, math, time, random, menu
 from pygame.locals import *
 pygame.init()
 pygame.mixer.init()
-# pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0))
+# pygame.mouse.set_cursor((8,8),(0,0),(0,0,0,0,0,0,0,0),(0,0,0,0,0,0,0,0)) 
 
-# global 
-# global 
-# global 
-# global 
-# global 
-# global 
-# global 
-# global 
-# global 
-# global 
-# global 
-# global 
-# global 
-# global 
-# global 
-
+# Music
 music = pygame.mixer.Sound("TRONmusic.mp3")
 boomSound = pygame.mixer.Sound("boom_sound.wav")
 moveSound = pygame.mixer.Sound("move.wav")
 pygame.mixer.music.set_volume(0.1)
-# music.play(-1)
+music.play(-1)
 
+# Play surface
 size = width, height = 1280, 720
 playSurface = pygame.display.set_mode(size)
 pygame.display.set_caption("TRON")
@@ -37,6 +23,7 @@ background = pygame.image.load("images/TRON2.png")
 tronLogo = pygame.image.load("images/TRON logo.png")
 TRONmenu = pygame.image.load("images/TRONmenu1.jpg")
 
+# Colors
 red = pygame.Color(255, 0, 0)
 green = pygame.Color(0, 255, 0)
 black = pygame.Color(0, 0, 0)
@@ -44,36 +31,7 @@ white = pygame.Color(255, 255, 255)
 brown = pygame.Color(165, 42, 42)
 blue = pygame.Color(0, 255, 255)
 
-global speed
-global lineSize 
-global redCarPos 
-global blueCarPos
-global redCarLine 
-global blueCarLine 
-global direction
-global direction1 
-global changeto
-global changeto1 
-global redBikeScore
-global blueBikeScore
-global animCount
-global state
-global winner
-global loser
-global pause
-global running
-global particlesRed
-global particlesBlue
-global boostRed
-global boostBlue
-global limitCountRed
-global limitCountBlue
-global timeCountRed
-global timeCountBlue
-global rectBlueX
-global redWin
-global blueWin
-
+# Game settings
 speed = 10
 lineSize = 10
 redCarPos = [100, 360]
@@ -103,8 +61,6 @@ timeCountBlue = 50
 rectBlueX = width - 50 - 200
 redWin = False
 blueWin = False
-
-
 
 # Red bike images
 redBikeLeftImage = pygame.image.load("images/bikeRed.png")
@@ -381,6 +337,7 @@ def carBlueCorrectBlit():
         playSurface.blit(blueBikeLeftImage, (blueCarPos[0]-55, blueCarPos[1]-35))
 
 def TRON1():
+    
     global speed
     global lineSize 
     global redCarPos 
@@ -411,76 +368,8 @@ def TRON1():
     global redWin
     global blueWin
 
-    # Sound
-    # music = pygame.mixer.Sound("TRONmusic.mp3")
-    # boomSound = pygame.mixer.Sound("boom_sound.wav")
-    # moveSound = pygame.mixer.Sound("move.wav")
-    # pygame.mixer.music.set_volume(0.1)
-    # music.play(-1)
-
-    # Play Surface
-    # size = width, height = 1280, 720
-    # playSurface = pygame.display.set_mode(size)
-    # pygame.display.set_caption("TRON")
-    # background = pygame.image.load("images/TRON2.png")
-    # tronLogo = pygame.image.load("images/TRON logo.png")
-    # TRONmenu = pygame.image.load("images/TRONmenu1.jpg")
-
-    # Colors
-    # red = pygame.Color(255, 0, 0)
-    # green = pygame.Color(0, 255, 0)
-    # black = pygame.Color(0, 0, 0)
-    # white = pygame.Color(255, 255, 255)
-    # brown = pygame.Color(165, 42, 42)
-    # blue = pygame.Color(0, 255, 255)
-
     # FPS controller
     fpsController = pygame.time.Clock()
-
-    # Game settings
-    # speed = 10
-    # lineSize = 10
-    # redCarPos = [100, 360]
-    # blueCarPos = [1180, 360]
-    # redCarLine = [[100, 360]]
-    # blueCarLine = [[1180, 360]]
-    # direction = 'RIGHT'
-    # direction1 = 'LEFT'
-    # changeto = ''
-    # changeto1 = ''
-    # redBikeScore = 0
-    # blueBikeScore = 0
-    # animCount = 0
-    # state = "BEGIN" # RUNNING, END
-    # winner: pygame.Color
-    # loser: pygame.Color
-    # pause = False
-    # running = True
-    # particlesRed = []
-    # particlesBlue = []
-    # boostRed = False
-    # boostBlue = False
-    # limitCountRed = 200
-    # limitCountBlue = 200
-    # timeCountRed = 50
-    # timeCountBlue = 50
-    # rectBlueX = width - 50 - 200
-    # redWin = False
-    # blueWin = False
-    # print(rectBlueX)
-    # print(rectBlueX - 200)
-
-    # Red bike images
-    # redBikeLeftImage = pygame.image.load("images/bikeRed.png")
-    # redBikeUpImage = pygame.transform.rotate(redBikeLeftImage, -90)
-    # redBikeDownImage = pygame.transform.rotate(redBikeLeftImage, 90)
-    # redBikeRightImage = pygame.transform.rotate(redBikeLeftImage, 180)
-
-    # Blue bike images
-    # blueBikeLeftImage = pygame.image.load("images/bikeBlue.png")
-    # blueBikeUpImage = pygame.transform.rotate(blueBikeLeftImage, -90)
-    # blueBikeDownImage = pygame.transform.rotate(blueBikeLeftImage, 90)
-    # blueBikeRightImage = pygame.transform.rotate(blueBikeLeftImage, 180)
 
     running = True
     while running:
