@@ -417,7 +417,7 @@ def particleDraw():
     xb = rectBlueX
     yb = 16
 
-    if boostRed == True or limitCountRed < 200:
+    if boostRed == True or limitCountRed < 199:
         # particlesRed.append([[xr, yr], [0.1, -0.1], random.randint(4, 6)])
         particlesRed.append([[xr, yr+3], [0.1, -0.1], random.randint(4, 6)])
         particlesRed.append([[xr, yr+10], [0.1, -0.1], random.randint(4, 6)])
@@ -425,7 +425,8 @@ def particleDraw():
         particlesRed.append([[xr, yr+20], [0.1, -0.1], random.randint(4, 6)])
         particlesRed.append([[xr, yr+25], [0.1, -0.1], random.randint(4, 6)])
         # particlesRed.append([[xr, yr+30], [0.1, -0.1], random.randint(4, 6)])
-    if boostBlue == True or limitCountBlue < 200:
+        
+    if boostBlue == True or rectBlueX < 1030:
         particlesBlue.append([[xb, yb+3], [0.1, -0.1], random.randint(4, 6)])
         particlesBlue.append([[xb, yb+10], [0.1, -0.1], random.randint(4, 6)])
         particlesBlue.append([[xb, yb+15], [0.1, -0.1], random.randint(4, 6)])
