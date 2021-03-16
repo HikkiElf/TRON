@@ -277,21 +277,6 @@ def setText(color: pygame.Color, changeto, changeto1):
             playSurface.blit(blueOutlineSurfWin, blueOutlineRectWin)
             playSurface.blit(blueSurfWin, blueRectWin)
 
-#draw text for set direction
-def setDirectionText(changeto, changeto1):
-    globalFontMini = pygame.font.SysFont('monaco', 50)
-    if changeto == '':
-        setRedDirectionSurf = globalFontMini.render("Set red bike direction", True, red)
-        setRedDirectionRect = setRedDirectionSurf.get_rect()
-        setRedDirectionRect.midtop = (240, 260)
-        playSurface.blit(setRedDirectionSurf, setRedDirectionRect)
-
-    if changeto1 == '':
-        setBlueDirectionSurf = globalFontMini.render("Set blue bike direction", True, blue)
-        setBlueDirectionRect = setBlueDirectionSurf.get_rect()
-        setBlueDirectionRect.midtop = (1040, 260)
-        playSurface.blit(setBlueDirectionSurf, setBlueDirectionRect)
-
 #draw particles
 def particleDraw():
     global particlesRed, particlesBlue
@@ -334,6 +319,28 @@ def particleDraw():
         pygame.draw.circle(playSurface, (65, 105, 225), [int(particle1[0][0]), int(particle1[0][1])], int(particle1[2]))
         if particle1[2] <= 0:
             particlesBlue.remove(particle1)
+
+def carRedCorrectBlit():
+    # Red car correct blit
+    if direction == "RIGHT":
+        playSurface.blit(redBikeRightImage, (redCarPos[0]-40, redCarPos[1]-55))
+    if direction == "UP":
+        playSurface.blit(redBikeUpImage, (redCarPos[0]-55, redCarPos[1]-35))
+    if direction == "DOWN":
+        playSurface.blit(redBikeDownImage, (redCarPos[0]-35, redCarPos[1]-55))
+    if direction == "LEFT":
+        playSurface.blit(redBikeLeftImage, (redCarPos[0]-55, redCarPos[1]-35))
+
+def carBlueCorrectBlit():
+    # Blue car correct blit
+    if direction1 == "RIGHT":
+        playSurface.blit(blueBikeRightImage, (blueCarPos[0]-40, blueCarPos[1]-55))
+    if direction1 == "UP":
+        playSurface.blit(blueBikeUpImage, (blueCarPos[0]-55, blueCarPos[1]-35))
+    if direction1 == "DOWN":
+        playSurface.blit(blueBikeDownImage, (blueCarPos[0]-35, blueCarPos[1]-55))
+    if direction1 == "LEFT":
+        playSurface.blit(blueBikeLeftImage, (blueCarPos[0]-55, blueCarPos[1]-35))
 
 while running:
 
@@ -545,25 +552,8 @@ while running:
         
         particleDraw()
         
-        # Red car correct blit
-        if direction == "RIGHT":
-            playSurface.blit(redBikeRightImage, (redCarPos[0]-40, redCarPos[1]-55))
-        if direction == "UP":
-            playSurface.blit(redBikeUpImage, (redCarPos[0]-55, redCarPos[1]-35))
-        if direction == "DOWN":
-            playSurface.blit(redBikeDownImage, (redCarPos[0]-35, redCarPos[1]-55))
-        if direction == "LEFT":
-            playSurface.blit(redBikeLeftImage, (redCarPos[0]-55, redCarPos[1]-35))
-        
-        # Blue car correct blit
-        if direction1 == "RIGHT":
-            playSurface.blit(blueBikeRightImage, (blueCarPos[0]-40, blueCarPos[1]-55))
-        if direction1 == "UP":
-            playSurface.blit(blueBikeUpImage, (blueCarPos[0]-55, blueCarPos[1]-35))
-        if direction1 == "DOWN":
-            playSurface.blit(blueBikeDownImage, (blueCarPos[0]-35, blueCarPos[1]-55))
-        if direction1 == "LEFT":
-            playSurface.blit(blueBikeLeftImage, (blueCarPos[0]-55, blueCarPos[1]-35))
+        carRedCorrectBlit()
+        carBlueCorrectBlit()
 
         # Draw
         if (redCarPos[0] == blueCarPos[0] and redCarPos[1] == blueCarPos[1]):
@@ -795,26 +785,9 @@ while running:
             pygame.draw.rect(playSurface, blue, pygame.Rect(pos1[0], pos1[1], lineSize, lineSize))
 
         if winner != blue:
-            # Red car correct blit
-            if direction == "RIGHT":
-                playSurface.blit(redBikeRightImage, (redCarPos[0]-40, redCarPos[1]-55))
-            if direction == "UP":
-                playSurface.blit(redBikeUpImage, (redCarPos[0]-55, redCarPos[1]-35))
-            if direction == "DOWN":
-                playSurface.blit(redBikeDownImage, (redCarPos[0]-35, redCarPos[1]-55))
-            if direction == "LEFT":
-                playSurface.blit(redBikeLeftImage, (redCarPos[0]-55, redCarPos[1]-35))
-        
-        if winner != red:
-            # Blue car correct blit
-            if direction1 == "RIGHT":
-                playSurface.blit(blueBikeRightImage, (blueCarPos[0]-40, blueCarPos[1]-55))
-            if direction1 == "UP":
-                playSurface.blit(blueBikeUpImage, (blueCarPos[0]-55, blueCarPos[1]-35))
-            if direction1 == "DOWN":
-                playSurface.blit(blueBikeDownImage, (blueCarPos[0]-35, blueCarPos[1]-55))
-            if direction1 == "LEFT":
-                playSurface.blit(blueBikeLeftImage, (blueCarPos[0]-55, blueCarPos[1]-35))
+            carRedCorrectBlit()
+        else:
+            carBlueCorrectBlit()
         
         if loser == winner:
             boom(blue)
