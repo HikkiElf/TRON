@@ -82,7 +82,8 @@ while True:
 
 
     mx, my = pygame.mouse.get_pos()
-    sparks.append(Spark([mx, my], math.radians(random.randint(0, 360)), random.randint(3, 6), (251, 134, 3), 2))
+    for i in range(10):
+        sparks.append(Spark([mx, my], math.radians(random.randint(0, 360)), random.randint(3, 6), (251, 134, 3), 2))
 
     # Buttons ------------------------------------------------ #
     for event in pygame.event.get():

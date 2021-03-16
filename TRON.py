@@ -80,14 +80,10 @@ fpsController = pygame.time.Clock()
 
 # Game settings
 speed = 10
-boostSpeed = 20
 lineSize = 10
 redCarPos = [100, 360]
 blueCarPos = [1180, 360]
-# redCarPosNG = [100, 360]
-# blueCarPosNG = [1180, 360]
 redCarLine = [[100, 360]]
-redCarLineBoost = redCarLine
 blueCarLine = [[1180, 360]]
 direction = 'RIGHT'
 direction1 = 'LEFT'
@@ -110,6 +106,9 @@ limitCountRed = 200
 limitCountBlue = 200
 timeCountRed = 50
 timeCountBlue = 50
+rectBlueX = width - 50 - 200
+print(rectBlueX)
+print(rectBlueX - 200)
 
 
 
@@ -331,7 +330,7 @@ def boom(color: pygame.Color):
             playSurface.blit(bangReverse, (blueCarPos[0] - 52, blueCarPos[1] - 50))
 
 def boostLimit():
-    global boostRed, boostBlue, limitCountRed, limitCountBlue, timeCountRed, timeCountBlue
+    global boostRed, boostBlue, limitCountRed, limitCountBlue, timeCountRed, timeCountBlue, rectBlueX
 
     if boostRed == False:
         if timeCountRed < 50:
@@ -344,8 +343,9 @@ def boostLimit():
         if timeCountBlue < 50:
             timeCountBlue += 0.5
         if limitCountBlue < 200 and timeCountBlue == 50:
+            rectBlueX -= 10
             limitCountBlue += 10
-        pygame.draw.rect(playSurface, blue, pygame.Rect(width - 50 - 200, 16, limitCountBlue, 26))
+        pygame.draw.rect(playSurface, blue, pygame.Rect(rectBlueX, 16, limitCountBlue, 26))
 
 
     if boostRed == True:
@@ -356,9 +356,10 @@ def boostLimit():
     
     if boostBlue == True:
         if state != "END":
+            rectBlueX += 10
             limitCountBlue -= 10
             timeCountBlue -= 50
-        pygame.draw.rect(playSurface, blue, pygame.Rect(width - 50 - 200, 16, limitCountBlue, 26))
+        pygame.draw.rect(playSurface, blue, pygame.Rect(rectBlueX, 16, limitCountBlue, 26))
 
 
 # Set start bike position 
@@ -413,7 +414,7 @@ def particleDraw():
     
     xr = 50 + limitCountRed
     yr = 16
-    xb = width - 50 - 200 + limitCountBlue
+    xb = rectBlueX
     yb = 16
 
     if boostRed == True or limitCountRed < 200:
@@ -460,6 +461,8 @@ while running:
     pygame.draw.rect(playSurface, black, pygame.Rect(0, 0, 1280, 52))
 
     if state == "BEGIN":
+
+        rectBlueX = width - 50 - 200
 
         limitCountRed = 200
         limitCountBlue = 200
