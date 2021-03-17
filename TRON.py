@@ -3,6 +3,7 @@
 #   Python 3.9.0 Pygame
 
 import pygame, sys, math, time, random, menu
+from sparking import sparks, Spark
 from pygame.locals import *
 pygame.init()
 pygame.mixer.init()
@@ -375,6 +376,7 @@ def TRON1():
     global redWin
     global blueWin
     global flagWin
+    global sparks
 
     # FPS controller
     fpsController = pygame.time.Clock()
@@ -388,6 +390,12 @@ def TRON1():
         pygame.draw.rect(playSurface, black, pygame.Rect(0, 0, 1280, 52))
 
         if state == "BEGIN":
+
+            for i, spark in sorted(enumerate(sparks), reverse=True):
+                spark.move(1)
+                spark.draw(playSurface)
+                if not spark.alive:
+                    sparks.pop(i)
 
             flagWin = False
 
@@ -468,6 +476,12 @@ def TRON1():
                 state = 'RUNNING'
         
         elif state == 'RUNNING':
+
+            for i, spark in sorted(enumerate(sparks), reverse=True):
+                spark.move(1)
+                spark.draw(playSurface)
+                if not spark.alive:
+                    sparks.pop(i)
 
             roundCount(red)
             roundCount(blue)
@@ -824,6 +838,12 @@ def TRON1():
 
             particleDraw()
 
+            for i, spark in sorted(enumerate(sparks), reverse=True):
+                spark.move(1)
+                spark.draw(playSurface)
+                if not spark.alive:
+                    sparks.pop(i)
+
             for pos in redCarLine:
                 pygame.draw.rect(playSurface, red, pygame.Rect(pos[0], pos[1], lineSize, lineSize))
             for pos1 in blueCarLine:
@@ -844,6 +864,9 @@ def TRON1():
                 setText(white, changeto, changeto1)
 
             elif winner == blue:
+                for i in range(10):
+                    sparks.append(Spark([redCarPos[0], redCarPos[1]], math.radians(random.randint(0, 360)), random.randint(3, 6), (229, 33, 0), 2))
+
                 boom(loser)
 
                 roundCount(red)
@@ -852,6 +875,8 @@ def TRON1():
                 setText(blue, changeto, changeto1)
                 
             else:
+                for i in range(10):
+                    sparks.append(Spark([blueCarPos[0], blueCarPos[1]], math.radians(random.randint(0, 360)), random.randint(3, 6), (0, 0, 255), 2))
                 boom(loser)
 
                 roundCount(red)

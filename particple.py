@@ -18,7 +18,7 @@ while True:
     for particle in particles:
         particle[0][0] += particle[1][0]
         particle[0][1] += particle[1][1]
-        particle[2] -= 0.5
+        particle[2] -= 0.1
         particle[1][1] += 0.1
         pygame.draw.circle(screen, (255, 255, 255), [int(particle[0][0]), int(particle[0][1])], int(particle[2]))
         if particle[2] <= 0:
