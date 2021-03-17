@@ -830,7 +830,10 @@ def TRON1():
 
         elif state == 'END':
 
-            if redBikeScore == 10 or blueBikeScore == 10 and flagWin != True:
+            if blueBikeScore == 10 and flagWin != True:
+                winSound.play(1)
+                flagWin = True
+            elif redBikeScore == 10 and flagWin != True:
                 winSound.play(1)
                 flagWin = True
 

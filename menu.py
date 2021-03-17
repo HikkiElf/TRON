@@ -36,6 +36,7 @@ def menu():
 
     selectSound.set_volume(0.2)
 
+    # Button animation when cursor focused on button
     def buttonFocusedAnimation(count, musicCount):
         if musicCount == 1:
             selectSound.play()
@@ -64,6 +65,7 @@ def menu():
             width[3] = 244
             height[3] = 124
 
+    # Button animation when cursor focused on button
     def buttonUnfocusedAnimation(count):
         if not count == 0:
             buttonColor[0] = pygame.Color(0, 31, 63)
@@ -90,15 +92,15 @@ def menu():
             width[3] = 240
             height[3] = 120
 
-    n = 0
+    forMusic = 0
             
     while running:
 
-        n += 1
+        forMusic += 1
 
-        print(n)
+        print(forMusic)
 
-        if n == 30:
+        if forMusic == 30:
             music1.play(-1)
 
         background.fill((0, 0, 0))
@@ -143,22 +145,20 @@ def menu():
                 if event.key == pygame.K_ESCAPE:
                     pygame.event.post(pygame.event.Event(pygame.QUIT))
             if event.type == pygame.MOUSEBUTTONDOWN:
-                (xMousePos, yMousePos) = pygame.mouse.get_pos()#координаты курсора мыши
+                (xMousePos, yMousePos) = pygame.mouse.get_pos()
                 if xMousePos > xButtonPos[0] and xMousePos < xButtonPos[0] + width[0] and yMousePos > yButtonPos[0] and yMousePos < yButtonPos[0] + height[0]:
-                    import TRON #игра
+                    import TRON 
                     TRON.TRON1()
                     music1.stop()
-                    n = 0
-                    # running = False
-                    # pygame.quit()
+                    forMusic = 0
                 if xMousePos > xButtonPos[1] and xMousePos < xButtonPos[1] + width[1] and yMousePos > yButtonPos[1] and yMousePos < yButtonPos[1] + height[1]:
-                    import help #помощь
+                    import help
                     help.help1()
                 if xMousePos > xButtonPos[2] and xMousePos < xButtonPos[2] + width[2] and yMousePos > yButtonPos[2] and yMousePos < yButtonPos[2] + height[2]:
                     import about
                     about.about()
                 if xMousePos > xButtonPos[3] and xMousePos < xButtonPos[3] + width[3] and yMousePos > yButtonPos[3] and yMousePos < yButtonPos[3] + height[3]:
-                    running = False #выход
+                    running = False
                     pygame.quit()
 
             if event.type == pygame.MOUSEMOTION:
