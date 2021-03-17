@@ -14,9 +14,9 @@ music = pygame.mixer.Sound("data/audio/TRONmusic.mp3")
 boomSound = pygame.mixer.Sound("data/audio/boom_sound.wav")
 moveSound = pygame.mixer.Sound("data/audio/move.wav")
 winSound = pygame.mixer.Sound("data/audio/winSound1.wav")
-music.set_volume(0.1)
+music.set_volume(0.15)
 boomSound.set_volume(0.2)
-moveSound.set_volume(0.5)
+moveSound.set_volume(0.3)
 music.play(-1)
 
 # Play surface
