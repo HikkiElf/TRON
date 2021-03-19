@@ -1,5 +1,5 @@
 import pygame
 import sys
-import menu
+import source.menu as menu
 pygame.init()
 menu.menu()  

@@ -2,8 +2,9 @@
 #   Truhanov Vsevolod
 #   Python 3.9.0 Pygame
 
-import pygame, sys, math, time, random, menu
-from sparking import sparks, Spark
+import pygame, sys, math, time, random
+import source.menu as menu
+from source.sparking import sparks, Spark
 from pygame.locals import *
 pygame.init()
 pygame.mixer.init()

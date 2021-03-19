@@ -12,4 +12,4 @@ To move red bike, use the W, A, S, D keys.                                      
 To move blue bike, use up, left, down, right arrows.                                                                                                 #                                                                                                                              #
 To pause press P key.                                                                                                                                                #                                                                                                                              #
 To restart round use SPACE key.                                                                                                                     #
-Exit from game use ECSAPE key.                                                                                                                      #
+Exit from game to menu use ECSAPE key.                                                                                                                      #

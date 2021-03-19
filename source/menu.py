@@ -1,6 +1,6 @@
 import pygame, sys, random
 import pickle
-import intro
+import source.intro as intro
 
 pygame.init()
 pygame.mixer.init()
@@ -98,7 +98,7 @@ def menu():
 
         forMusic += 1
 
-        print(forMusic)
+        # print(forMusic)
 
         if forMusic == 30:
             music1.play(-1)
@@ -147,15 +147,15 @@ def menu():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 (xMousePos, yMousePos) = pygame.mouse.get_pos()
                 if xMousePos > xButtonPos[0] and xMousePos < xButtonPos[0] + width[0] and yMousePos > yButtonPos[0] and yMousePos < yButtonPos[0] + height[0]:
-                    import TRON 
+                    import source.TRON as TRON
                     TRON.TRON1()
                     music1.stop()
                     forMusic = 0
                 if xMousePos > xButtonPos[1] and xMousePos < xButtonPos[1] + width[1] and yMousePos > yButtonPos[1] and yMousePos < yButtonPos[1] + height[1]:
-                    import help
+                    import source.help as help
                     help.help1()
                 if xMousePos > xButtonPos[2] and xMousePos < xButtonPos[2] + width[2] and yMousePos > yButtonPos[2] and yMousePos < yButtonPos[2] + height[2]:
-                    import about
+                    import source.about as about
                     about.about()
                 if xMousePos > xButtonPos[3] and xMousePos < xButtonPos[3] + width[3] and yMousePos > yButtonPos[3] and yMousePos < yButtonPos[3] + height[3]:
                     running = False
